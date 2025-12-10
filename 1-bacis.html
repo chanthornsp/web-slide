@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Basics Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Fredoka", sans-serif;
+        overflow: hidden;
+        background-color: #0f172a; /* Slate 900 */
+      }
+      pre,
+      code {
+        font-family: "JetBrains Mono", monospace;
+      }
+      .slide {
+        display: none;
+        height: 100vh;
+        width: 100vw;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .slide.active {
+        display: flex;
+        opacity: 1;
+        z-index: 10;
+      }
+      /* Stars Background */
+      .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 4s infinite;
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.2;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+      .code-card {
+        background: #1e293b;
+        color: #e2e8f0;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        border: 2px solid #334155;
+        position: relative;
+        overflow-x: auto;
+      }
+      .code-card::before {
+        content: "● ● ●";
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        color: #475569;
+        font-size: 10px;
+        letter-spacing: 4px;
+      }
+      .tag {
+        color: #f472b6;
+      } /* Pink */
+      .attr {
+        color: #a5b4fc;
+      } /* Indigo */
+      .val {
+        color: #86efac;
+      } /* Green */
+      .comment {
+        color: #94a3b8;
+        font-style: italic;
+      }
+
+      /* Nested List Styling for Demo */
+      .nested-demo ul {
+        padding-left: 20px;
+        list-style-type: disc;
+        color: #cbd5e1;
+      }
+      .nested-demo ul ul {
+        list-style-type: square;
+        color: #94a3b8;
+      }
+      .nested-demo ul ul ul {
+        list-style-type: circle;
+        color: #64748b;
+      }
+    </style>
+  </head>
+  <body class="text-white selection:bg-cyan-500 selection:text-white">
+    <!-- Starry Background -->
+    <div id="stars-container"></div>
+
+    <!-- Navigation Controls -->
+    <div class="fixed bottom-8 right-8 z-50 flex gap-4">
+      <button
+        onclick="prevSlide()"
+        class="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full transition-all hover:scale-110 active:scale-95 border border-white/20"
+      >
+        <i data-lucide="arrow-left" class="w-6 h-6"></i>
+      </button>
+      <span
+        id="page-indicator"
+        class="flex items-center font-bold text-lg bg-white/10 px-4 rounded-full border border-white/20 backdrop-blur-md"
+      >
+        1 / 11
+      </span>
+      <button
+        onclick="nextSlide()"
+        class="p-3 bg-cyan-500 hover:bg-cyan-600 rounded-full transition-all hover:scale-110 active:scale-95 shadow-lg shadow-cyan-500/30"
+      >
+        <i data-lucide="arrow-right" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- SLIDE 1: Intro -->
+    <div class="slide active" id="slide-1">
+      <div class="text-center p-8 max-w-4xl animate-fade-in-up">
+        <div
+          class="inline-block p-6 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 mb-8 shadow-2xl shadow-cyan-500/20 animate-bounce-slow"
+        >
+          <i data-lucide="rocket" class="w-24 h-24 text-white"></i>
+        </div>
+        <h1
+          class="text-7xl md:text-8xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400"
+        >
+          HTML Basics
+        </h1>
+        <p class="text-2xl text-slate-300 font-light max-w-2xl mx-auto">
+          Your Journey Into Web Space Begins! 👨‍🚀
+        </p>
+        <div
+          class="mt-12 flex justify-center gap-4 text-sm text-slate-400 font-mono"
+        >
+          <span class="px-3 py-1 bg-white/5 rounded-full border border-white/10"
+            >&lt;setup&gt;</span
+          >
+          <span class="px-3 py-1 bg-white/5 rounded-full border border-white/10"
+            >&lt;tags&gt;</span
+          >
+          <span class="px-3 py-1 bg-white/5 rounded-full border border-white/10"
+            >&lt;elements&gt;</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Structure -->
+    <div class="slide" id="slide-2">
+      <div class="max-w-6xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-12 text-center text-cyan-400">
+          The Space Suit 👨‍🚀
+        </h2>
+
+        <div
+          class="flex flex-col md:flex-row gap-8 items-center justify-center"
+        >
+          <!-- Explanation -->
+          <div class="w-full md:w-1/3 space-y-4">
+            <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-pink-500">
+              <strong class="text-pink-400 block mb-1"
+                >&lt;!DOCTYPE html&gt;</strong
+              >
+              <span class="text-slate-300 text-sm"
+                >Tells the browser: "This is modern HTML5!"</span
+              >
+            </div>
+            <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-blue-500">
+              <strong class="text-blue-400 block mb-1">&lt;html&gt;</strong>
+              <span class="text-slate-300 text-sm"
+                >The root container. The spaceship itself.</span
+              >
+            </div>
+            <div
+              class="bg-slate-800 p-4 rounded-xl border-l-4 border-yellow-500"
+            >
+              <strong class="text-yellow-400 block mb-1">&lt;head&gt;</strong>
+              <span class="text-slate-300 text-sm"
+                >Meta info (Title, SEO). Invisible to users.</span
+              >
+            </div>
+            <div
+              class="bg-slate-800 p-4 rounded-xl border-l-4 border-green-500"
+            >
+              <strong class="text-green-400 block mb-1">&lt;body&gt;</strong>
+              <span class="text-slate-300 text-sm"
+                >Visible content. Text, images, everything you see.</span
+              >
+            </div>
+          </div>
+
+          <!-- Code -->
+          <div class="w-full md:w-1/2">
+            <div class="code-card text-lg whitespace-pre">
+              <span class="tag">&lt;!DOCTYPE</span>
+              <span class="attr">html</span><span class="tag">&gt;</span>
+              <span class="tag">&lt;html&gt;</span>
+              <span class="tag">&lt;head&gt;</span>
+              <span class="tag">&lt;title&gt;</span>My First Page<span
+                class="tag"
+                >&lt;/title&gt;</span
+              >
+              <span class="tag">&lt;head&gt;</span>
+              <span class="tag">&lt;body&gt;</span>
+              <span class="tag">&lt;h1&gt;</span>Hello Universe!<span
+                class="tag"
+                >&lt;/h1&gt;</span
+              >
+              <span class="tag">&lt;p&gt;</span>We come in peace.<span
+                class="tag"
+                >&lt;/p&gt;</span
+              >
+              <span class="tag">&lt;/body&gt;</span>
+              <span class="tag">&lt;/html&gt;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Anatomy of an Element -->
+    <div class="slide" id="slide-3">
+      <div class="max-w-6xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-12 text-center text-purple-400">
+          The Element Anatomy 🧬
+        </h2>
+
+        <div class="flex flex-col items-center gap-12">
+          <!-- Visual Breakdown -->
+          <div
+            class="flex items-center gap-2 text-2xl md:text-4xl font-mono bg-white/5 p-8 rounded-2xl border border-white/10"
+          >
+            <div class="flex flex-col items-center">
+              <span class="text-pink-400">&lt;h1&gt;</span>
+              <span
+                class="text-xs text-slate-500 mt-2 font-sans uppercase tracking-widest"
+                >Start Tag</span
+              >
+            </div>
+            <div class="flex flex-col items-center px-4">
+              <span>Hello</span>
+              <span
+                class="text-xs text-slate-500 mt-2 font-sans uppercase tracking-widest"
+                >Content</span
+              >
+            </div>
+            <div class="flex flex-col items-center">
+              <span class="text-pink-400">&lt;/h1&gt;</span>
+              <span
+                class="text-xs text-slate-500 mt-2 font-sans uppercase tracking-widest"
+                >End Tag</span
+              >
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-600">
+              <h3 class="text-xl font-bold mb-3 text-cyan-300">
+                Standard Elements
+              </h3>
+              <p class="text-slate-400 mb-4">Have a start and end tag.</p>
+              <code class="bg-black/30 p-2 rounded block text-sm"
+                >&lt;p&gt;Text&lt;/p&gt;</code
+              >
+              <code class="bg-black/30 p-2 rounded block text-sm mt-2"
+                >&lt;h1&gt;Title&lt;/h1&gt;</code
+              >
+            </div>
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-600">
+              <h3 class="text-xl font-bold mb-3 text-red-300">
+                Empty Elements
+              </h3>
+              <p class="text-slate-400 mb-4">
+                No content, no end tag (Self-closing).
+              </p>
+              <code class="bg-black/30 p-2 rounded block text-sm mb-2"
+                >&lt;br&gt;
+                <span class="text-slate-500">// Line Break</span></code
+              >
+              <code class="bg-black/30 p-2 rounded block text-sm"
+                >&lt;hr&gt;
+                <span class="text-slate-500">// Horizontal Line</span></code
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Attributes -->
+    <div class="slide" id="slide-4">
+      <div class="max-w-6xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-12 text-center text-green-400">
+          Attributes: The Settings ⚙️
+        </h2>
+        <p class="text-center text-slate-300 mb-8 max-w-2xl mx-auto">
+          Attributes provide extra info about elements. They always live in the
+          <strong>Start Tag</strong>.
+        </p>
+
+        <div class="flex flex-col items-center gap-8">
+          <!-- Code Visual -->
+          <div class="code-card text-2xl whitespace-pre inline-block">
+            <span class="tag">&lt;p</span> <span class="attr">style</span>=<span
+              class="val"
+              >"color:blue"</span
+            >
+            <span class="attr">title</span>=<span class="val">"Tooltip!"</span
+            ><span class="tag">&gt;</span>
+            Hover me
+            <span class="tag">&lt;/p&gt;</span>
+          </div>
+
+          <!-- Attribute List -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            <div
+              class="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-green-400 transition-colors"
+            >
+              <code class="text-green-300 font-bold block mb-2"
+                >style="..."</code
+              >
+              <p class="text-sm text-slate-400">
+                Change appearance (color, font, size).
+              </p>
+            </div>
+            <div
+              class="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-green-400 transition-colors"
+            >
+              <code class="text-green-300 font-bold block mb-2"
+                >title="..."</code
+              >
+              <p class="text-sm text-slate-400">
+                Shows a tooltip text when mouse hovers.
+              </p>
+            </div>
+            <div
+              class="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-green-400 transition-colors"
+            >
+              <code class="text-green-300 font-bold block mb-2"
+                >href / src</code
+              >
+              <p class="text-sm text-slate-400">
+                Specific attributes for links and images.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Headings -->
+    <div class="slide" id="slide-5">
+      <div class="max-w-6xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-8 text-center text-yellow-400">
+          Headings Hierarchy 👑
+        </h2>
+        <p class="text-center text-slate-300 mb-8">
+          From the Captain down to the Cadets. Use these for importance, not
+          just size!
+        </p>
+
+        <div class="flex gap-8 items-start justify-center">
+          <!-- Visuals -->
+          <div
+            class="bg-white text-slate-900 p-8 rounded-xl shadow-2xl w-full md:w-1/2 space-y-2"
+          >
+            <h1 class="text-4xl font-bold border-b border-slate-200 pb-2">
+              H1: Main Title
+            </h1>
+            <h2 class="text-3xl font-bold text-slate-700">H2: Major Section</h2>
+            <h3 class="text-2xl font-bold text-slate-600">H3: Sub-section</h3>
+            <h4 class="text-xl font-bold text-slate-500">H4: Detail Title</h4>
+            <h5 class="text-lg font-bold text-slate-400">H5: Minor Note</h5>
+            <h6
+              class="text-base font-bold text-slate-400 uppercase tracking-widest"
+            >
+              H6: Tiny Header
+            </h6>
+          </div>
+
+          <!-- Code -->
+          <div class="hidden md:block w-1/3">
+            <div class="code-card text-sm whitespace-pre">
+              <span class="tag">&lt;h1&gt;</span>Most Important<span class="tag"
+                >&lt;/h1&gt;</span
+              >
+              <span class="tag">&lt;h2&gt;</span>Second Level<span class="tag"
+                >&lt;/h2&gt;</span
+              >
+              <span class="tag">&lt;h3&gt;</span>Third Level<span class="tag"
+                >&lt;/h3&gt;</span
+              >
+              <span class="tag">&lt;h4&gt;</span>Fourth Level<span class="tag"
+                >&lt;/h4&gt;</span
+              >
+              <span class="tag">&lt;h5&gt;</span>Fifth Level<span class="tag"
+                >&lt;/h5&gt;</span
+              >
+              <span class="tag">&lt;h6&gt;</span>Least Important<span
+                class="tag"
+                >&lt;/h6&gt;</span
+              >
+            </div>
+            <div
+              class="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg text-yellow-200 text-sm"
+            >
+              ⚠️ <strong>Tip:</strong> Only use one
+              <code class="bg-black/30 px-1 rounded">&lt;h1&gt;</code> per page!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Paragraphs -->
+    <div class="slide" id="slide-6">
+      <div class="max-w-4xl w-full p-8 text-center">
+        <div class="inline-block p-4 bg-green-500/20 rounded-full mb-6">
+          <i data-lucide="align-left" class="w-12 h-12 text-green-400"></i>
+        </div>
+        <h2 class="text-5xl font-bold mb-6 text-green-400">
+          The Paragraph &lt;p&gt;
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-12">
+          <div class="code-card text-lg whitespace-pre text-left">
+            <span class="tag">&lt;p&gt;</span>
+            This is a paragraph of text. HTML ignores extra spaces and lines!
+            <span class="tag">&lt;/p&gt;</span>
+          </div>
+
+          <div
+            class="bg-white text-slate-800 p-6 rounded-xl text-left leading-relaxed shadow-lg relative"
+          >
+            <div
+              class="absolute -top-3 -left-3 bg-green-500 text-white px-2 py-1 rounded text-xs font-bold"
+            >
+              Output
+            </div>
+            This is a paragraph of text. HTML ignores extra spaces and lines!
+          </div>
+        </div>
+
+        <p class="mt-12 text-slate-400 text-lg">
+          Paragraphs automatically add some space (margin) before and after
+          themselves.
+        </p>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: Lists (Basic) -->
+    <div class="slide" id="slide-7">
+      <div class="max-w-6xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-8 text-center text-orange-400">
+          Organizing Lists 📋
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <!-- Unordered List -->
+          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+            <div class="flex items-center gap-3 mb-4">
+              <i data-lucide="list" class="text-orange-400"></i>
+              <h3 class="text-2xl font-bold text-orange-300">
+                Unordered &lt;ul&gt;
+              </h3>
+            </div>
+            <div class="code-card text-sm mb-4 whitespace-pre">
+              <span class="tag">&lt;ul</span>
+              <span class="attr">type</span>=<span class="val">"square"</span
+              ><span class="tag">&gt;</span>
+              <span class="tag">&lt;li&gt;</span>Apples<span class="tag"
+                >&lt;/li&gt;</span
+              >
+              <span class="tag">&lt;li&gt;</span>Bananas<span class="tag"
+                >&lt;/li&gt;</span
+              >
+              <span class="tag">&lt;/ul&gt;</span>
+            </div>
+            <div class="bg-black/30 p-4 rounded-lg pl-8">
+              <ul class="list-disc text-slate-300 space-y-2">
+                <li>Apples</li>
+                <li>Bananas</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Ordered List -->
+          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+            <div class="flex items-center gap-3 mb-4">
+              <i data-lucide="list-ordered" class="text-blue-400"></i>
+              <h3 class="text-2xl font-bold text-blue-300">
+                Ordered &lt;ol&gt;
+              </h3>
+            </div>
+            <div class="code-card text-sm mb-4 whitespace-pre">
+              <span class="tag">&lt;ol</span>
+              <span class="attr">type</span>=<span class="val">"1"</span
+              ><span class="tag">&gt;</span>
+              <span class="tag">&lt;li&gt;</span>Wake up<span class="tag"
+                >&lt;/li&gt;</span
+              >
+              <span class="tag">&lt;li&gt;</span>Code<span class="tag"
+                >&lt;/li&gt;</span
+              >
+              <span class="tag">&lt;/ol&gt;</span>
+            </div>
+            <div class="bg-black/30 p-4 rounded-lg pl-8">
+              <ol class="list-decimal text-slate-300 space-y-2">
+                <li>Wake up</li>
+                <li>Code</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: Nested Lists (NEW) -->
+    <div class="slide" id="slide-8">
+      <div class="max-w-6xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-8 text-center text-teal-400">
+          Nested Elements 🪆
+        </h2>
+        <p class="text-center text-slate-300 mb-8">
+          You can put lists inside lists! This is great for sub-categories.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <!-- Visual Demo -->
+          <div
+            class="bg-slate-800 p-8 rounded-2xl border-2 border-teal-500/50 relative overflow-hidden"
+          >
+            <div class="absolute top-0 right-0 p-4 opacity-10">
+              <i data-lucide="layers" class="w-32 h-32"></i>
+            </div>
+
+            <h3
+              class="text-2xl font-bold text-teal-300 mb-4 border-b border-teal-500/30 pb-2"
+            >
+              Pixel 9 Pro Features
+            </h3>
+            <div class="nested-demo text-lg">
+              <ul>
+                <li>
+                  Display
+                  <ul>
+                    <li>6.7 inch screen</li>
+                    <li>120Hz refresh</li>
+                  </ul>
+                </li>
+                <li>
+                  Camera
+                  <ul>
+                    <li>50MP Main</li>
+                    <li>12MP Wide</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Code -->
+          <div
+            class="code-card text-sm whitespace-pre h-full flex items-center"
+          >
+            <span class="tag">&lt;ul&gt;</span>
+            <span class="tag">&lt;li&gt;</span>
+            Display
+            <span class="tag">&lt;ul&gt;</span>
+            <span class="tag">&lt;li&gt;</span>6.7 inch<span class="tag"
+              >&lt;/li&gt;</span
+            >
+            <span class="tag">&lt;li&gt;</span>120Hz<span class="tag"
+              >&lt;/li&gt;</span
+            >
+            <span class="tag">&lt;/ul&gt;</span>
+            <span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;li&gt;</span>
+            Camera...
+            <span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;/ul&gt;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: Links (External) -->
+    <div class="slide" id="slide-9">
+      <div class="max-w-5xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-12 text-center text-blue-400">
+          Hyperlinks &lt;a&gt; 🔗
+        </h2>
+
+        <div class="flex flex-col items-center gap-8">
+          <!-- Concept -->
+          <div
+            class="bg-slate-800 p-8 rounded-2xl border-2 border-dashed border-slate-600 relative hover:border-blue-500 transition-colors"
+          >
+            <i
+              data-lucide="globe"
+              class="w-16 h-16 text-slate-500 mx-auto mb-4"
+            ></i>
+            <div class="code-card text-xl whitespace-pre">
+              <span class="tag">&lt;a</span>
+              <span class="attr">href</span>=<span class="val"
+                >"https://norton-u.com"</span
+              >
+              <span class="attr">target</span>=<span class="val">"_blank"</span
+              ><span class="tag">&gt;</span>
+              Click Here
+              <span class="tag">&lt;/a&gt;</span>
+            </div>
+          </div>
+
+          <!-- Attributes breakdown -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            <div
+              class="bg-blue-500/10 p-6 rounded-xl border border-blue-500/20 flex items-start gap-4"
+            >
+              <div
+                class="bg-blue-500 text-white px-2 py-1 rounded font-mono font-bold"
+              >
+                href
+              </div>
+              <div>
+                <h3 class="font-bold text-blue-300">Hypertext Reference</h3>
+                <p class="text-sm text-slate-400">
+                  The destination address (URL).
+                </p>
+              </div>
+            </div>
+            <div
+              class="bg-purple-500/10 p-6 rounded-xl border border-purple-500/20 flex items-start gap-4"
+            >
+              <div
+                class="bg-purple-500 text-white px-2 py-1 rounded font-mono font-bold"
+              >
+                target
+              </div>
+              <div>
+                <h3 class="font-bold text-purple-300">Target Window</h3>
+                <p class="text-sm text-slate-400">
+                  <code>_blank</code> opens in a new tab!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: Images -->
+    <div class="slide" id="slide-10">
+      <div class="max-w-6xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-8 text-center text-pink-400">
+          Images &lt;img&gt; 🖼️
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6">
+            <div class="code-card text-sm whitespace-pre">
+              <span class="tag">&lt;img</span>
+              <span class="attr">src</span>=<span class="val"
+                >"rocket.jpg"</span
+              >
+              <span class="attr">alt</span>=<span class="val">"A Rocket"</span>
+              <span class="attr">width</span>=<span class="val">"300"</span>
+              <span class="tag">/&gt;</span>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <span class="text-pink-400 font-mono font-bold">src</span>
+                <span class="text-slate-400 text-sm"
+                  >Source file path (URL or local)</span
+                >
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-pink-400 font-mono font-bold">alt</span>
+                <span class="text-slate-400 text-sm"
+                  >Alternative text (for accessibility)</span
+                >
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-pink-400 font-mono font-bold"
+                  >Self-Closing</span
+                >
+                <span class="text-slate-400 text-sm"
+                  >No closing tag needed!</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual Demo -->
+          <div class="relative group">
+            <div
+              class="absolute -inset-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000"
+            ></div>
+            <div
+              class="relative bg-slate-900 rounded-lg p-2 border border-slate-700"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1517976487492-5750f3195933?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+                alt="Rocket"
+                class="rounded w-full h-64 object-cover"
+              />
+              <div class="p-2 text-center text-xs text-slate-500 font-mono">
+                src="rocket.jpg"
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 11: Homework (UPDATED) -->
+    <div class="slide" id="slide-11">
+      <div class="text-center p-8 max-w-4xl">
+        <div
+          class="inline-block p-4 bg-white/10 rounded-full mb-6 animate-pulse"
+        >
+          <i data-lucide="flag" class="w-16 h-16 text-red-400"></i>
+        </div>
+        <h1 class="text-6xl font-bold mb-8">Final Mission: The Website 🚀</h1>
+
+        <div
+          class="bg-slate-800/80 backdrop-blur-md p-8 rounded-2xl border border-slate-600 text-left max-w-3xl mx-auto shadow-2xl relative"
+        >
+          <!-- Paperclip visual -->
+          <div
+            class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-16 bg-slate-500 rounded-full border-4 border-slate-700"
+          ></div>
+
+          <h3 class="text-2xl font-bold mb-4 text-cyan-400 mt-4">
+            Build a Multi-Page Site
+          </h3>
+          <ul class="space-y-4 text-lg text-slate-300">
+            <li class="flex items-start gap-3">
+              <i
+                data-lucide="files"
+                class="w-6 h-6 text-cyan-500 shrink-0 mt-1"
+              ></i>
+              <span
+                >Create 3 HTML files: <strong>index.html</strong>,
+                <strong>about.html</strong>,
+                <strong>contact.html</strong>.</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <i
+                data-lucide="navigation"
+                class="w-6 h-6 text-cyan-500 shrink-0 mt-1"
+              ></i>
+              <span
+                >Create a <strong>Navigation Bar</strong> using
+                <code class="text-pink-400">&lt;ul&gt;</code> and
+                <code class="text-pink-400">&lt;li&gt;</code>.</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <i
+                data-lucide="link"
+                class="w-6 h-6 text-cyan-500 shrink-0 mt-1"
+              ></i>
+              <span
+                >Use <code class="text-pink-400">&lt;a&gt;</code> tags to link
+                all pages together in the nav bar.</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <i
+                data-lucide="check-circle"
+                class="w-6 h-6 text-cyan-500 shrink-0 mt-1"
+              ></i>
+              <span>Test that you can click between all 3 pages!</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-12">
+          <button
+            onclick="goToSlide(0)"
+            class="px-8 py-4 bg-cyan-600 hover:bg-cyan-500 rounded-full font-bold transition-all hover:scale-105 flex items-center gap-2 mx-auto shadow-lg shadow-cyan-500/20"
+          >
+            <i data-lucide="rotate-ccw" class="w-5 h-5"></i> Restart Mission
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      lucide.createIcons();
+
+      // Star Background Generation
+      const starsContainer = document.getElementById("stars-container");
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        const size = Math.random() * 3;
+        star.style.width = size + "px";
+        star.style.height = size + "px";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.top = Math.random() * 100 + "vh";
+        star.style.animationDelay = Math.random() * 5 + "s";
+        starsContainer.appendChild(star);
+      }
+
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const indicator = document.getElementById("page-indicator");
+      const totalSlides = slides.length;
+
+      function updateSlide() {
+        slides.forEach((slide, index) => {
+          if (index === currentSlide) {
+            slide.classList.add("active");
+          } else {
+            slide.classList.remove("active");
+          }
+        });
+        indicator.innerText = `${currentSlide + 1} / ${totalSlides}`;
+      }
+
+      function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+          currentSlide++;
+          updateSlide();
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateSlide();
+        }
+      }
+
+      function goToSlide(index) {
+        currentSlide = index;
+        updateSlide();
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " ") {
+          nextSlide();
+        } else if (e.key === "ArrowLeft") {
+          prevSlide();
+        }
+      });
+
+      updateSlide();
+    </script>
+  </body>
+</html>

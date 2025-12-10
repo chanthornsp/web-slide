@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Tables Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Fredoka", sans-serif;
+        overflow: hidden;
+      }
+      pre,
+      code {
+        font-family: "JetBrains Mono", monospace;
+      }
+      .slide {
+        display: none;
+        height: 100vh;
+        width: 100vw;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .slide.active {
+        display: flex;
+        opacity: 1;
+        z-index: 10;
+      }
+      .blob {
+        position: absolute;
+        filter: blur(40px);
+        z-index: -1;
+        animation: move 10s infinite alternate;
+      }
+      @keyframes move {
+        from {
+          transform: translate(0, 0) scale(1);
+        }
+        to {
+          transform: translate(20px, -20px) scale(1.1);
+        }
+      }
+      .code-card {
+        background: #1e293b;
+        color: #e2e8f0;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        border: 2px solid #334155;
+        position: relative;
+        overflow-x: auto;
+      }
+      .code-card::before {
+        content: "● ● ●";
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        color: #475569;
+        font-size: 10px;
+        letter-spacing: 4px;
+      }
+      .tag {
+        color: #f472b6;
+      }
+      .attr {
+        color: #a5b4fc;
+      }
+      .val {
+        color: #86efac;
+      }
+      .comment {
+        color: #94a3b8;
+        font-style: italic;
+      }
+
+      /* Custom Table Styles for Demo */
+      .demo-table {
+        border-collapse: collapse;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .demo-table th,
+      .demo-table td {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 12px;
+        text-align: center;
+      }
+      .demo-table th {
+        background: rgba(244, 114, 182, 0.2);
+        color: #f472b6;
+        font-weight: bold;
+      }
+      .demo-table td {
+        color: #cbd5e1;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-900 text-white selection:bg-cyan-500 selection:text-white"
+  >
+    <!-- Background Blobs (Different Colors for Variety) -->
+    <div
+      class="blob bg-emerald-600 w-96 h-96 rounded-full top-0 left-0 opacity-20 mix-blend-screen"
+    ></div>
+    <div
+      class="blob bg-indigo-600 w-96 h-96 rounded-full bottom-0 right-0 opacity-20 mix-blend-screen animation-delay-2000"
+    ></div>
+    <div
+      class="blob bg-orange-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-screen"
+    ></div>
+
+    <!-- Navigation Controls -->
+    <div class="fixed bottom-8 right-8 z-50 flex gap-4">
+      <button
+        onclick="prevSlide()"
+        class="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full transition-all hover:scale-110 active:scale-95 border border-white/20"
+      >
+        <i data-lucide="arrow-left" class="w-6 h-6"></i>
+      </button>
+      <span
+        id="page-indicator"
+        class="flex items-center font-bold text-lg bg-white/10 px-4 rounded-full border border-white/20 backdrop-blur-md"
+      >
+        1 / 7
+      </span>
+      <button
+        onclick="nextSlide()"
+        class="p-3 bg-emerald-500 hover:bg-emerald-600 rounded-full transition-all hover:scale-110 active:scale-95 shadow-lg shadow-emerald-500/30"
+      >
+        <i data-lucide="arrow-right" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- SLIDE 1: Title -->
+    <div class="slide active" id="slide-1">
+      <div class="text-center p-8 max-w-4xl animate-fade-in-up">
+        <div
+          class="inline-block p-6 rounded-3xl bg-gradient-to-br from-emerald-400 to-cyan-500 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500"
+        >
+          <i data-lucide="table-2" class="w-24 h-24 text-white"></i>
+        </div>
+        <h1
+          class="text-6xl md:text-8xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400"
+        >
+          HTML Tables
+        </h1>
+        <p class="text-2xl text-slate-300 font-light max-w-2xl mx-auto">
+          Organizing Data Like a Pro 📊
+        </p>
+        <div class="mt-12 flex justify-center gap-6">
+          <div
+            class="bg-white/5 backdrop-blur-sm px-6 py-3 rounded-xl border border-white/10"
+          >
+            <span class="text-2xl">🧱</span> Rows
+          </div>
+          <div
+            class="bg-white/5 backdrop-blur-sm px-6 py-3 rounded-xl border border-white/10"
+          >
+            <span class="text-2xl">🏛️</span> Columns
+          </div>
+          <div
+            class="bg-white/5 backdrop-blur-sm px-6 py-3 rounded-xl border border-white/10"
+          >
+            <span class="text-2xl">📑</span> Data
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Basic Ingredients -->
+    <div class="slide" id="slide-2">
+      <div class="max-w-6xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-12 text-center text-emerald-400">
+          The Basic Ingredients 🥣
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Table Tag -->
+            <div
+              class="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-emerald-400 transition-colors group"
+            >
+              <code class="text-2xl text-pink-400 font-bold mb-2 block"
+                >&lt;table&gt;</code
+              >
+              <p class="text-slate-300">
+                The wrapper. Everything lives inside this box.
+              </p>
+            </div>
+            <!-- TR Tag -->
+            <div
+              class="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-yellow-400 transition-colors group"
+            >
+              <code class="text-2xl text-yellow-400 font-bold mb-2 block"
+                >&lt;tr&gt;</code
+              >
+              <p class="text-slate-300">
+                Table Row. Creates a horizontal line.
+              </p>
+            </div>
+            <!-- TH Tag -->
+            <div
+              class="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-blue-400 transition-colors group"
+            >
+              <code class="text-2xl text-blue-400 font-bold mb-2 block"
+                >&lt;th&gt;</code
+              >
+              <p class="text-slate-300">
+                Table Header. Bold & Centered text. Use for titles.
+              </p>
+            </div>
+            <!-- TD Tag -->
+            <div
+              class="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-green-400 transition-colors group"
+            >
+              <code class="text-2xl text-green-400 font-bold mb-2 block"
+                >&lt;td&gt;</code
+              >
+              <p class="text-slate-300">Table Data. The actual content cell.</p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div
+              class="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl blur-lg opacity-20"
+            ></div>
+            <div
+              class="bg-slate-900 p-6 rounded-xl border border-slate-700 relative"
+            >
+              <div class="code-card text-lg whitespace-pre">
+                <span class="tag">&lt;table&gt;</span>
+                <span class="tag">&lt;tr&gt;</span>
+                <span class="tag">&lt;th&gt;</span>Fruit<span class="tag"
+                  >&lt;/th&gt;</span
+                >
+                <span class="tag">&lt;th&gt;</span>Color<span class="tag"
+                  >&lt;/th&gt;</span
+                >
+                <span class="tag">&lt;/tr&gt;</span>
+                <span class="tag">&lt;tr&gt;</span>
+                <span class="tag">&lt;td&gt;</span>Apple<span class="tag"
+                  >&lt;/td&gt;</span
+                >
+                <span class="tag">&lt;td&gt;</span>Red<span class="tag"
+                  >&lt;/td&gt;</span
+                >
+                <span class="tag">&lt;/tr&gt;</span>
+                <span class="tag">&lt;/table&gt;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Table Sections -->
+    <div class="slide" id="slide-3">
+      <div class="max-w-5xl w-full p-8 text-center">
+        <h2 class="text-5xl font-bold mb-8">Table Anatomy 🦴</h2>
+        <p class="text-xl text-slate-300 mb-12">
+          Just like a document (or a person!), tables have a head, body, and
+          feet.
+        </p>
+
+        <div class="flex flex-col md:flex-row gap-8 items-start justify-center">
+          <!-- Visual Table -->
+          <div class="w-full md:w-1/2 space-y-2">
+            <div
+              class="p-4 bg-pink-500/20 border-2 border-pink-500 rounded-t-lg text-pink-300 font-bold flex items-center justify-center gap-2"
+            >
+              <span>&lt;thead&gt;</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i> Headers
+            </div>
+            <div
+              class="p-8 bg-emerald-500/20 border-2 border-emerald-500 text-emerald-300 font-bold h-32 flex items-center justify-center gap-2"
+            >
+              <span>&lt;tbody&gt;</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i> Main Data
+            </div>
+            <div
+              class="p-4 bg-blue-500/20 border-2 border-blue-500 rounded-b-lg text-blue-300 font-bold flex items-center justify-center gap-2"
+            >
+              <span>&lt;tfoot&gt;</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i> Totals/Footer
+            </div>
+          </div>
+
+          <!-- Code Block -->
+          <div class="w-full md:w-1/2">
+            <div class="code-card text-left text-sm whitespace-pre">
+              <span class="tag">&lt;table&gt;</span>
+              <span class="tag">&lt;thead&gt;</span>
+              <span class="tag">&lt;tr&gt;</span
+              ><span class="tag">&lt;th&gt;</span>Item<span class="tag"
+                >&lt;/th&gt;</span
+              ><span class="tag">&lt;th&gt;</span>Cost<span class="tag"
+                >&lt;/th&gt;</span
+              ><span class="tag">&lt;/tr&gt;</span>
+              <span class="tag">&lt;/thead&gt;</span>
+
+              <span class="tag">&lt;tbody&gt;</span>
+              <span class="tag">&lt;tr&gt;</span
+              ><span class="tag">&lt;td&gt;</span>Phone<span class="tag"
+                >&lt;/td&gt;</span
+              ><span class="tag">&lt;td&gt;</span>$999<span class="tag"
+                >&lt;/td&gt;</span
+              ><span class="tag">&lt;/tr&gt;</span>
+              <span class="tag">&lt;tr&gt;</span
+              ><span class="tag">&lt;td&gt;</span>Laptop<span class="tag"
+                >&lt;/td&gt;</span
+              ><span class="tag">&lt;td&gt;</span>$1200<span class="tag"
+                >&lt;/td&gt;</span
+              ><span class="tag">&lt;/tr&gt;</span>
+              <span class="tag">&lt;/tbody&gt;</span>
+
+              <span class="tag">&lt;tfoot&gt;</span>
+              <span class="tag">&lt;tr&gt;</span
+              ><span class="tag">&lt;td&gt;</span>Total<span class="tag"
+                >&lt;/td&gt;</span
+              ><span class="tag">&lt;td&gt;</span>$2199<span class="tag"
+                >&lt;/td&gt;</span
+              ><span class="tag">&lt;/tr&gt;</span>
+              <span class="tag">&lt;/tfoot&gt;</span>
+              <span class="tag">&lt;/table&gt;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Live Example -->
+    <div class="slide" id="slide-4">
+      <div class="max-w-4xl w-full p-8">
+        <h2 class="text-4xl font-bold mb-6 text-center">
+          Product Inventory Example
+        </h2>
+
+        <!-- Rendered Table -->
+        <div
+          class="bg-white/5 p-6 rounded-2xl border border-white/10 mb-8 shadow-2xl"
+        >
+          <table class="demo-table">
+            <caption class="text-slate-400 mb-2 italic">
+              Product Inventory 2025
+            </caption>
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Price (USD)</th>
+                <th>Stock Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>iPhone 15 Pro</td>
+                <td>$999</td>
+                <td class="text-green-400">In Stock</td>
+              </tr>
+              <tr>
+                <td>MacBook Air M3</td>
+                <td>$1,299</td>
+                <td class="text-yellow-400">Low Stock</td>
+              </tr>
+              <tr>
+                <td>AirPods Pro</td>
+                <td>$249</td>
+                <td class="text-red-400">Out of Stock</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="text-slate-500 text-xs">
+                  Last updated: May 21, 2025 | Total Products: 3
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <p class="text-center text-slate-300">
+          Notice the
+          <code class="bg-white/10 px-2 py-1 rounded text-pink-300"
+            >&lt;caption&gt;</code
+          >
+          at the top and the
+          <code class="bg-white/10 px-2 py-1 rounded text-blue-300"
+            >&lt;tfoot&gt;</code
+          >
+          spanning all columns at the bottom!
+        </p>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Attributes -->
+    <div class="slide" id="slide-5">
+      <div class="max-w-5xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-12 text-center text-purple-400">
+          Table Attributes 🎛️
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-purple-500 transition-all hover:-translate-y-2"
+          >
+            <div
+              class="bg-purple-500/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-purple-400"
+            >
+              <i data-lucide="square" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">border</h3>
+            <p class="text-sm text-slate-400">
+              Defines the thickness of the border around the table and cells.
+            </p>
+            <code
+              class="text-xs bg-black/30 p-1 rounded mt-2 block text-purple-300"
+              >border="1"</code
+            >
+          </div>
+
+          <div
+            class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-pink-500 transition-all hover:-translate-y-2"
+          >
+            <div
+              class="bg-pink-500/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-pink-400"
+            >
+              <i data-lucide="maximize" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">cellpadding</h3>
+            <p class="text-sm text-slate-400">
+              Space between the cell content and its border. (Like internal
+              cushion).
+            </p>
+            <code
+              class="text-xs bg-black/30 p-1 rounded mt-2 block text-pink-300"
+              >cellpadding="10"</code
+            >
+          </div>
+
+          <div
+            class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-cyan-500 transition-all hover:-translate-y-2"
+          >
+            <div
+              class="bg-cyan-500/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-cyan-400"
+            >
+              <i data-lucide="grid" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">cellspacing</h3>
+            <p class="text-sm text-slate-400">
+              Space between the cells themselves.
+            </p>
+            <code
+              class="text-xs bg-black/30 p-1 rounded mt-2 block text-cyan-300"
+              >cellspacing="5"</code
+            >
+          </div>
+        </div>
+
+        <div
+          class="mt-8 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg flex items-center gap-4"
+        >
+          <i data-lucide="info" class="text-yellow-400"></i>
+          <p class="text-sm text-yellow-100">
+            <strong>Note:</strong> In modern web development, we usually control
+            these with CSS (borders, padding, gap), but it's good to know the
+            attributes exist!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Merging Cells -->
+    <div class="slide" id="slide-6">
+      <div class="max-w-6xl w-full p-8">
+        <h2 class="text-5xl font-bold mb-8 text-center text-orange-400">
+          Merging Magic 🪄
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <!-- Colspan -->
+          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+            <div class="flex items-center gap-3 mb-4">
+              <span
+                class="bg-orange-500 text-white px-2 py-1 rounded text-sm font-bold"
+                >colspan</span
+              >
+              <h3 class="text-2xl font-bold">Spanning Columns</h3>
+            </div>
+
+            <!-- Visual -->
+            <div class="grid grid-cols-2 gap-2 mb-4 bg-black/30 p-4 rounded-lg">
+              <div
+                class="bg-orange-500/20 border border-orange-500 text-orange-300 p-4 rounded text-center col-span-2"
+              >
+                Header (colspan="2")
+              </div>
+              <div class="bg-slate-700 p-4 rounded text-center text-sm">
+                Data
+              </div>
+              <div class="bg-slate-700 p-4 rounded text-center text-sm">
+                Data
+              </div>
+            </div>
+
+            <div class="code-card text-sm whitespace-pre">
+              <span class="tag">&lt;th</span>
+              <span class="attr">colspan</span>=<span class="val">"2"</span
+              ><span class="tag">&gt;</span>
+              Header
+              <span class="tag">&lt;/th&gt;</span>
+            </div>
+          </div>
+
+          <!-- Rowspan -->
+          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+            <div class="flex items-center gap-3 mb-4">
+              <span
+                class="bg-indigo-500 text-white px-2 py-1 rounded text-sm font-bold"
+                >rowspan</span
+              >
+              <h3 class="text-2xl font-bold">Spanning Rows</h3>
+            </div>
+
+            <!-- Visual -->
+            <div class="grid grid-cols-2 gap-2 mb-4 bg-black/30 p-4 rounded-lg">
+              <div
+                class="bg-indigo-500/20 border border-indigo-500 text-indigo-300 p-4 rounded flex items-center justify-center row-span-2"
+              >
+                User (rowspan="2")
+              </div>
+              <div class="bg-slate-700 p-2 rounded text-center text-sm">
+                Email
+              </div>
+              <div class="bg-slate-700 p-2 rounded text-center text-sm">
+                Phone
+              </div>
+            </div>
+
+            <div class="code-card text-sm whitespace-pre">
+              <span class="tag">&lt;td</span>
+              <span class="attr">rowspan</span>=<span class="val">"2"</span
+              ><span class="tag">&gt;</span>
+              User
+              <span class="tag">&lt;/td&gt;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: Homework -->
+    <div class="slide" id="slide-7">
+      <div class="text-center p-8 max-w-4xl">
+        <div
+          class="inline-block p-4 bg-white/10 rounded-full mb-6 animate-bounce"
+        >
+          <i data-lucide="music" class="w-16 h-16 text-pink-400"></i>
+        </div>
+        <h1 class="text-6xl font-bold mb-8">Homework Time! 📝</h1>
+
+        <div
+          class="bg-slate-800/80 backdrop-blur-md p-8 rounded-2xl border border-slate-600 text-left max-w-2xl mx-auto shadow-2xl"
+        >
+          <h3 class="text-2xl font-bold mb-4 text-emerald-400">
+            Create a "Favorite Songs" Table
+          </h3>
+          <ul class="space-y-4 text-lg text-slate-300">
+            <li class="flex items-start gap-3">
+              <i
+                data-lucide="check-circle"
+                class="w-6 h-6 text-emerald-500 shrink-0 mt-1"
+              ></i>
+              <span
+                >Include columns for <strong>Song Title</strong>,
+                <strong>Artist</strong>, and <strong>Year</strong>.</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <i
+                data-lucide="check-circle"
+                class="w-6 h-6 text-emerald-500 shrink-0 mt-1"
+              ></i>
+              <span
+                >Use a <code class="text-pink-400">&lt;caption&gt;</code> to
+                title your list.</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <i
+                data-lucide="check-circle"
+                class="w-6 h-6 text-emerald-500 shrink-0 mt-1"
+              ></i>
+              <span
+                >Add a <code class="text-blue-400">&lt;tfoot&gt;</code> showing
+                the total number of songs.</span
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-12">
+          <button
+            onclick="goToSlide(0)"
+            class="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 rounded-full font-bold transition-all hover:scale-105 flex items-center gap-2 mx-auto shadow-lg shadow-emerald-500/20"
+          >
+            <i data-lucide="rotate-ccw" class="w-5 h-5"></i> Start Over
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      lucide.createIcons();
+
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const indicator = document.getElementById("page-indicator");
+      const totalSlides = slides.length;
+
+      function updateSlide() {
+        slides.forEach((slide, index) => {
+          if (index === currentSlide) {
+            slide.classList.add("active");
+          } else {
+            slide.classList.remove("active");
+          }
+        });
+        indicator.innerText = `${currentSlide + 1} / ${totalSlides}`;
+      }
+
+      function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+          currentSlide++;
+          updateSlide();
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateSlide();
+        }
+      }
+
+      function goToSlide(index) {
+        currentSlide = index;
+        updateSlide();
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " ") {
+          nextSlide();
+        } else if (e.key === "ArrowLeft") {
+          prevSlide();
+        }
+      });
+
+      updateSlide();
+    </script>
+  </body>
+</html>
