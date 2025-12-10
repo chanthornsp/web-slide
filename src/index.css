@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;700&family=Pacifico&family=JetBrains+Mono:wght@400;700&display=swap");
+
+@theme {
+  --font-fredoka: "Fredoka", sans-serif;
+  --font-pacifico: "Pacifico", cursive;
+  --font-jetbrains: "JetBrains Mono", monospace;
+}
+
+body {
+  margin: 0;
+  font-family: "Fredoka", sans-serif;
+}
