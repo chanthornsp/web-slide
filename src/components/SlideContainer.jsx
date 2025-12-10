@@ -62,15 +62,15 @@ export default function SlideContainer({ children, totalSlides, accentColor = 'c
   const colors = colorClasses[accentColor] || colorClasses.cyan;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-900 text-white">
+    <div className="relative min-h-screen w-full overflow-x-hidden md:overflow-hidden bg-slate-900 text-white">
       {/* Home Button */}
-      <div className="fixed top-8 left-8 z-50">
+      <div className="fixed top-4 left-4 md:top-8 md:left-8 z-50">
         <Link
           to="/"
-          className="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full transition-all hover:scale-110 active:scale-95 border border-white/20 flex items-center gap-2 group"
+          className="p-2 md:p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full transition-all hover:scale-110 active:scale-95 border border-white/20 flex items-center gap-2 group text-sm md:text-base"
           title="Back to Home"
         >
-          <Home className="w-6 h-6" />
+          <Home className="w-5 h-5 md:w-6 md:h-6" />
           <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap">
             Home
           </span>
@@ -78,21 +78,21 @@ export default function SlideContainer({ children, totalSlides, accentColor = 'c
       </div>
 
       {/* Navigation Controls */}
-      <div className="fixed bottom-8 right-8 z-50 flex gap-4">
+      <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 flex gap-2 md:gap-4">
         <button
           onClick={prevSlide}
-          className="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full transition-all hover:scale-110 active:scale-95 border border-white/20"
+          className="p-2 md:p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full transition-all hover:scale-110 active:scale-95 border border-white/20"
         >
-          <ArrowLeft className="w-6 h-6" />
+          <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
         </button>
-        <span className="flex items-center font-bold text-lg bg-white/10 px-4 rounded-full border border-white/20 backdrop-blur-md">
+        <span className="flex items-center font-bold text-sm md:text-lg bg-white/10 px-3 md:px-4 rounded-full border border-white/20 backdrop-blur-md">
           {currentSlide + 1} / {totalSlides}
         </span>
         <button
           onClick={nextSlide}
-          className={`p-3 rounded-full transition-all hover:scale-110 active:scale-95 shadow-lg ${colors.button}`}
+          className={`p-2 md:p-3 rounded-full transition-all hover:scale-110 active:scale-95 shadow-lg ${colors.button}`}
         >
-          <ArrowRight className="w-6 h-6" />
+          <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
         </button>
       </div>
 
