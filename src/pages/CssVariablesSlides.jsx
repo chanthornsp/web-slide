@@ -2,13 +2,13 @@ import { useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { Settings, Sliders, Sun, Moon, Calculator, Box, CheckCircle, Globe, Palette, RotateCcw } from 'lucide-react';
+import { Settings, Sliders, Sun, Moon, Calculator, Box, CheckCircle, Globe, Palette, RotateCcw, Smartphone, Monitor } from 'lucide-react';
 
 export default function CssVariablesSlides() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   return (
-    <SlideContainer totalSlides={8} accentColor="emerald">
+    <SlideContainer totalSlides={9} accentColor="emerald">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -18,7 +18,7 @@ export default function CssVariablesSlides() {
             <div className="blob bg-green-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-screen"></div>
           </div>
 
-          {/* SLIDE 1: Title */}
+          {/* SLIDE 0: Title */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-6 rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
@@ -33,7 +33,7 @@ export default function CssVariablesSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 2: Basic Syntax */}
+          {/* SLIDE 1: Basic Syntax */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-emerald-400">The Syntax 🔡</h2>
@@ -82,7 +82,7 @@ export default function CssVariablesSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 3: Scopes */}
+          {/* SLIDE 2: Scopes */}
           <Slide isActive={currentSlide === 2}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-teal-400">Global vs. Local 🌍</h2>
@@ -123,7 +123,7 @@ export default function CssVariablesSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 4: Using Variables & Fallbacks */}
+          {/* SLIDE 3: Using Variables & Fallbacks */}
           <Slide isActive={currentSlide === 3}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-green-400">Safety Net 🕸️</h2>
@@ -160,7 +160,7 @@ export default function CssVariablesSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 5: Theme Demo */}
+          {/* SLIDE 4: Theme Demo */}
           <Slide isActive={currentSlide === 4}>
             <div className="max-w-6xl w-full p-8 z-10 text-center">
               <h2 className="text-5xl font-bold mb-8 text-purple-400">The Power of Themes 🎨</h2>
@@ -220,8 +220,50 @@ export default function CssVariablesSlides() {
             </div>
           </Slide>
 
+           {/* SLIDE 5: Responsive Variables (NEW) */}
+           <Slide isActive={currentSlide === 5}>
+             <div className="max-w-6xl w-full p-8 z-10 text-center">
+                 <h2 className="text-5xl font-bold mb-8 text-cyan-400">Responsive Variables 📱</h2>
+                 <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
+                    Instead of rewriting dozens of CSS properties for mobile, just change the variable value <span className="text-cyan-400">once</span>!
+                 </p>
+                 
+                 <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
+                    <div className="flex gap-4">
+                        <div className="bg-slate-800 p-4 rounded-xl border border-slate-600 flex flex-col items-center">
+                           <Smartphone className="w-8 h-8 text-cyan-400 mb-2" />
+                           <span className="text-sm text-slate-400">Mobile</span>
+                           <strong className="text-white text-lg">16px Text</strong>
+                        </div>
+                        <div className="text-2xl text-slate-600">→</div>
+                        <div className="bg-slate-800 p-4 rounded-xl border border-slate-600 flex flex-col items-center">
+                           <Monitor className="w-8 h-8 text-cyan-400 mb-2" />
+                           <span className="text-sm text-slate-400">Desktop</span>
+                           <strong className="text-white text-lg">20px Text</strong>
+                        </div>
+                    </div>
+
+                    <div className="w-full max-w-lg text-left">
+                        <CodeCard>
+                           <Tag>:root</Tag> {'{'}{'\n'}
+                           {'  '}<Attr>--text-size</Attr>: <Val>16px</Val>;{'\n'}
+                           {'  '}<Attr>--container-padding</Attr>: <Val>20px</Val>;{'\n'}
+                           {'}'}{'\n'}
+                           {'\n'}
+                           <Tag>@media</Tag> (<Attr>min-width</Attr>: <Val>1024px</Val>) {'{'}{'\n'}
+                           {'  '}<Tag>:root</Tag> {'{'}{'\n'}
+                           {'    '}<Attr>--text-size</Attr>: <Val>20px</Val>;{'\n'}
+                           {'    '}<Attr>--container-padding</Attr>: <Val>40px</Val>;{'\n'}
+                           {'  '}{'}'}{'\n'}
+                           {'}'}
+                        </CodeCard>
+                    </div>
+                 </div>
+             </div>
+           </Slide>
+
           {/* SLIDE 6: Calculations */}
-          <Slide isActive={currentSlide === 5}>
+          <Slide isActive={currentSlide === 6}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-orange-400">Calculations 🧮</h2>
               
@@ -276,7 +318,7 @@ export default function CssVariablesSlides() {
           </Slide>
 
           {/* SLIDE 7: Best Practices */}
-          <Slide isActive={currentSlide === 6}>
+          <Slide isActive={currentSlide === 7}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-white">Best Practices 🏆</h2>
               
@@ -311,7 +353,7 @@ export default function CssVariablesSlides() {
           </Slide>
 
           {/* SLIDE 8: Summary */}
-          <Slide isActive={currentSlide === 7}>
+          <Slide isActive={currentSlide === 8}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-pulse">
                 <CheckCircle className="w-16 h-16 text-emerald-400" />

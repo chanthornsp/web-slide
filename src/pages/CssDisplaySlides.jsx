@@ -2,13 +2,13 @@ import { useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { Monitor, Square, Type, LayoutGrid, Layers, Ghost, MousePointer, BookOpen, RotateCcw, CheckCircle } from 'lucide-react';
+import { Monitor, Square, Type, LayoutGrid, Layers, Ghost, MousePointer, BookOpen, RotateCcw, CheckCircle, MapPin, ArrowUpFromLine } from 'lucide-react';
 
 export default function CssDisplaySlides() {
   const [activeTab, setActiveTab] = useState('block');
 
   return (
-    <SlideContainer totalSlides={9} accentColor="indigo">
+    <SlideContainer totalSlides={11} accentColor="indigo">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -18,22 +18,22 @@ export default function CssDisplaySlides() {
             <div className="blob bg-pink-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-screen"></div>
           </div>
 
-          {/* SLIDE 1: Title */}
+          {/* SLIDE 0: Title */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-6 rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
                 <Monitor className="w-24 h-24 text-white" />
               </div>
               <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
-                CSS Display
+                CSS Display & Layout
               </h1>
               <p className="text-2xl text-slate-300 font-light max-w-2xl mx-auto">
-                Controlling Layout & Flow 📐
+                Controlling Layout, Flow & Position 📐
               </p>
             </div>
           </Slide>
 
-          {/* SLIDE 2: Block Elements */}
+          {/* SLIDE 1: Block Elements */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-indigo-400">Display: Block 🧱</h2>
@@ -67,7 +67,7 @@ export default function CssDisplaySlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 3: Inline Elements */}
+          {/* SLIDE 2: Inline Elements */}
           <Slide isActive={currentSlide === 2}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-pink-400">Display: Inline 📝</h2>
@@ -105,7 +105,7 @@ export default function CssDisplaySlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 4: Inline-Block */}
+          {/* SLIDE 3: Inline-Block */}
           <Slide isActive={currentSlide === 3}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-yellow-400">Display: Inline-Block 🍱</h2>
@@ -139,8 +139,95 @@ export default function CssDisplaySlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 5: Flexbox */}
-          <Slide isActive={currentSlide === 4}>
+           {/* SLIDE 4: Positioning (NEW) */}
+           <Slide isActive={currentSlide === 4}>
+             <div className="max-w-6xl w-full p-8 z-10">
+                <h2 className="text-5xl font-bold mb-8 text-center text-cyan-400">Positioning 📍</h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm md:text-base">
+                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600">
+                      <div className="flex items-center gap-2 mb-2 text-blue-400 font-bold">
+                         <div className="w-3 h-3 bg-blue-500 rounded-full"></div> relative
+                      </div>
+                      <p className="text-slate-300 mb-2">Positioned relative to its <span className="italic">normal</span> position.</p>
+                      <CodeCard className="text-xs">
+                         <Attr>position</Attr>: <Val>relative</Val>;{'\n'}
+                         <Attr>top</Attr>: <Val>20px</Val>;
+                      </CodeCard>
+                   </div>
+
+                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600">
+                      <div className="flex items-center gap-2 mb-2 text-red-400 font-bold">
+                         <div className="w-3 h-3 bg-red-500 rounded-full"></div> absolute
+                      </div>
+                      <p className="text-slate-300 mb-2">Removed from flow. Relative to nearest <span className="text-blue-400">positioned ancestor</span>.</p>
+                      <CodeCard className="text-xs">
+                         <Attr>position</Attr>: <Val>absolute</Val>;{'\n'}
+                         <Attr>top</Attr>: <Val>0</Val>; <Attr>right</Attr>: <Val>0</Val>;
+                      </CodeCard>
+                   </div>
+
+                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600">
+                      <div className="flex items-center gap-2 mb-2 text-green-400 font-bold">
+                         <div className="w-3 h-3 bg-green-500 rounded-full"></div> fixed
+                      </div>
+                      <p className="text-slate-300 mb-2">Stuck to the <span className="text-green-400">viewport</span> (screen). Doesn't move when scrolling.</p>
+                      <CodeCard className="text-xs">
+                         <Attr>position</Attr>: <Val>fixed</Val>;{'\n'}
+                         <Attr>bottom</Attr>: <Val>20px</Val>;
+                      </CodeCard>
+                   </div>
+
+                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600">
+                      <div className="flex items-center gap-2 mb-2 text-yellow-400 font-bold">
+                         <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> sticky
+                      </div>
+                      <p className="text-slate-300 mb-2">Behaves like relative until scroll hits threshold, then becomes fixed.</p>
+                      <CodeCard className="text-xs">
+                         <Attr>position</Attr>: <Val>sticky</Val>;{'\n'}
+                         <Attr>top</Attr>: <Val>0</Val>;
+                      </CodeCard>
+                   </div>
+                </div>
+             </div>
+           </Slide>
+
+           {/* SLIDE 5: Z-Index (NEW) */}
+            <Slide isActive={currentSlide === 5}>
+             <div className="max-w-5xl w-full p-8 z-10">
+                <h2 className="text-5xl font-bold mb-10 text-center text-purple-400">Layers (z-index) 🥞</h2>
+                
+                <div className="flex flex-col md:flex-row gap-12 items-center">
+                   <div className="space-y-6 w-full md:w-1/2">
+                      <p className="text-xl text-slate-300">
+                         Controls strict stacking order. Higher numbers sit on top of lower numbers.
+                      </p>
+                      <div className="bg-yellow-500/10 border-l-4 border-yellow-500 p-4 text-yellow-200 text-sm">
+                         ⚠️ Only works on positioned elements (relative, absolute, fixed, sticky)!
+                      </div>
+                      <CodeCard>
+                         <Tag>.bottom</Tag> {'{'} <Attr>z-index</Attr>: <Val>1</Val>; {'}'}{'\n'}
+                         <Tag>.top</Tag> {'{'} <Attr>z-index</Attr>: <Val>999</Val>; {'}'}
+                      </CodeCard>
+                   </div>
+
+                   <div className="relative w-64 h-64 mx-auto">
+                      <div className="absolute top-0 left-0 w-32 h-32 bg-red-500 rounded-xl shadow-xl flex items-center justify-center font-bold text-white z-0 transform hover:scale-110 transition-transform">
+                         z-index: 1
+                      </div>
+                      <div className="absolute top-8 left-8 w-32 h-32 bg-blue-500 rounded-xl shadow-xl flex items-center justify-center font-bold text-white z-10 transform hover:scale-110 transition-transform">
+                         z-index: 2
+                      </div>
+                      <div className="absolute top-16 left-16 w-32 h-32 bg-green-500 rounded-xl shadow-xl flex items-center justify-center font-bold text-white z-20 transform hover:scale-110 transition-transform">
+                         z-index: 3
+                      </div>
+                   </div>
+                </div>
+             </div>
+            </Slide>
+
+          {/* SLIDE 6: Flexbox */}
+          <Slide isActive={currentSlide === 6}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-8 text-center text-teal-400">Display: Flex 💪</h2>
               
@@ -180,8 +267,8 @@ export default function CssDisplaySlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 6: Grid */}
-          <Slide isActive={currentSlide === 5}>
+          {/* SLIDE 7: Grid */}
+          <Slide isActive={currentSlide === 7}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-8 text-center text-emerald-400">Display: Grid 🏁</h2>
               
@@ -213,8 +300,8 @@ export default function CssDisplaySlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 7: Display None */}
-          <Slide isActive={currentSlide === 6}>
+          {/* SLIDE 8: Display None */}
+          <Slide isActive={currentSlide === 8}>
             <div className="max-w-4xl w-full p-8 z-10 text-center">
               <h2 className="text-5xl font-bold mb-8 text-slate-400">Display: None 👻</h2>
               
@@ -233,8 +320,8 @@ export default function CssDisplaySlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 8: Interactive Playground */}
-          <Slide isActive={currentSlide === 7}>
+          {/* SLIDE 9: Interactive Playground */}
+          <Slide isActive={currentSlide === 9}>
             <div className="max-w-6xl w-full p-4 z-10 flex flex-col h-full">
               <h2 className="text-4xl font-bold mb-6 text-center text-white">Interactive Playground 🎮</h2>
               
@@ -288,8 +375,8 @@ export default function CssDisplaySlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 9: Homework */}
-          <Slide isActive={currentSlide === 8}>
+          {/* SLIDE 10: Homework */}
+          <Slide isActive={currentSlide === 10}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-bounce">
                 <BookOpen className="w-16 h-16 text-indigo-400" />
@@ -299,15 +386,15 @@ export default function CssDisplaySlides() {
               <div className="bg-slate-800/80 backdrop-blur-md p-8 rounded-2xl border border-slate-600 text-left max-w-2xl mx-auto shadow-2xl space-y-6">
                 <div className="flex items-start gap-4">
                     <CheckCircle className="w-6 h-6 text-indigo-400 shrink-0 mt-1" />
-                    <p className="text-slate-300">Create a simple webpage with a header, nav bar, and content section.</p>
-                </div>
-                <div className="flex items-start gap-4">
-                    <CheckCircle className="w-6 h-6 text-indigo-400 shrink-0 mt-1" />
-                    <p className="text-slate-300">Style the <strong className="text-white">navigation bar</strong> using <code>display: inline-block</code> for the links.</p>
+                    <p className="text-slate-300">Create a webpage with a <strong className="text-white">Sticky Header</strong> using <code>position: sticky</code>.</p>
                 </div>
                 <div className="flex items-start gap-4">
                     <CheckCircle className="w-6 h-6 text-indigo-400 shrink-0 mt-1" />
                     <p className="text-slate-300">Create a <strong className="text-white">card layout</strong> in the content section using <code>display: flex</code> (or grid!).</p>
+                </div>
+                <div className="flex items-start gap-4">
+                    <CheckCircle className="w-6 h-6 text-indigo-400 shrink-0 mt-1" />
+                    <p className="text-slate-300">Build a <strong className="text-white">"Go to Top"</strong> button that stays in the corner using <code>position: fixed</code>.</p>
                 </div>
               </div>
 

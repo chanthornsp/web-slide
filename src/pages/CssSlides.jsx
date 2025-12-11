@@ -2,11 +2,11 @@ import { useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { Palette, Box, FileCode, CheckCircle, RotateCcw, PaintBucket, Layout, Type } from 'lucide-react';
+import { Palette, Box, FileCode, CheckCircle, RotateCcw, PaintBucket, Layout, Type, MousePointer, ShieldAlert, Ruler } from 'lucide-react';
 
 export default function CssSlides() {
   return (
-    <SlideContainer totalSlides={9} accentColor="blue">
+    <SlideContainer totalSlides={12} accentColor="blue">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -16,7 +16,7 @@ export default function CssSlides() {
             <div className="blob bg-cyan-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-screen"></div>
           </div>
 
-          {/* SLIDE 1: Title */}
+          {/* SLIDE 0: Title */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-6 rounded-3xl bg-gradient-to-br from-blue-500 to-cyan-600 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
@@ -31,7 +31,7 @@ export default function CssSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 2: What is CSS? */}
+          {/* SLIDE 1: What is CSS? */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-blue-400">What is CSS? 🤔</h2>
@@ -82,7 +82,7 @@ export default function CssSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 3: CSS Syntax */}
+          {/* SLIDE 2: CSS Syntax */}
           <Slide isActive={currentSlide === 2}>
             <div className="max-w-5xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-cyan-400">CSS Syntax 📝</h2>
@@ -121,10 +121,9 @@ export default function CssSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 4: Selectors */}
+          {/* SLIDE 3: Selectors */}
           <Slide isActive={currentSlide === 3}>
             <div className="max-w-6xl w-full p-8 z-10 block overflow-y-auto max-h-screen">
-               {/* Added overflow auto for smaller screens/content safety */}
               <h2 className="text-5xl font-bold mb-12 text-center text-green-400">Selectors 🎯</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -172,13 +171,162 @@ export default function CssSlides() {
                         {'}'}
                     </CodeCard>
                 </div>
-
               </div>
             </div>
           </Slide>
 
-           {/* SLIDE 5: Including CSS */}
-           <Slide isActive={currentSlide === 4}>
+          {/* SLIDE 4: Pseudo-classes (NEW) */}
+          <Slide isActive={currentSlide === 4}>
+             <div className="max-w-6xl w-full p-8 z-10">
+                <h2 className="text-5xl font-bold mb-10 text-center text-purple-400">Pseudo-classes 🎭</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                   <div className="space-y-6">
+                      <p className="text-xl text-slate-300">
+                         Styles that apply only when an element is in a specific <span className="text-purple-400 font-bold">state</span>.
+                      </p>
+                      
+                      <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-purple-500">
+                         <h3 className="text-lg font-bold text-white mb-2">:hover</h3>
+                         <p className="text-slate-400 text-sm">When the user's mouse is over the element.</p>
+                      </div>
+                      <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-pink-500">
+                         <h3 className="text-lg font-bold text-white mb-2">:active</h3>
+                         <p className="text-slate-400 text-sm">When the user clicks (presses down) on the element.</p>
+                      </div>
+                      <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-blue-500">
+                         <h3 className="text-lg font-bold text-white mb-2">:focus</h3>
+                         <p className="text-slate-400 text-sm">When selected via keyboard (Tab) or clicked (Inputs).</p>
+                      </div>
+                   </div>
+
+                   <div className="flex flex-col items-center gap-8">
+                      <div className="group relative">
+                         <button className="bg-slate-700 text-white px-8 py-4 rounded-full font-bold transition-all duration-300 hover:bg-purple-500 hover:scale-110 active:bg-pink-600 active:scale-95 focus:ring-4 focus:ring-blue-400 outline-none">
+                            Interact with Me!
+                         </button>
+                         <div className="absolute top-full mt-4 text-center w-full opacity-0 group-hover:opacity-100 transition-opacity text-purple-300">
+                            (I am being hovered!)
+                         </div>
+                      </div>
+
+                      <CodeCard>
+                         <Tag>button</Tag>:<Attr>hover</Attr> {'{'}{'\n'}
+                         {'  '}<Attr>background-color</Attr>: <Val>purple</Val>;{'\n'}
+                         {'  '}<Attr>transform</Attr>: <Val>scale(1.1)</Val>;{'\n'}
+                         {'}'}{'\n'}
+                         <Tag>button</Tag>:<Attr>active</Attr> {'{'}{'\n'}
+                         {'  '}<Attr>background-color</Attr>: <Val>pink</Val>;{'\n'}
+                         {'}'}
+                      </CodeCard>
+                   </div>
+                </div>
+             </div>
+          </Slide>
+
+          {/* SLIDE 5: Specificity (NEW) */}
+          <Slide isActive={currentSlide === 5}>
+             <div className="max-w-6xl w-full p-8 z-10">
+                <h2 className="text-5xl font-bold mb-10 text-center text-red-400">Specificity Wars ⚔️</h2>
+                <p className="text-center text-slate-300 mb-8 max-w-2xl mx-auto">
+                   When two rules fight for the same element, who wins? The one with the most points!
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                   <div className="bg-slate-800 p-6 rounded-2xl border-t-8 border-slate-500">
+                      <div className="text-4xl mb-4">🥉</div>
+                      <h3 className="text-xl font-bold text-slate-300">Tags</h3>
+                      <p className="font-mono text-slate-500 mb-2">div, p, h1</p>
+                      <div className="text-2xl font-bold text-white">1 Point</div>
+                   </div>
+
+                   <div className="bg-slate-800 p-6 rounded-2xl border-t-8 border-blue-500 transform scale-105 shadow-xl">
+                      <div className="text-4xl mb-4">🥈</div>
+                      <h3 className="text-xl font-bold text-blue-300">Classes</h3>
+                      <p className="font-mono text-slate-500 mb-2">.my-class</p>
+                      <div className="text-2xl font-bold text-white">10 Points</div>
+                   </div>
+
+                   <div className="bg-slate-800 p-6 rounded-2xl border-t-8 border-yellow-500">
+                      <div className="text-4xl mb-4">🥇</div>
+                      <h3 className="text-xl font-bold text-yellow-300">IDs</h3>
+                      <p className="font-mono text-slate-500 mb-2">#my-id</p>
+                      <div className="text-2xl font-bold text-white">100 Points</div>
+                   </div>
+                </div>
+
+                <div className="mt-8 bg-black/30 p-6 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4 border border-white/10">
+                   <CodeCard className="text-sm">
+                      <Tag>#header</Tag> <Tag>h1</Tag> {'{'} <Attr>color</Attr>: <Val>red</Val>; {'}'} <Comment>/* 101 pts */</Comment>{'\n'}
+                      <Tag>.title</Tag> {'{'} <Attr>color</Attr>: <Val>blue</Val>; {'}'} <Comment>/* 10 pts */</Comment>
+                   </CodeCard>
+                   <div className="flex bg-slate-200 rounded p-4 items-center gap-4">
+                      <span className="text-slate-900 font-bold">Result:</span>
+                      <span className="text-red-600 font-bold text-2xl">Red wins!</span>
+                   </div>
+                </div>
+             </div>
+          </Slide>
+
+          {/* SLIDE 6: Colors & Units (NEW) */}
+           <Slide isActive={currentSlide === 6}>
+             <div className="max-w-6xl w-full p-8 z-10">
+                 <h2 className="text-5xl font-bold mb-8 text-center text-teal-400">Colors & Units 📏</h2>
+                 
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    
+                    {/* Colors */}
+                    <div className="bg-slate-800 p-6 rounded-2xl border border-teal-500/30">
+                       <h3 className="text-2xl font-bold text-teal-300 mb-4 flex items-center gap-2"><PaintBucket /> Colors</h3>
+                       <ul className="space-y-4">
+                          <li className="flex justify-between items-center bg-black/20 p-2 rounded">
+                             <span className="font-mono text-slate-300">Named</span>
+                             <span className="flex items-center gap-2 text-sm"><div className="w-4 h-4 rounded bg-red-500"></div> red</span>
+                          </li>
+                          <li className="flex justify-between items-center bg-black/20 p-2 rounded">
+                             <span className="font-mono text-slate-300">Hex</span>
+                             <span className="flex items-center gap-2 text-sm"><div className="w-4 h-4 rounded bg-[#ff5733]"></div> #ff5733</span>
+                          </li>
+                          <li className="flex justify-between items-center bg-black/20 p-2 rounded">
+                             <span className="font-mono text-slate-300">RGB</span>
+                             <span className="flex items-center gap-2 text-sm"><div className="w-4 h-4 rounded bg-[rgb(0,255,0)]"></div> rgb(0, 255, 0)</span>
+                          </li>
+                          <li className="flex justify-between items-center bg-black/20 p-2 rounded">
+                             <span className="font-mono text-slate-300">HSL</span>
+                             <span className="flex items-center gap-2 text-sm"><div className="w-4 h-4 rounded bg-[hsl(240,100%,50%)]"></div> hsl(240, 100%, 50%)</span>
+                          </li>
+                       </ul>
+                    </div>
+
+                    {/* Units */}
+                    <div className="bg-slate-800 p-6 rounded-2xl border border-teal-500/30">
+                       <h3 className="text-2xl font-bold text-teal-300 mb-4 flex items-center gap-2"><Ruler /> Units</h3>
+                       <div className="space-y-4">
+                          <div className="bg-white/5 p-3 rounded">
+                             <div className="flex justify-between font-bold text-white mb-1">
+                                <span>Absolute</span> <span className="text-slate-400 font-mono">px</span>
+                             </div>
+                             <p className="text-xs text-slate-400">Exact pixels. Good for borders, bad for responsive text.</p>
+                          </div>
+                          <div className="bg-white/5 p-3 rounded">
+                             <div className="flex justify-between font-bold text-white mb-1">
+                                <span>Relative</span> <span className="text-slate-400 font-mono">rem, em</span>
+                             </div>
+                             <p className="text-xs text-slate-400">Scales with font size. <code className="text-teal-300">1rem</code> = browser font size (usu. 16px).</p>
+                          </div>
+                          <div className="bg-white/5 p-3 rounded">
+                             <div className="flex justify-between font-bold text-white mb-1">
+                                <span>Viewport</span> <span className="text-slate-400 font-mono">vw, vh</span>
+                             </div>
+                             <p className="text-xs text-slate-400">Percentage of screen size. <code className="text-teal-300">50vw</code> = half screen width.</p>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+             </div>
+           </Slide>
+
+           {/* SLIDE 7: Including CSS */}
+           <Slide isActive={currentSlide === 7}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-purple-400">Including CSS 🔌</h2>
               
@@ -235,8 +383,8 @@ export default function CssSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 6: Common Properties */}
-          <Slide isActive={currentSlide === 5}>
+          {/* SLIDE 8: Common Properties */}
+          <Slide isActive={currentSlide === 8}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-teal-400">Common Properties 🎨</h2>
               
@@ -275,8 +423,8 @@ export default function CssSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 7: Box Model */}
-          <Slide isActive={currentSlide === 6}>
+          {/* SLIDE 9: Box Model */}
+          <Slide isActive={currentSlide === 9}>
             <div className="max-w-5xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-8 text-center text-orange-400">The Box Model 📦</h2>
               <p className="text-center text-slate-300 mb-12 text-lg">Every element on a web page is a box.</p>
@@ -320,8 +468,8 @@ export default function CssSlides() {
             </div>
           </Slide>
 
-           {/* SLIDE 8: Best Practices */}
-           <Slide isActive={currentSlide === 7}>
+           {/* SLIDE 10: Best Practices */}
+           <Slide isActive={currentSlide === 10}>
             <div className="max-w-4xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-white">Best Practices 🌟</h2>
               
@@ -353,8 +501,8 @@ export default function CssSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 9: Homework */}
-          <Slide isActive={currentSlide === 8}>
+          {/* SLIDE 11: Homework */}
+          <Slide isActive={currentSlide === 11}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-bounce">
                 <FileCode className="w-16 h-16 text-yellow-400" />
@@ -372,6 +520,7 @@ export default function CssSlides() {
                         <li>Add padding/margin to paragraphs.</li>
                         <li>Style list items differently.</li>
                         <li>Add border to the image.</li>
+                        <li><strong className="text-pink-400">Bonus:</strong> Add a <code>:hover</code> effect to the image!</li>
                     </ul>
                 </div>
               </div>

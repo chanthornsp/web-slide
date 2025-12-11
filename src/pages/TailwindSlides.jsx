@@ -2,13 +2,14 @@ import { useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { Wind, Code, Layout, Palette, Smartphone, Layers, Command, Play, CheckCircle, RotateCcw, LayoutGrid, Monitor } from 'lucide-react';
+import { Wind, Code, Layout, Palette, Smartphone, Layers, Command, Play, CheckCircle, RotateCcw, LayoutGrid, Monitor, Moon, Sun, Settings } from 'lucide-react';
 
 export default function TailwindSlides() {
   const [activeRes, setActiveRes] = useState('mobile');
+  const [isDark, setIsDark] = useState(false);
 
   return (
-    <SlideContainer totalSlides={8} accentColor="cyan">
+    <SlideContainer totalSlides={10} accentColor="cyan">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -18,7 +19,7 @@ export default function TailwindSlides() {
             <div className="blob bg-teal-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-screen"></div>
           </div>
 
-          {/* SLIDE 1: Intro */}
+          {/* SLIDE 0: Intro */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-6 rounded-3xl bg-gradient-to-br from-cyan-400 to-sky-500 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
@@ -33,7 +34,7 @@ export default function TailwindSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 2: Installation */}
+          {/* SLIDE 1: Installation */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-cyan-400">Quick Start 🚀</h2>
@@ -48,10 +49,6 @@ export default function TailwindSlides() {
                           <div className="bg-black/30 p-4 rounded-lg font-mono text-sm text-slate-300">
                              <div className="flex gap-2"><span className="text-green-400">$</span> npm init -y</div>
                              <div className="flex gap-2"><span className="text-green-400">$</span> npm install tailwindcss @tailwindcss/cli</div>
-                          </div>
-                          <div className="bg-black/30 p-4 rounded-lg font-mono text-sm text-slate-300">
-                             <div className="text-slate-500 mb-2"># src/input.css</div>
-                             <div className="text-cyan-300">@import "tailwindcss";</div>
                           </div>
                       </div>
                   </div>
@@ -70,7 +67,7 @@ export default function TailwindSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 3: Utility First */}
+          {/* SLIDE 2: Utility First */}
           <Slide isActive={currentSlide === 2}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-blue-400">Utility First 🧠</h2>
@@ -99,7 +96,7 @@ export default function TailwindSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 4: Layout & Spacing */}
+          {/* SLIDE 3: Layout & Spacing */}
           <Slide isActive={currentSlide === 3}>
              <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-teal-400">Layout & Spacing 📐</h2>
@@ -130,19 +127,10 @@ export default function TailwindSlides() {
                        </CodeCard>
                    </div>
                </div>
-               
-               <div className="mt-8 bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center">
-                   <h3 className="text-xl font-bold text-white mb-4">Spacing Scale</h3>
-                   <div className="flex justify-center gap-4 flex-wrap font-mono text-sm text-slate-300">
-                       <span className="p-2 border border-slate-600 rounded">p-4 (1rem)</span>
-                       <span className="p-2 border border-slate-600 rounded">m-8 (2rem)</span>
-                       <span className="p-2 border border-slate-600 rounded">gap-2 (0.5rem)</span>
-                   </div>
-               </div>
              </div>
           </Slide>
 
-          {/* SLIDE 5: Styling Components */}
+          {/* SLIDE 4: Styling Components */}
           <Slide isActive={currentSlide === 4}>
              <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-purple-400">Styling Components 🎨</h2>
@@ -164,11 +152,7 @@ export default function TailwindSlides() {
                       {'  '}<Attr>class</Attr>=<Val>"</Val>{'\n'}
                       {'    '}<Val>bg-blue-600</Val> <Comment>/* Default */</Comment>{'\n'}
                       {'    '}<Val>hover:bg-blue-700</Val> <Comment>/* Hover */</Comment>{'\n'}
-                      {'    '}<Val>text-white</Val>{'\n'}
-                      {'    '}<Val>font-bold</Val>{'\n'}
-                      {'    '}<Val>py-2 px-6</Val>{'\n'}
-                      {'    '}<Val>rounded shadow</Val>{'\n'}
-                      {'    '}<Val>transition-colors</Val>{'\n'}
+                      {'    '}<Val>text-white font-bold</Val>{'\n'}
                       {'  '}<Val>"</Val>{'\n'}
                       <Tag>&gt;</Tag>{'\n'}
                       {'  '}Hover Me!{'\n'}
@@ -178,14 +162,14 @@ export default function TailwindSlides() {
              </div>
           </Slide>
 
-          {/* SLIDE 6: Responsive Design */}
+          {/* SLIDE 5: Responsive Design */}
           <Slide isActive={currentSlide === 5}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-rose-400">Responsive Design 📱</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                    <div className="space-y-6">
-                       <p className="text-xl text-slate-300">Prefix utilities with breakpoint names to apply them at specific screen widths.</p>
+                       <p className="text-xl text-slate-300">Prefix utilities with breakpoint names so they only apply at that screen width and above.</p>
                        <ul className="space-y-3 font-mono text-sm text-slate-400">
                            <li className="flex justify-between border-b border-slate-700 pb-2"><span>sm:</span> <span>640px+</span></li>
                            <li className="flex justify-between border-b border-slate-700 pb-2"><span>md:</span> <span>768px+</span></li>
@@ -227,8 +211,100 @@ export default function TailwindSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 7: Pro Tips */}
+          {/* SLIDE 6: Dark Mode (NEW) */}
           <Slide isActive={currentSlide === 6}>
+             <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-12 text-center text-indigo-400">Dark Mode 🌙</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-6">
+                       <p className="text-xl text-slate-300">
+                           Just add the <code className="text-indigo-400">dark:</code> prefix!
+                       </p>
+                       <div className="bg-slate-800 p-6 rounded-2xl border border-indigo-500/30">
+                           <p className="text-sm text-slate-400 mb-4">
+                               Tailwind uses the class strategy by default. Toggle the class "dark" on a parent element.
+                           </p>
+                           <button 
+                               onClick={() => setIsDark(!isDark)}
+                               className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition-colors"
+                           >
+                               {isDark ? <Sun size={18}/> : <Moon size={18}/>} Toggle Demo
+                           </button>
+                       </div>
+                  </div>
+
+                  <div className={`p-8 rounded-2xl transition-colors duration-500 border-2 ${isDark ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+                      <div className="text-center">
+                          <h3 className={`text-3xl font-bold mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                              {isDark ? 'Dark Mode' : 'Light Mode'}
+                          </h3>
+                          <p className={`mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                              This card adapts to the theme automatically using utility classes.
+                          </p>
+                          <button className={`px-4 py-2 rounded font-bold ${isDark ? 'bg-indigo-500 text-white' : 'bg-indigo-100 text-indigo-700'}`}>
+                              Action
+                          </button>
+                      </div>
+                      <div className="mt-8">
+                          <CodeCard className="text-xs w-full">
+                              <Tag>&lt;div</Tag> <Attr>class</Attr>=<Val>"{isDark ? 'bg-slate-900 text-white' : 'bg-white text-slate-900'} ..."</Val><Tag>&gt;</Tag>{'\n'}
+                              {'  '}...{'\n'}
+                              <Tag>&lt;/div&gt;</Tag>
+                          </CodeCard>
+                      </div>
+                  </div>
+              </div>
+             </div>
+          </Slide>
+
+          {/* SLIDE 7: Customization (NEW) */}
+          <Slide isActive={currentSlide === 7}>
+             <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-12 text-center text-slate-300">Customization 🛠️</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                   <div className="space-y-6 text-slate-300">
+                       <p>Tailwind is controlled by a configuration file.</p>
+                       <ul className="space-y-4">
+                           <li className="flex gap-3">
+                               <Settings className="text-slate-400"/>
+                               <span><strong>theme:</strong> Add your own colors, fonts, and breakpoints.</span>
+                           </li>
+                           <li className="flex gap-3">
+                               <Layers className="text-slate-400"/>
+                               <span><strong>plugins:</strong> Add third-party plugins (typography, forms).</span>
+                           </li>
+                       </ul>
+                   </div>
+
+                   <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                       <div className="flex gap-2 mb-4 text-xs font-mono text-slate-500">
+                           <span className="text-green-400">tailwind.config.js</span>
+                       </div>
+                       <CodeCard className="text-xs">
+                           <Tag>module.exports</Tag> = {'{'}{'\n'}
+                           {'  '}<Attr>theme</Attr>: {'{'}{'\n'}
+                           {'    '}<Attr>extend</Attr>: {'{'}{'\n'}
+                           {'      '}<Attr>colors</Attr>: {'{'}{'\n'}
+                           {'        '}<Attr>brand</Attr>: <Val>'#ff49db'</Val>,{'\n'}
+                           {'      '}{'}'}{'\n'}
+                           {'    '}{'}'}{'\n'}
+                           {'  '}{'}'}{'\n'}
+                           {'}'}
+                       </CodeCard>
+                       <div className="mt-4 text-center">
+                           <span className="inline-block px-4 py-2 rounded text-white bg-[#ff49db] font-bold text-sm">
+                               bg-brand
+                           </span>
+                       </div>
+                   </div>
+              </div>
+             </div>
+          </Slide>
+
+          {/* SLIDE 8: Pro Tips */}
+          <Slide isActive={currentSlide === 8}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-emerald-400">Pro Tips 💡</h2>
               
@@ -239,14 +315,6 @@ export default function TailwindSlides() {
                           <h3 className="text-xl font-bold text-white">IntelliSense</h3>
                       </div>
                       <p className="text-slate-300 text-sm">Install the <strong>Tailwind CSS IntelliSense</strong> VS Code extension for autocomplete, syntax highlighting, and hover previews.</p>
-                  </div>
-
-                   <div className="bg-slate-800 p-6 rounded-xl border-t-4 border-sky-500">
-                      <div className="flex items-center gap-3 mb-3">
-                          <Layers className="w-6 h-6 text-sky-400" />
-                          <h3 className="text-xl font-bold text-white">Prettier Sorting</h3>
-                      </div>
-                      <p className="text-slate-300 text-sm">Use the Prettier plugin to automatically sort your classes. No more arguing about class order!</p>
                   </div>
 
                   <div className="bg-slate-800 p-6 rounded-xl border-t-4 border-purple-500">
@@ -260,8 +328,8 @@ export default function TailwindSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 8: Summary */}
-          <Slide isActive={currentSlide === 7}>
+          {/* SLIDE 9: Summary */}
+          <Slide isActive={currentSlide === 9}>
              <div className="text-center p-8 max-w-4xl z-10">
                <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-pulse">
                 <CheckCircle className="w-16 h-16 text-cyan-400" />

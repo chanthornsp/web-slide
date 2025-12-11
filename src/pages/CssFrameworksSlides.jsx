@@ -2,11 +2,11 @@ import { useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { Package, Grid, Zap, Smartphone, Settings, Users, Wind, Layers, Box, Layout, RotateCcw } from 'lucide-react';
+import { Package, Grid, Zap, Smartphone, Settings, Users, Wind, Layers, Box, Layout, RotateCcw, ThumbsUp, ThumbsDown, Scale } from 'lucide-react';
 
 export default function CssFrameworksSlides() {
   return (
-    <SlideContainer totalSlides={5} accentColor="cyan">
+    <SlideContainer totalSlides={7} accentColor="cyan">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -16,7 +16,7 @@ export default function CssFrameworksSlides() {
             <div className="blob bg-blue-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-screen"></div>
           </div>
 
-          {/* SLIDE 1: Title */}
+          {/* SLIDE 0: Title */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-6 rounded-3xl bg-gradient-to-br from-cyan-500 to-blue-600 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
@@ -31,7 +31,7 @@ export default function CssFrameworksSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 2: Introduction */}
+          {/* SLIDE 1: What are they? */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-cyan-400">What are they? 🤔</h2>
@@ -61,8 +61,55 @@ export default function CssFrameworksSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 3: Key Features */}
+          {/* SLIDE 2: Pros & Cons (NEW) */}
           <Slide isActive={currentSlide === 2}>
+             <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-12 text-center text-emerald-400">To Use or Not to Use? ⚖️</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                   {/* Pros */}
+                   <div className="bg-slate-800 p-6 rounded-2xl border-t-4 border-green-500">
+                       <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3"><ThumbsUp className="text-green-400"/> Pros</h3>
+                       <ul className="space-y-4">
+                           <li className="flex gap-3">
+                               <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                               <span className="text-slate-300"><strong>Speed:</strong> Build complex UIs in minutes.</span>
+                           </li>
+                           <li className="flex gap-3">
+                               <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                               <span className="text-slate-300"><strong>Consistency:</strong> Everything looks uniform.</span>
+                           </li>
+                           <li className="flex gap-3">
+                               <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                               <span className="text-slate-300"><strong>Cross-Browser:</strong> Works on all modern browsers.</span>
+                           </li>
+                       </ul>
+                   </div>
+
+                   {/* Cons */}
+                   <div className="bg-slate-800 p-6 rounded-2xl border-t-4 border-red-500">
+                       <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3"><ThumbsDown className="text-red-400"/> Cons</h3>
+                       <ul className="space-y-4">
+                           <li className="flex gap-3">
+                               <CheckCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                               <span className="text-slate-300"><strong>Generic Look:</strong> Sites can look "Bootstrap-y".</span>
+                           </li>
+                           <li className="flex gap-3">
+                               <CheckCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                               <span className="text-slate-300"><strong>File Size:</strong> Loads unused styles (bloat).</span>
+                           </li>
+                           <li className="flex gap-3">
+                               <CheckCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                               <span className="text-slate-300"><strong>Overriding:</strong> Fighting the framework's defaults.</span>
+                           </li>
+                       </ul>
+                   </div>
+              </div>
+             </div>
+          </Slide>
+
+          {/* SLIDE 3: Key Features */}
+          <Slide isActive={currentSlide === 3}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-blue-400">Key Features 🔑</h2>
               
@@ -83,8 +130,57 @@ export default function CssFrameworksSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 4: The Big Two */}
-          <Slide isActive={currentSlide === 3}>
+          {/* SLIDE 4: Comparisons (NEW) */}
+          <Slide isActive={currentSlide === 4}>
+             <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-12 text-center text-pink-400">Components vs Utility 🥊</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Component Based */}
+                  <div className="bg-[#7952b3]/20 p-6 rounded-2xl border border-[#7952b3]/50">
+                      <div className="flex items-center gap-3 mb-4">
+                          <Box className="w-8 h-8 text-[#7952b3]" />
+                          <h3 className="text-2xl font-bold text-white">Component-Based</h3>
+                      </div>
+                      <p className="text-slate-300 mb-4 text-sm">
+                          <strong>Ex: Bootstrap, Foundation.</strong> You use high-level classes that do many things at once.
+                      </p>
+                      <CodeCard className="text-xs">
+                          <Tag>&lt;div</Tag> <Attr>class</Attr>=<Val>"card"</Val><Tag>&gt;</Tag>{'\n'}
+                          {'  '}<Tag>&lt;div</Tag> <Attr>class</Attr>=<Val>"card-body"</Val><Tag>&gt;</Tag>...<Tag>&lt;/div&gt;</Tag>{'\n'}
+                          <Tag>&lt;/div&gt;</Tag>
+                      </CodeCard>
+                      <ul className="mt-4 text-xs text-slate-400 list-disc pl-4 space-y-1">
+                          <li>Easy to read HTML</li>
+                          <li>Harder to customize</li>
+                      </ul>
+                  </div>
+
+                  {/* Utility First */}
+                  <div className="bg-[#06b6d4]/20 p-6 rounded-2xl border border-[#06b6d4]/50">
+                      <div className="flex items-center gap-3 mb-4">
+                          <Wind className="w-8 h-8 text-[#06b6d4]" />
+                          <h3 className="text-2xl font-bold text-white">Utility-First</h3>
+                      </div>
+                      <p className="text-slate-300 mb-4 text-sm">
+                          <strong>Ex: Tailwind CSS.</strong> You combine small, single-purpose classes to build elements.
+                      </p>
+                      <CodeCard className="text-xs">
+                          <Tag>&lt;div</Tag> <Attr>class</Attr>=<Val>"p-6 bg-white rounded-xl shadow-lg"</Val><Tag>&gt;</Tag>{'\n'}
+                          {'  '}...{'\n'}
+                          <Tag>&lt;/div&gt;</Tag>
+                      </CodeCard>
+                      <ul className="mt-4 text-xs text-slate-400 list-disc pl-4 space-y-1">
+                          <li>Infinite customization</li>
+                          <li>"Messy" HTML classes</li>
+                      </ul>
+                  </div>
+              </div>
+             </div>
+          </Slide>
+
+          {/* SLIDE 5: Popular Choices */}
+          <Slide isActive={currentSlide === 5}>
             <div className="max-w-6xl w-full p-8 z-10 text-center">
               <h2 className="text-5xl font-bold mb-12 text-center text-indigo-400">Popular Choices 🏆</h2>
               
@@ -120,43 +216,38 @@ export default function CssFrameworksSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 5: Other Notables */}
-          <Slide isActive={currentSlide === 4}>
-            <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-teal-400">Other Great Options 🌟</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="bg-slate-800 p-6 rounded-2xl border-l-4 border-emerald-500">
-                      <div className="flex items-center gap-4 mb-4">
-                           <Layout className="w-8 h-8 text-emerald-400" />
-                           <h3 className="text-2xl font-bold text-white">Bulma</h3>
-                      </div>
-                      <p className="text-slate-300">Modern, CSS-only framework based on Flexbox. Very clean syntax and minimalistic design.</p>
-                      <a href="https://bulma.io/" target="_blank" className="text-emerald-400 text-sm mt-2 inline-block hover:underline">bulma.io →</a>
-                  </div>
-
-                  <div className="bg-slate-800 p-6 rounded-2xl border-l-4 border-blue-500">
-                      <div className="flex items-center gap-4 mb-4">
-                           <Layers className="w-8 h-8 text-blue-400" />
-                           <h3 className="text-2xl font-bold text-white">Foundation</h3>
-                      </div>
-                      <p className="text-slate-300">Advanced, responsive front-end framework. Great for complex, enterprise-level applications.</p>
-                      <a href="https://get.foundation/" target="_blank" className="text-blue-400 text-sm mt-2 inline-block hover:underline">get.foundation →</a>
-                  </div>
-              </div>
-
-               <div className="mt-12 text-center">
-                <button
+          {/* SLIDE 6: Summary */}
+          <Slide isActive={currentSlide === 6}>
+             <div className="text-center p-8 max-w-4xl z-10">
+               <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-pulse">
+                <Layout className="w-16 h-16 text-cyan-400" />
+               </div>
+               <h1 className="text-5xl font-bold mb-8 text-white">Which one to pick? 🤷‍♂️</h1>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left max-w-2xl mx-auto mb-12">
+                   <div className="bg-slate-800 p-6 rounded-xl">
+                       <h3 className="text-lg font-bold text-white mb-2">Choose Bootstrap IF:</h3>
+                       <p className="text-slate-400 text-sm">You need a working backend dashboard quickly and don't care much about unique branding.</p>
+                   </div>
+                   <div className="bg-slate-800 p-6 rounded-xl">
+                       <h3 className="text-lg font-bold text-white mb-2">Choose Tailwind IF:</h3>
+                       <p className="text-slate-400 text-sm">You are building a custom design, a modern React app, or want full control over the UI.</p>
+                   </div>
+               </div>
+               <button
                   onClick={() => goToSlide(0)}
                   className="px-8 py-4 bg-cyan-600 hover:bg-cyan-500 rounded-full font-bold transition-all hover:scale-105 flex items-center gap-2 mx-auto shadow-lg shadow-cyan-500/20"
                 >
                   <RotateCcw className="w-5 h-5" /> Start Over
                 </button>
-              </div>
-            </div>
+             </div>
           </Slide>
         </>
       )}
     </SlideContainer>
   );
+}
+
+// Helper icon component
+function CheckCircle({ className }) {
+    return <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
 }

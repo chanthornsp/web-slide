@@ -2,11 +2,11 @@ import { useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { Atom, Play, Box, Layers, RefreshCw, Zap, CheckCircle, RotateCcw, Database } from 'lucide-react';
+import { Atom, Play, Box, Layers, RefreshCw, Zap, CheckCircle, RotateCcw, Database, Repeat, Split, Type } from 'lucide-react';
 
 export default function ReactSlides() {
   return (
-    <SlideContainer totalSlides={9} accentColor="cyan">
+    <SlideContainer totalSlides={12} accentColor="cyan">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -16,7 +16,7 @@ export default function ReactSlides() {
             <div className="blob bg-indigo-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-screen"></div>
           </div>
 
-          {/* SLIDE 1: Title */}
+          {/* SLIDE 0: Title */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-6 rounded-3xl bg-gradient-to-br from-cyan-400 to-blue-600 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
@@ -40,7 +40,7 @@ export default function ReactSlides() {
             `}</style>
           </Slide>
 
-          {/* SLIDE 2: What is React? */}
+          {/* SLIDE 1: What is React? */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-cyan-400">What is React? ⚛️</h2>
@@ -56,14 +56,6 @@ export default function ReactSlides() {
                               <div className="font-bold text-cyan-400 text-lg mb-1">Components</div>
                               <p className="text-sm text-slate-400">Build encapsulated parts that manage their own state.</p>
                           </div>
-                          <div className="bg-slate-800 p-4 rounded-xl border-l-4 border-blue-500">
-                              <div className="font-bold text-blue-400 text-lg mb-1">Virtual DOM</div>
-                              <p className="text-sm text-slate-400">Optimizes rendering for better performance.</p>
-                          </div>
-                          <div className="bg-slate-800 p-4 rounded-xl border-l-4 border-indigo-500">
-                              <div className="font-bold text-indigo-400 text-lg mb-1">JSX</div>
-                              <p className="text-sm text-slate-400">Write HTML-like syntax directly in JavaScript.</p>
-                          </div>
                       </div>
                   </div>
 
@@ -76,15 +68,12 @@ export default function ReactSlides() {
                           {'  '}<Tag>return</Tag> <Tag>&lt;h1&gt;</Tag>Hello, React!<Tag>&lt;/h1&gt;</Tag>;{'\n'}
                           {'}'}
                       </CodeCard>
-                      <div className="bg-white text-black px-6 py-3 rounded shadow-lg font-bold">
-                          Hello, React!
-                      </div>
                   </div>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 3: Setup & Vite */}
+          {/* SLIDE 2: Setup & Vite */}
           <Slide isActive={currentSlide === 2}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-indigo-400">Getting Started 🚀</h2>
@@ -95,14 +84,10 @@ export default function ReactSlides() {
                            <Zap className="w-8 h-8 text-yellow-400" />
                            <h3 className="text-2xl font-bold text-white">Create with Vite</h3>
                        </div>
-                       <p className="text-slate-300 mb-6">Vite is the modern, fast way to scaffold React projects.</p>
                        <div className="bg-black/30 p-4 rounded-lg font-mono text-sm text-indigo-300 space-y-2">
-                           <div><span className="text-slate-500"># Create project</span></div>
                            <div>npm create vite@latest my-app -- --template react</div>
-                           <div><span className="text-slate-500"># Install dependencies</span></div>
                            <div>cd my-app</div>
                            <div>npm install</div>
-                           <div><span className="text-slate-500"># Run dev server</span></div>
                            <div>npm run dev</div>
                        </div>
                    </div>
@@ -113,16 +98,13 @@ export default function ReactSlides() {
                            <div className="flex gap-2"><Box className="w-4 h-4 text-blue-400"/> src/</div>
                            <div className="pl-6 flex gap-2"><div className="w-4 border-l border-slate-600 h-full"></div> App.jsx <span className="text-slate-500">// Main component</span></div>
                            <div className="pl-6 flex gap-2"><div className="w-4 border-l border-slate-600 h-full"></div> main.jsx <span className="text-slate-500">// Entry point</span></div>
-                           <div className="pl-6 flex gap-2"><div className="w-4 border-l border-slate-600 h-full"></div> index.css <span className="text-slate-500">// Global styles</span></div>
-                           <div className="flex gap-2 mt-2"><Box className="w-4 h-4 text-orange-400"/> index.html</div>
-                           <div className="flex gap-2"><Box className="w-4 h-4 text-green-400"/> package.json</div>
                        </div>
                    </div>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 4: JSX & Components */}
+          {/* SLIDE 3: JSX & Components */}
           <Slide isActive={currentSlide === 3}>
              <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-cyan-400">JSX & Components 🧩</h2>
@@ -132,29 +114,20 @@ export default function ReactSlides() {
                       <div className="bg-slate-800 p-6 rounded-2xl border-l-4 border-cyan-500">
                           <h3 className="text-xl font-bold text-white mb-2">JSX Rules</h3>
                           <ul className="list-disc pl-5 text-slate-300 space-y-2">
-                              <li>Return a <strong>single parent</strong> element (or fragment <code>&lt;&gt;...&lt;/&gt;</code>).</li>
+                              <li>Return a <strong>single parent</strong> element.</li>
                               <li>Use <code>className</code> instead of <code>class</code>.</li>
                               <li>Close all tags (e.g., <code>&lt;img /&gt;</code>).</li>
                               <li>Embed JS with <code>{'{ }'}</code>.</li>
                           </ul>
                       </div>
-                      
-                      <div className="bg-slate-800 p-6 rounded-2xl border-l-4 border-blue-500">
-                           <h3 className="text-xl font-bold text-white mb-2">Props</h3>
-                           <p className="text-slate-300">Pass data to components like HTML attributes.</p>
-                      </div>
                   </div>
 
                   <CodeCard className="text-sm">
-                      <Tag>function</Tag> <Attr>Greeting</Attr>(<Val>props</Val>) {'{'}{'\n'}
-                      {'  '}<Tag>return</Tag> <Tag>&lt;h2&gt;</Tag>Hello, {'{'}<Val>props</Val>.<Attr>name</Attr>{'}'}!<Tag>&lt;/h2&gt;</Tag>;{'\n'}
-                      {'}'}{'\n'}
-                      {'\n'}
                       <Tag>function</Tag> <Attr>App</Attr>() {'{'}{'\n'}
+                      {'  '}<Tag>const</Tag> <Attr>name</Attr> = <Val>"React"</Val>;{'\n'}
                       {'  '}<Tag>return</Tag> ({'\n'}
                       {'    '}<Tag>&lt;div</Tag> <Attr>className</Attr>=<Val>"container"</Val><Tag>&gt;</Tag>{'\n'}
-                      {'      '}<Tag>&lt;Greeting</Tag> <Attr>name</Attr>=<Val>"Alice"</Val> <Tag>/&gt;</Tag>{'\n'}
-                      {'      '}<Tag>&lt;Greeting</Tag> <Attr>name</Attr>=<Val>"Bob"</Val> <Tag>/&gt;</Tag>{'\n'}
+                      {'      '}<Tag>&lt;h1&gt;</Tag>Hello, {'{'}<Attr>name</Attr>{'}'}!<Tag>&lt;/h1&gt;</Tag>{'\n'}
                       {'    '}<Tag>&lt;/div&gt;</Tag>{'\n'}
                       {'  '});{'\n'}
                       {'}'}
@@ -163,28 +136,51 @@ export default function ReactSlides() {
              </div>
           </Slide>
 
-          {/* SLIDE 5: State (useState) */}
+          {/* SLIDE 4: Props vs State (NEW) */}
           <Slide isActive={currentSlide === 4}>
              <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-green-400">State & Events 🔄</h2>
+              <h2 className="text-5xl font-bold mb-12 text-center text-blue-400">Props vs State 🥊</h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-6">
-                      <p className="text-xl text-slate-300">
-                          <strong>State</strong> is data that changes over time. When state updates, the component re-renders.
-                      </p>
-                      
-                      <div className="bg-slate-800 p-6 rounded-2xl border border-green-500/30">
-                          <h3 className="text-lg font-bold text-green-400 mb-2">useState Hook</h3>
-                          <code className="block bg-black/30 p-3 rounded text-green-300 mb-2">const [count, setCount] = useState(0);</code>
-                          <ul className="text-sm text-slate-400 space-y-2">
-                              <li><code>count</code>: Current value</li>
-                              <li><code>setCount</code>: Function to update value</li>
-                              <li><code>0</code>: Initial value</li>
-                          </ul>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Props */}
+                  <div className="bg-blue-500/10 p-6 rounded-2xl border border-blue-500/30">
+                      <div className="flex items-center gap-3 mb-4">
+                          <Box className="w-8 h-8 text-blue-400" />
+                          <h3 className="text-2xl font-bold text-white">Props</h3>
                       </div>
+                      <p className="text-slate-300 mb-4 text-sm">
+                          Arguments passed <strong>down</strong> to components. They are <strong>read-only</strong> (immutable).
+                      </p>
+                      <CodeCard className="text-xs">
+                          <Tag>&lt;Welcome</Tag> <Attr>name</Attr>=<Val>"Alice"</Val> <Tag>/&gt;</Tag>
+                      </CodeCard>
+                      <p className="text-xs text-blue-300 mt-2">Like function arguments.</p>
                   </div>
 
+                  {/* State */}
+                  <div className="bg-green-500/10 p-6 rounded-2xl border border-green-500/30">
+                      <div className="flex items-center gap-3 mb-4">
+                          <Database className="w-8 h-8 text-green-400" />
+                          <h3 className="text-2xl font-bold text-white">State</h3>
+                      </div>
+                      <p className="text-slate-300 mb-4 text-sm">
+                          Data managed <strong>inside</strong> the component. Can change over time (mutable).
+                      </p>
+                      <CodeCard className="text-xs">
+                          <Tag>const</Tag> [<Attr>count</Attr>, <Attr>setCount</Attr>] = <Attr>useState</Attr>(<Val>0</Val>);
+                      </CodeCard>
+                       <p className="text-xs text-green-300 mt-2">Like local variables.</p>
+                  </div>
+              </div>
+             </div>
+          </Slide>
+
+          {/* SLIDE 5: useState Hook */}
+          <Slide isActive={currentSlide === 5}>
+             <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-12 text-center text-green-400">Using State 🔄</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                   <div className="bg-slate-900 p-8 rounded-2xl border border-slate-700 font-mono text-sm">
                       <CodeCard>
                           <Tag>import</Tag> {'{'} <Attr>useState</Attr> {'}'} <Tag>from</Tag> <Val>'react'</Val>;{'\n'}
@@ -199,19 +195,71 @@ export default function ReactSlides() {
                           {'  '});{'\n'}
                           {'}'}
                       </CodeCard>
-                      
-                      <div className="mt-6 flex justify-center">
-                           <button className="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded transition-all active:scale-95 shadow-lg shadow-green-500/20">
-                               Clicked 0 times
-                           </button>
-                      </div>
                   </div>
               </div>
              </div>
           </Slide>
 
-          {/* SLIDE 6: Effects (useEffect) */}
-          <Slide isActive={currentSlide === 5}>
+          {/* SLIDE 6: Handling Forms (NEW) */}
+           <Slide isActive={currentSlide === 6}>
+              <div className="max-w-6xl w-full p-8 z-10">
+                <h2 className="text-5xl font-bold mb-12 text-center text-purple-400">Forms & Inputs 📝</h2>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                   <div className="space-y-6">
+                       <h3 className="text-2xl font-bold text-white">Controlled Components</h3>
+                       <p className="text-slate-300">
+                           In React, form inputs are "controlled". The React state is the single source of truth.
+                       </p>
+                       <ul className="list-decimal pl-5 text-slate-400 space-y-2">
+                           <li>Create state for the input value.</li>
+                           <li>Set the input's <code>value</code> prop to that state.</li>
+                           <li>Update state using <code>onChange</code>.</li>
+                       </ul>
+                   </div>
+
+                   <CodeCard className="text-sm">
+                       <Tag>const</Tag> [<Attr>text</Attr>, <Attr>setText</Attr>] = <Attr>useState</Attr>(<Val>""</Val>);{'\n'}
+                       {'\n'}
+                       <Tag>return</Tag> ({'\n'}
+                       {'  '}<Tag>&lt;input</Tag>{'\n'}
+                       {'    '}<Attr>type</Attr>=<Val>"text"</Val>{'\n'}
+                       {'    '}<Attr>value</Attr>={'{'}<Attr>text</Attr>{'}'}{'\n'}
+                       {'    '}<Attr>onChange</Attr>={'{'}<Val>e</Val> <Tag>=&gt;</Tag> <Attr>setText</Attr>(<Val>e.target.value</Val>){'}'}{'\n'}
+                       {'  '}<Tag>/&gt;</Tag>{'\n'}
+                       );
+                   </CodeCard>
+                </div>
+              </div>
+           </Slide>
+
+          {/* SLIDE 7: Conditional Rendering (NEW) */}
+           <Slide isActive={currentSlide === 7}>
+              <div className="max-w-6xl w-full p-8 z-10">
+                <h2 className="text-5xl font-bold mb-12 text-center text-orange-400">Conditional Rendering 🔀</h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                   <div className="bg-slate-800 p-6 rounded-2xl border border-orange-500/30">
+                       <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2"><Split className="w-5 h-5 text-orange-400"/> Ternary Operator</h3>
+                       <p className="text-sm text-slate-400 mb-4">Use for if/else logic inside JSX.</p>
+                       <CodeCard className="text-xs">
+                          {'{'}<Attr>isLoggedIn</Attr> ? <Tag>&lt;UserMenu /&gt;</Tag> : <Tag>&lt;LoginBtn /&gt;</Tag>{'}'}
+                       </CodeCard>
+                   </div>
+                   
+                   <div className="bg-slate-800 p-6 rounded-2xl border border-green-500/30">
+                       <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-400"/> Short Circuit (&&)</h3>
+                       <p className="text-sm text-slate-400 mb-4">Use when you want to render something OR nothing.</p>
+                       <CodeCard className="text-xs">
+                          {'{'}<Attr>showError</Attr> && <Tag>&lt;ErrorMsg /&gt;</Tag>{'}'}
+                       </CodeCard>
+                   </div>
+                </div>
+              </div>
+           </Slide>
+
+          {/* SLIDE 8: useEffect */}
+          <Slide isActive={currentSlide === 8}>
              <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-purple-400">Side Effects 🔮</h2>
               
@@ -219,36 +267,19 @@ export default function ReactSlides() {
                    <div className="bg-slate-800 p-8 rounded-2xl border-l-8 border-purple-500">
                        <h3 className="text-2xl font-bold text-white mb-4">useEffect Hook</h3>
                        <p className="text-slate-300 mb-6">Perform side effects like fetching data, timers, or DOM subscriptions.</p>
-                       
-                       <div className="space-y-4">
-                           <div className="bg-black/30 p-4 rounded-lg">
-                               <div className="text-purple-300 font-mono text-xs mb-1">Dependent on nothing (Runs once)</div>
-                               <code className="text-slate-300 text-sm">useEffect(fn, []);</code>
-                           </div>
-                           <div className="bg-black/30 p-4 rounded-lg">
-                               <div className="text-purple-300 font-mono text-xs mb-1">Dependent on prop/state</div>
-                               <code className="text-slate-300 text-sm">useEffect(fn, [userId]);</code>
-                           </div>
-                       </div>
                    </div>
 
                    <CodeCard className="text-sm">
                        <Tag>useEffect</Tag>(() <Tag>=&gt;</Tag> {'{'}{'\n'}
-                       {'  '}<Comment>// 1. Run effect</Comment>{'\n'}
-                       {'  '}<Tag>const</Tag> <Attr>timer</Attr> = <Attr>setInterval</Attr>(() <Tag>=&gt;</Tag> {'{'}{'\n'}
-                       {'    '}<Tag>console</Tag>.<Attr>log</Attr>(<Val>'Tick'</Val>);{'\n'}
-                       {'  '}{'}'}, <Val>1000</Val>);{'\n'}
-                       {'\n'}
-                       {'  '}<Comment>// 2. Cleanup (Optional)</Comment>{'\n'}
-                       {'  '}<Tag>return</Tag> () <Tag>=&gt;</Tag> <Attr>clearInterval</Attr>(<Attr>timer</Attr>);{'\n'}
-                       {'}'}, []); <Comment>// 3. Dependencies</Comment>
+                       {'  '}<Tag>console</Tag>.<Attr>log</Attr>(<Val>'Rendered!'</Val>);{'\n'}
+                       {'}'}, []); <Comment>// Empty array = Run once</Comment>
                    </CodeCard>
               </div>
              </div>
           </Slide>
 
-          {/* SLIDE 7: Lists & Keys */}
-          <Slide isActive={currentSlide === 6}>
+          {/* SLIDE 9: Lists & Keys */}
+          <Slide isActive={currentSlide === 9}>
              <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-pink-400">Lists & Keys 📝</h2>
               
@@ -257,31 +288,19 @@ export default function ReactSlides() {
                        <p className="text-xl text-slate-300">
                            Render lists using <code className="text-pink-400">.map()</code>. Always provide a unique <code className="text-pink-400">key</code> prop!
                        </p>
-                       <ul className="list-disc pl-5 text-slate-300 space-y-2">
-                           <li>Keys help React identify which items have changed.</li>
-                           <li>Use stable IDs (like database IDs), not array indexes if possible.</li>
-                       </ul>
                    </div>
 
                    <CodeCard className="text-sm">
-                       <Tag>const</Tag> <Attr>tasks</Attr> = [<Val>'Eat'</Val>, <Val>'Sleep'</Val>, <Val>'Code'</Val>];{'\n'}
-                       {'\n'}
-                       <Tag>return</Tag> ({'\n'}
-                       {'  '}<Tag>&lt;ul&gt;</Tag>{'\n'}
-                       {'    '}{'{'}<Attr>tasks</Attr>.<Attr>map</Attr>((<Val>task</Val>, <Val>id</Val>) <Tag>=&gt;</Tag> ({'\n'}
-                       {'      '}<Tag>&lt;li</Tag> <Attr>key</Attr>={'{'}<Val>id</Val>{'}'}<Tag>&gt;</Tag>{'\n'}
-                       {'        '}{'{'}<Val>task</Val>{'}'}{'\n'}
-                       {'      '}<Tag>&lt;/li&gt;</Tag>{'\n'}
-                       {'    '})){'}'}{'\n'}
-                       {'  '}<Tag>&lt;/ul&gt;</Tag>{'\n'}
-                       );
+                       {'{'}<Attr>items</Attr>.<Attr>map</Attr>(<Val>item</Val> <Tag>=&gt;</Tag> ({'\n'}
+                       {'  '}<Tag>&lt;li</Tag> <Attr>key</Attr>={'{'}<Val>item.id</Val>{'}'}<Tag>&gt;</Tag>{'{'}<Val>item.name</Val>{'}'}<Tag>&lt;/li&gt;</Tag>{'\n'}
+                       )){'}'}
                    </CodeCard>
               </div>
              </div>
           </Slide>
 
-          {/* SLIDE 8: To-Do App Project */}
-          <Slide isActive={currentSlide === 7}>
+          {/* SLIDE 10: To-Do App Project */}
+          <Slide isActive={currentSlide === 10}>
              <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-orange-400">Mini Project: To-Do ✅</h2>
               
@@ -318,7 +337,7 @@ export default function ReactSlides() {
                                <span className="font-mono text-sm">todos: Array</span>
                            </div>
                            <div className="flex items-center gap-2 p-3 bg-green-100 rounded-lg">
-                               <Keyboard className="w-5 h-5 text-green-600"/>
+                               <Type className="w-5 h-5 text-green-600"/>
                                <span className="font-mono text-sm">text: String</span>
                            </div>
                            <div className="flex justify-center">⬇️</div>
@@ -331,8 +350,8 @@ export default function ReactSlides() {
              </div>
           </Slide>
 
-          {/* SLIDE 9: Summary */}
-          <Slide isActive={currentSlide === 8}>
+          {/* SLIDE 11: Summary */}
+          <Slide isActive={currentSlide === 11}>
              <div className="text-center p-8 max-w-4xl z-10">
                <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-pulse">
                 <CheckCircle className="w-16 h-16 text-cyan-400" />
@@ -359,27 +378,4 @@ export default function ReactSlides() {
       )}
     </SlideContainer>
   );
-}
-
-// Helper icon component for illustration
-function Keyboard(props) {
-  return (
-    <svg 
-      {...props}
-      xmlns="http://www.w3.org/2000/svg" 
-      width="24" 
-      height="24" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
-      strokeLinejoin="round"
-    >
-      <rect width="20" height="16" x="2" y="4" rx="2" ry="2"/>
-      <path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/>
-      <path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/>
-      <path d="M7 16h10"/>
-    </svg>
-  )
 }

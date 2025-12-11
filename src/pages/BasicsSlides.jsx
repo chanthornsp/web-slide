@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val } from '../components/CodeCard';
-import { Rocket, AlignLeft, List, ListOrdered, Globe, Image as ImageIcon, Flag, RotateCcw, Layers, Files, Navigation, Link, CheckCircle } from 'lucide-react';
+import { Rocket, AlignLeft, List, ListOrdered, Globe, Image as ImageIcon, Flag, RotateCcw, Layers, Files, Navigation, Link, CheckCircle, MessageSquare, Hash, FolderTree } from 'lucide-react';
 
 export default function BasicsSlides() {
   const [stars, setStars] = useState([]);
@@ -22,7 +22,7 @@ export default function BasicsSlides() {
   }, []);
 
   return (
-    <SlideContainer totalSlides={11} accentColor="cyan">
+    <SlideContainer totalSlides={13} accentColor="cyan">
       {(currentSlide, goToSlide) => (
         <>
           {/* Stars Background */}
@@ -42,7 +42,7 @@ export default function BasicsSlides() {
             ))}
           </div>
 
-          {/* SLIDE 1: Intro */}
+          {/* SLIDE 0: Intro */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-6 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 mb-8 shadow-2xl shadow-cyan-500/20 animate-bounce">
@@ -62,7 +62,7 @@ export default function BasicsSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 2: Structure */}
+          {/* SLIDE 1: Structure */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8">
               <h2 className="text-5xl font-bold mb-12 text-center text-cyan-400">The Space Suit 👨‍🚀</h2>
@@ -103,7 +103,7 @@ export default function BasicsSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 3: Anatomy of an Element */}
+          {/* SLIDE 2: Anatomy of an Element */}
           <Slide isActive={currentSlide === 2}>
             <div className="max-w-6xl w-full p-8">
               <h2 className="text-5xl font-bold mb-12 text-center text-purple-400">The Element Anatomy 🧬</h2>
@@ -140,39 +140,93 @@ export default function BasicsSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 4: Attributes */}
+          {/* SLIDE 3: Comments (NEW) */}
           <Slide isActive={currentSlide === 3}>
+             <div className="max-w-6xl w-full p-8 text-center">
+               <div className="inline-block p-4 bg-slate-700/50 rounded-full mb-6">
+                 <MessageSquare className="w-12 h-12 text-slate-300" />
+               </div>
+               <h2 className="text-5xl font-bold mb-8 text-slate-300">Secret Notes (Comments) 🤫</h2>
+               <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
+                 Comments are notes for you and other developers. The browser <strong>completely ignores</strong> them!
+               </p>
+               
+               <div className="bg-slate-900 p-8 rounded-2xl border border-slate-700 max-w-3xl mx-auto text-left shadow-2xl">
+                 <CodeCard>
+                    <Tag>&lt;!-- This is a comment --&gt;</Tag>{'\n'}
+                    <Tag>&lt;p&gt;</Tag>I am visible!<Tag>&lt;/p&gt;</Tag>{'\n'}
+                    <Tag>&lt;!--</Tag>{'\n'}
+                    {'  '}You can even comment out multiple lines{'\n'}
+                    {'  '}to hide code temporarily!{'\n'}
+                    <Tag>--&gt;</Tag>
+                 </CodeCard>
+               </div>
+
+               <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                 <div className="bg-green-500/10 p-4 rounded-xl border border-green-500/20 text-green-200 text-sm">
+                    ✅ <strong>Do use comments</strong> to explain complex code or leave "TODO" reminders.
+                 </div>
+                 <div className="bg-red-500/10 p-4 rounded-xl border border-red-500/20 text-red-200 text-sm">
+                    ❌ <strong>Don't comment</strong> obvious things like "This is a paragraph" on a p tag.
+                 </div>
+               </div>
+             </div>
+          </Slide>
+
+          {/* SLIDE 4: Attributes (UPDATED) */}
+          <Slide isActive={currentSlide === 4}>
             <div className="max-w-6xl w-full p-8">
               <h2 className="text-5xl font-bold mb-12 text-center text-green-400">Attributes: The Settings ⚙️</h2>
               <p className="text-center text-slate-300 mb-8 max-w-2xl mx-auto">
-                Attributes provide extra info about elements. They always live in the <strong>Start Tag</strong>.
+                Attributes provide extra info. They always live in the <strong>Start Tag</strong>.
               </p>
               <div className="flex flex-col items-center gap-8">
-                <CodeCard className="text-2xl">
-                  <Tag>&lt;p </Tag><Attr>style</Attr>=<Val>"color:blue"</Val> <Attr>title</Attr>=<Val>"Tooltip!"</Val><Tag>&gt;</Tag>
-                  Hover me
+                <CodeCard className="text-xl md:text-2xl">
+                  <Tag>&lt;p </Tag>
+                  <Attr>id</Attr>=<Val>"hero"</Val>{' '}
+                  <Attr>class</Attr>=<Val>"big-text"</Val>{' '}
+                  <Attr>style</Attr>=<Val>"color:blue"</Val>
+                  <Tag>&gt;</Tag>{'\n'}
+                  {'  '}Hover me{'\n'}
                   <Tag>&lt;/p&gt;</Tag>
                 </CodeCard>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-                  <div className="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-green-400 transition-colors">
-                    <code className="text-green-300 font-bold block mb-2">style="..."</code>
-                    <p className="text-sm text-slate-400">Change appearance (color, font, size).</p>
-                  </div>
-                  <div className="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-green-400 transition-colors">
-                    <code className="text-green-300 font-bold block mb-2">title="..."</code>
-                    <p className="text-sm text-slate-400">Shows a tooltip text when mouse hovers.</p>
-                  </div>
-                  <div className="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-green-400 transition-colors">
-                    <code className="text-green-300 font-bold block mb-2">href / src</code>
-                    <p className="text-sm text-slate-400">Specific attributes for links and images.</p>
-                  </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                   {/* ID & Class */}
+                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-blue-400 transition-colors">
+                     <div className="flex items-center gap-3 mb-2">
+                        <Hash className="text-blue-400 w-5 h-5"/>
+                        <code className="text-blue-300 font-bold">id="..."</code>
+                     </div>
+                     <p className="text-sm text-slate-400 mb-2">A <strong>unique</strong> name for one element.</p>
+                     <p className="text-xs text-slate-500">Like a Social Security Number.</p>
+                   </div>
+
+                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-yellow-400 transition-colors">
+                     <div className="flex items-center gap-3 mb-2">
+                        <Layers className="text-yellow-400 w-5 h-5"/>
+                        <code className="text-yellow-300 font-bold">class="..."</code>
+                     </div>
+                     <p className="text-sm text-slate-400 mb-2">A <strong>group</strong> name for many elements.</p>
+                     <p className="text-xs text-slate-500">Like "Student" or "Teacher".</p>
+                   </div>
+
+                   {/* Other Attributes */}
+                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-green-400 transition-colors">
+                     <code className="text-green-300 font-bold block mb-2">style="..."</code>
+                     <p className="text-sm text-slate-400">Directly change appearance (inline CSS).</p>
+                   </div>
+                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600 hover:border-pink-400 transition-colors">
+                     <code className="text-pink-300 font-bold block mb-2">title="..."</code>
+                     <p className="text-sm text-slate-400">Shows a tooltip when hovering.</p>
+                   </div>
                 </div>
               </div>
             </div>
           </Slide>
 
           {/* SLIDE 5: Headings */}
-          <Slide isActive={currentSlide === 4}>
+          <Slide isActive={currentSlide === 5}>
             <div className="max-w-6xl w-full p-8">
               <h2 className="text-5xl font-bold mb-8 text-center text-yellow-400">Headings Hierarchy 👑</h2>
               <p className="text-center text-slate-300 mb-8">
@@ -205,7 +259,7 @@ export default function BasicsSlides() {
           </Slide>
 
           {/* SLIDE 6: Paragraphs */}
-          <Slide isActive={currentSlide === 5}>
+          <Slide isActive={currentSlide === 6}>
             <div className="max-w-4xl w-full p-8 text-center">
               <div className="inline-block p-4 bg-green-500/20 rounded-full mb-6">
                 <AlignLeft className="w-12 h-12 text-green-400" />
@@ -232,7 +286,7 @@ export default function BasicsSlides() {
           </Slide>
 
           {/* SLIDE 7: Lists */}
-          <Slide isActive={currentSlide === 6}>
+          <Slide isActive={currentSlide === 7}>
             <div className="max-w-6xl w-full p-8">
               <h2 className="text-5xl font-bold mb-8 text-center text-orange-400">Organizing Lists 📋</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -277,7 +331,7 @@ export default function BasicsSlides() {
           </Slide>
 
           {/* SLIDE 8: Nested Lists */}
-          <Slide isActive={currentSlide === 7}>
+          <Slide isActive={currentSlide === 8}>
             <div className="max-w-6xl w-full p-8">
               <h2 className="text-5xl font-bold mb-8 text-center text-teal-400">Nested Elements 🪆</h2>
               <p className="text-center text-slate-300 mb-8">
@@ -326,14 +380,14 @@ export default function BasicsSlides() {
           </Slide>
 
           {/* SLIDE 9: Links */}
-          <Slide isActive={currentSlide === 8}>
+          <Slide isActive={currentSlide === 9}>
             <div className="max-w-5xl w-full p-8">
               <h2 className="text-5xl font-bold mb-12 text-center text-blue-400">Hyperlinks &lt;a&gt; 🔗</h2>
               <div className="flex flex-col items-center gap-8">
                 <div className="bg-slate-800 p-8 rounded-2xl border-2 border-dashed border-slate-600 relative hover:border-blue-500 transition-colors">
                   <Globe className="w-16 h-16 text-slate-500 mx-auto mb-4" />
                   <CodeCard className="text-xl">
-                    <Tag>&lt;a </Tag><Attr>href</Attr>=<Val>"https://norton-u.com"</Val> <Attr>target</Attr>=<Val>"_blank"</Val><Tag>&gt;</Tag>{'\n'}
+                    <Tag>&lt;a </Tag><Attr>href</Attr>=<Val>"https://google.com"</Val> <Attr>target</Attr>=<Val>"_blank"</Val><Tag>&gt;</Tag>{'\n'}
                     Click Here{'\n'}
                     <Tag>&lt;/a&gt;</Tag>
                   </CodeCard>
@@ -358,21 +412,64 @@ export default function BasicsSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 10: Images */}
-          <Slide isActive={currentSlide === 9}>
+          {/* SLIDE 10: File Paths (NEW) */}
+          <Slide isActive={currentSlide === 10}>
+            <div className="max-w-6xl w-full p-8">
+              <h2 className="text-5xl font-bold mb-10 text-center text-amber-400">The Map: File Paths 🗺️</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                   <div className="flex items-center gap-3 mb-6">
+                     <FolderTree className="text-amber-400 w-8 h-8" />
+                     <h3 className="text-2xl font-bold text-white">Project Folder</h3>
+                   </div>
+                   <div className="font-mono text-sm space-y-2 text-slate-300 bg-black/40 p-4 rounded-lg">
+                      <div className="text-amber-400">📂 my-website</div>
+                      <div className="pl-4">📄 index.html</div>
+                      <div className="pl-4">📂 images</div>
+                      <div className="pl-8 text-green-400">🖼️ logo.png</div>
+                      <div className="pl-4">📂 pages</div>
+                      <div className="pl-8 text-blue-400">📄 about.html</div>
+                   </div>
+                </div>
+
+                <div className="space-y-6">
+                   <div className="bg-slate-800 p-4 rounded-xl border-l-4 border-green-400">
+                     <strong className="text-green-400 block mb-1">Looking Down (Children)</strong>
+                     <p className="text-slate-300 text-sm mb-2">To get <code>logo.png</code> from <code>index.html</code>:</p>
+                     <code className="bg-black/30 px-2 py-1 rounded text-cyan-300">images/logo.png</code>
+                   </div>
+                   <div className="bg-slate-800 p-4 rounded-xl border-l-4 border-blue-400">
+                     <strong className="text-blue-400 block mb-1">Looking Up (Parent)</strong>
+                     <p className="text-slate-300 text-sm mb-2">To get <code>logo.png</code> from <code>about.html</code>:</p>
+                     <code className="bg-black/30 px-2 py-1 rounded text-cyan-300">../images/logo.png</code>
+                     <p className="text-xs text-slate-500 mt-2">The <code>..</code> means "go back one folder".</p>
+                   </div>
+                   <div className="bg-slate-800 p-4 rounded-xl border-l-4 border-purple-400">
+                     <strong className="text-purple-400 block mb-1">Current Folder</strong>
+                     <code className="bg-black/30 px-2 py-1 rounded text-cyan-300">./file.html</code>
+                     <p className="text-xs text-slate-500 mt-2">The <code>.</code> means "right here".</p>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 11: Images */}
+          <Slide isActive={currentSlide === 11}>
             <div className="max-w-6xl w-full p-8">
               <h2 className="text-5xl font-bold mb-8 text-center text-pink-400">Images &lt;img&gt; 🖼️</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-6">
                   <CodeCard className="text-sm">
-                    <Tag>&lt;img </Tag><Attr>src</Attr>=<Val>"rocket.jpg"</Val>{'\n'}
+                    <Tag>&lt;img </Tag><Attr>src</Attr>=<Val>"images/rocket.jpg"</Val>{'\n'}
                     {'     '}<Attr>alt</Attr>=<Val>"A Rocket"</Val>{'\n'}
                     {'     '}<Attr>width</Attr>=<Val>"300"</Val> <Tag>/&gt;</Tag>
                   </CodeCard>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
                       <span className="text-pink-400 font-mono font-bold">src</span>
-                      <span className="text-slate-400 text-sm">Source file path (URL or local)</span>
+                      <span className="text-slate-400 text-sm">Source path (use what you learned!)</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-pink-400 font-mono font-bold">alt</span>
@@ -392,15 +489,15 @@ export default function BasicsSlides() {
                       alt="Rocket"
                       className="rounded w-full h-64 object-cover"
                     />
-                    <div className="p-2 text-center text-xs text-slate-500 font-mono">src="rocket.jpg"</div>
+                    <div className="p-2 text-center text-xs text-slate-500 font-mono">src="images/rocket.jpg"</div>
                   </div>
                 </div>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 11: Homework */}
-          <Slide isActive={currentSlide === 10}>
+          {/* SLIDE 12: Homework */}
+          <Slide isActive={currentSlide === 12}>
             <div className="text-center p-8 max-w-4xl">
               <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-pulse">
                 <Flag className="w-16 h-16 text-red-400" />

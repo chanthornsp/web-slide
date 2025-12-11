@@ -1,11 +1,11 @@
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val } from '../components/CodeCard';
-import { LayoutTemplate, Search, Eye, PanelTop, Newspaper, Box, Layers, FileText, Copyright, User, Mail, Map, Check, ThumbsUp, AlertTriangle, Smartphone, RotateCcw } from 'lucide-react';
+import { LayoutTemplate, Search, Eye, PanelTop, Newspaper, Box, Layers, FileText, Copyright, User, Mail, Map, Check, ThumbsUp, AlertTriangle, Smartphone, RotateCcw, Brain, Sidebar, Image, Type } from 'lucide-react';
 
 export default function StructureSlides() {
   return (
-    <SlideContainer totalSlides={8} accentColor="pink">
+    <SlideContainer totalSlides={10} accentColor="pink">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -15,7 +15,7 @@ export default function StructureSlides() {
             <div className="blob bg-pink-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-multiply"></div>
           </div>
 
-          {/* SLIDE 1: Title */}
+          {/* SLIDE 0: Title */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-4 rounded-3xl bg-gradient-to-br from-pink-500 to-purple-600 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
@@ -44,7 +44,7 @@ export default function StructureSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 2: What is Semantic HTML? */}
+          {/* SLIDE 1: What is Semantic HTML? */}
           <Slide isActive={currentSlide === 1}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl p-8 items-center z-10">
               <div>
@@ -91,8 +91,46 @@ export default function StructureSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 3: Header & Nav */}
+          {/* SLIDE 2: The Head Tag (NEW) */}
           <Slide isActive={currentSlide === 2}>
+            <div className="max-w-6xl w-full p-8 z-10">
+              <div className="text-center mb-12">
+                 <div className="inline-block p-4 bg-purple-500/20 rounded-full mb-4">
+                   <Brain className="w-16 h-16 text-purple-400" />
+                 </div>
+                 <h2 className="text-5xl font-bold text-slate-200">The Brain: &lt;head&gt; 🧠</h2>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <CodeCard>
+                  <Tag>&lt;head&gt;</Tag>{'\n'}
+                  {'  '}<Tag>&lt;meta </Tag><Attr>charset</Attr>=<Val>"UTF-8"</Val><Tag>&gt;</Tag>{'\n'}
+                  {'  '}<Tag>&lt;title&gt;</Tag>My Page<Tag>&lt;/title&gt;</Tag>{'\n'}
+                  {'  '}<Tag>&lt;link </Tag><Attr>rel</Attr>=<Val>"stylesheet"</Val> <Attr>href</Attr>=<Val>"style.css"</Val><Tag>&gt;</Tag>{'\n'}
+                  {'  '}<Tag>&lt;meta </Tag><Attr>name</Attr>=<Val>"viewport"</Val> <Attr>content</Attr>=<Val>"..."</Val><Tag>&gt;</Tag>{'\n'}
+                  <Tag>&lt;/head&gt;</Tag>
+                </CodeCard>
+
+                <div className="space-y-6">
+                   <div className="bg-slate-800 p-5 rounded-xl border border-slate-700">
+                     <h3 className="font-bold text-pink-400 text-xl mb-2">&lt;meta&gt;</h3>
+                     <p className="text-slate-300">Invisible settings. <code>charset="UTF-8"</code> lets you use emojis! 🚀</p>
+                   </div>
+                   <div className="bg-slate-800 p-5 rounded-xl border border-slate-700">
+                     <h3 className="font-bold text-blue-400 text-xl mb-2">&lt;link&gt;</h3>
+                     <p className="text-slate-300">Connects external files, like your CSS styles or Favicon.</p>
+                   </div>
+                   <div className="bg-slate-800 p-5 rounded-xl border border-slate-700">
+                     <h3 className="font-bold text-yellow-400 text-xl mb-2">&lt;title&gt;</h3>
+                     <p className="text-slate-300">The text shown on the browser <strong>Tab</strong> (not the page!).</p>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 3: Header & Nav */}
+          <Slide isActive={currentSlide === 3}>
             <div className="max-w-6xl w-full p-8 z-10">
               <div className="flex items-center gap-4 mb-8">
                 <div className="p-3 bg-yellow-400 rounded-lg text-black"><PanelTop className="w-8 h-8" /></div>
@@ -147,7 +185,7 @@ export default function StructureSlides() {
           </Slide>
 
           {/* SLIDE 4: Main, Section, Article */}
-          <Slide isActive={currentSlide === 3}>
+          <Slide isActive={currentSlide === 4}>
             <div className="max-w-6xl w-full p-8 text-center z-10">
               <div className="inline-block p-3 bg-purple-500 rounded-xl mb-6 shadow-lg shadow-purple-500/40">
                 <Newspaper className="w-10 h-10 text-white" />
@@ -158,26 +196,65 @@ export default function StructureSlides() {
                 <div className="bg-slate-800 border-2 border-dashed border-slate-600 rounded-2xl p-6 flex flex-col items-center w-full md:w-1/3 hover:border-cyan-400 transition-colors group">
                   <span className="bg-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-4">&lt;main&gt;</span>
                   <Box className="w-16 h-16 text-slate-600 mb-4 group-hover:text-cyan-400 transition-colors" />
-                  <p className="text-slate-300">The primary content of the page. Only one per page!</p>
+                  <p className="text-slate-300">The primary content. <br/><span className="text-cyan-400 font-bold">Use once per page!</span></p>
                 </div>
 
                 <div className="bg-slate-800 border-2 border-dashed border-slate-600 rounded-2xl p-6 flex flex-col items-center w-full md:w-1/3 hover:border-purple-400 transition-colors group">
                   <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-4">&lt;section&gt;</span>
                   <Layers className="w-16 h-16 text-slate-600 mb-4 group-hover:text-purple-400 transition-colors" />
-                  <p className="text-slate-300">Groups related content together. Like chapters in a book.</p>
+                  <p className="text-slate-300">Groups related content.<br/>e.g., "Services", "Contact".</p>
                 </div>
 
                 <div className="bg-slate-800 border-2 border-dashed border-slate-600 rounded-2xl p-6 flex flex-col items-center w-full md:w-1/3 hover:border-pink-400 transition-colors group">
                   <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-4">&lt;article&gt;</span>
                   <FileText className="w-16 h-16 text-slate-600 mb-4 group-hover:text-pink-400 transition-colors" />
-                  <p className="text-slate-300">Self-contained content. Can stand alone (like a blog post).</p>
+                  <p className="text-slate-300">Self-contained content.<br/>e.g., A Blog Post, A Product.</p>
                 </div>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 5: Footer */}
-          <Slide isActive={currentSlide === 4}>
+          {/* SLIDE 5: Aside & Figure (NEW) */}
+          <Slide isActive={currentSlide === 5}>
+            <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-12 text-center text-teal-400">The Sidekicks: Aside & Figure 🦸</h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                 {/* Aside */}
+                 <div className="bg-slate-800 p-8 rounded-2xl border border-teal-500/30 relative">
+                    <div className="flex items-center gap-3 mb-4">
+                       <Sidebar className="text-teal-400 w-8 h-8" />
+                       <h3 className="text-3xl font-bold text-white">&lt;aside&gt;</h3>
+                    </div>
+                    <p className="text-slate-300 mb-6 min-h-[60px]">Content <strong>related</strong> to the main story, but separate. Like a sidebar, ad, or "Read Also".</p>
+                    <div className="flex gap-4">
+                       <div className="flex-1 bg-white/5 p-4 rounded h-32 border border-white/10">Main Content...</div>
+                       <div className="w-1/3 bg-teal-500/20 border border-teal-500 p-2 rounded flex items-center justify-center text-teal-300 font-bold text-sm">
+                          &lt;aside&gt;
+                       </div>
+                    </div>
+                 </div>
+
+                 {/* Figure */}
+                 <div className="bg-slate-800 p-8 rounded-2xl border border-pink-500/30 relative">
+                    <div className="flex items-center gap-3 mb-4">
+                       <Image className="text-pink-400 w-8 h-8" />
+                       <h3 className="text-3xl font-bold text-white">&lt;figure&gt;</h3>
+                    </div>
+                    <p className="text-slate-300 mb-6 min-h-[60px]">Wraps an image with its caption. Semantic way to show photos!</p>
+                    <CodeCard className="text-sm">
+                      <Tag>&lt;figure&gt;</Tag>{'\n'}
+                      {'  '}<Tag>&lt;img </Tag><Attr>src</Attr>=<Val>"cat.jpg"</Val><Tag>/&gt;</Tag>{'\n'}
+                      {'  '}<Tag>&lt;figcaption&gt;</Tag>My Cat<Tag>&lt;/figcaption&gt;</Tag>{'\n'}
+                      <Tag>&lt;/figure&gt;</Tag>
+                    </CodeCard>
+                 </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 6: Footer */}
+          <Slide isActive={currentSlide === 6}>
             <div className="max-w-4xl text-center p-8 z-10">
               <h2 className="text-5xl font-bold mb-8 text-slate-400">The Basement: Footer</h2>
               <div className="relative group">
@@ -212,27 +289,26 @@ export default function StructureSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 6: Div vs Span */}
-          <Slide isActive={currentSlide === 5}>
+          {/* SLIDE 7: Block vs Inline (UPDATED) */}
+          <Slide isActive={currentSlide === 7}>
             <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center">Generic Containers 📦</h2>
+              <h2 className="text-5xl font-bold mb-12 text-center">Block vs Inline 🧱</h2>
               
               <div className="flex flex-col md:flex-row gap-12 items-center">
                 <div className="flex-1 bg-blue-900/30 p-8 rounded-2xl border border-blue-500/30 w-full">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-4xl">📦</span>
-                    <h3 className="text-3xl font-bold text-blue-400">&lt;div&gt;</h3>
+                    <Box className="w-8 h-8 text-blue-400" />
+                    <h3 className="text-3xl font-bold text-blue-400">Block Level</h3>
                   </div>
                   <ul className="space-y-3 mb-6 text-blue-100">
-                    <li className="flex gap-2"><Check className="w-5 h-5" /> Block-level (takes full width)</li>
-                    <li className="flex gap-2"><Check className="w-5 h-5" /> For grouping sections</li>
-                    <li className="flex gap-2"><Check className="w-5 h-5" /> Layout structure</li>
+                    <li className="flex gap-2"><Check className="w-5 h-5" /> Starts on a NEW line</li>
+                    <li className="flex gap-2"><Check className="w-5 h-5" /> Takes FULL width</li>
                   </ul>
                   <div className="bg-white text-slate-900 p-4 rounded font-bold text-center w-full mb-2">
-                    I am a DIV
+                    &lt;div&gt;, &lt;h1&gt;, &lt;p&gt;
                   </div>
                   <div className="bg-white text-slate-900 p-4 rounded font-bold text-center w-full">
-                    I stack vertically!
+                    They stack like boxes!
                   </div>
                 </div>
 
@@ -240,24 +316,25 @@ export default function StructureSlides() {
 
                 <div className="flex-1 bg-pink-900/30 p-8 rounded-2xl border border-pink-500/30 w-full">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-4xl">🖍️</span>
-                    <h3 className="text-3xl font-bold text-pink-400">&lt;span&gt;</h3>
+                    <Type className="w-8 h-8 text-pink-400" />
+                    <h3 className="text-3xl font-bold text-pink-400">Inline</h3>
                   </div>
                   <ul className="space-y-3 mb-6 text-pink-100">
-                    <li className="flex gap-2"><Check className="w-5 h-5" /> Inline (takes only needed space)</li>
-                    <li className="flex gap-2"><Check className="w-5 h-5" /> For styling text bits</li>
-                    <li className="flex gap-2"><Check className="w-5 h-5" /> Doesn't break flow</li>
+                    <li className="flex gap-2"><Check className="w-5 h-5" /> Stays on SAME line</li>
+                    <li className="flex gap-2"><Check className="w-5 h-5" /> Takes only NEEDED width</li>
                   </ul>
-                  <div className="bg-slate-800 p-4 rounded text-center">
-                    This is <span className="bg-yellow-300 text-black px-1 rounded transform -rotate-2 inline-block">highlighted</span> text inside a sentence.
+                  <div className="bg-slate-800 p-4 rounded text-center leading-loose">
+                     This is a sentence with <span className="bg-pink-500 text-white px-2 py-1 rounded">&lt;span&gt;</span> inside it.
+                     Also <span className="bg-blue-500 text-white px-2 py-1 rounded">&lt;a&gt;</span> links are inline.
+                     They flow like text!
                   </div>
                 </div>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 7: Best Practices */}
-          <Slide isActive={currentSlide === 6}>
+          {/* SLIDE 8: Best Practices */}
+          <Slide isActive={currentSlide === 8}>
             <div className="max-w-4xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-yellow-400">🧠 Best Practices</h2>
               
@@ -295,8 +372,8 @@ export default function StructureSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 8: Thank You */}
-          <Slide isActive={currentSlide === 7}>
+          {/* SLIDE 9: Thank You */}
+          <Slide isActive={currentSlide === 9}>
             <div className="text-center z-10">
               <h1 className="text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
                 You're Ready to Build! 🚀

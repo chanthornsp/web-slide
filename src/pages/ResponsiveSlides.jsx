@@ -2,13 +2,13 @@ import { useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { Smartphone, Monitor, Tablet, LayoutGrid, Maximize, SmartphoneCharging, Play, CheckCircle, RotateCcw, Image } from 'lucide-react';
+import { Smartphone, Tablet, Monitor, Layout, Maximize, Image, CheckCircle, RotateCcw, Menu, Grid, Move, BoxSelect, CreditCard, LayoutTemplate } from 'lucide-react';
 
 export default function ResponsiveSlides() {
-  const [activeTab, setActiveTab] = useState('mobile');
+  const [device, setDevice] = useState('desktop');
 
   return (
-    <SlideContainer totalSlides={9} accentColor="rose">
+    <SlideContainer totalSlides={12} accentColor="rose">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -18,18 +18,14 @@ export default function ResponsiveSlides() {
             <div className="blob bg-pink-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-screen"></div>
           </div>
 
-          {/* SLIDE 1: Title */}
+          {/* SLIDE 0: Title */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-6 rounded-3xl bg-gradient-to-br from-rose-500 to-orange-600 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-                <div className="flex items-end gap-2 text-white">
-                    <Smartphone className="w-12 h-12" />
-                    <Tablet className="w-16 h-16" />
-                    <Monitor className="w-20 h-20" />
-                </div>
+                <Smartphone className="w-24 h-24 text-white" />
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-rose-400 via-orange-400 to-yellow-400">
-                Responsive Web Design
+              <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-rose-400 via-orange-400 to-red-400">
+                Responsive Design
               </h1>
               <p className="text-2xl text-slate-300 font-light max-w-2xl mx-auto">
                 One Codebase, Every Device 📱💻
@@ -37,371 +33,392 @@ export default function ResponsiveSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 2: Breakpoints & Media Queries */}
+          {/* SLIDE 1: What is Responsive Design? */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-rose-400">Breakpoints & Media Queries 📏</h2>
+              <h2 className="text-5xl font-bold mb-12 text-center text-rose-400">What is it? 🤔</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-6">
                   <div className="bg-slate-800 p-6 rounded-xl border border-rose-500/30">
-                    <table className="w-full text-left text-slate-300">
-                        <thead>
-                            <tr className="border-b border-slate-700 text-rose-400">
-                                <th className="pb-2">Device</th>
-                                <th className="pb-2">Width</th>
-                            </tr>
-                        </thead>
-                        <tbody className="font-mono text-sm">
-                            <tr className="border-b border-slate-700/50">
-                                <td className="py-3 flex items-center gap-2"><Smartphone className="w-4 h-4"/> Mobile</td>
-                                <td className="py-3">&lt; 768px</td>
-                            </tr>
-                            <tr className="border-b border-slate-700/50">
-                                <td className="py-3 flex items-center gap-2"><Tablet className="w-4 h-4"/> Tablet</td>
-                                <td className="py-3">768px - 1024px</td>
-                            </tr>
-                            <tr>
-                                <td className="py-3 flex items-center gap-2"><Monitor className="w-4 h-4"/> Desktop</td>
-                                <td className="py-3">&ge; 1024px</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <p className="text-lg text-slate-300 leading-relaxed">
+                      Responsive Web Design (RWD) makes your web pages look good on all devices. It uses CSS to resize, hide, shrink, enlarge, or move the content to look good on any screen.
+                    </p>
                   </div>
-                  <CodeCard>
-                    <Comment>/* Mobile First (Base styles) */</Comment>{'\n'}
-                    <Tag>body</Tag> {'{'}{'\n'}
-                    {'  '}<Attr>background</Attr>: <Val>white</Val>;{'\n'}
-                    {'}'}{'\n'}
-                    {'\n'}
-                    <Tag>@media</Tag> <Attr>screen</Attr> and (<Attr>min-width</Attr>: <Val>768px</Val>) {'{'}{'\n'}
-                    {'  '}<Tag>body</Tag> {'{'} <Attr>background</Attr>: <Val>lightblue</Val>; {'}'}{'\n'}
-                    {'}'}
-                  </CodeCard>
+                  <div className="flex justify-between gap-4">
+                      <div className={`flex flex-col items-center gap-2 p-4 rounded-xl cursor-pointer transition-all ${device === 'mobile' ? 'bg-rose-600 scale-105' : 'bg-slate-800 hover:bg-slate-700'}`} onClick={() => setDevice('mobile')}>
+                          <Smartphone /> <span className="text-sm">Mobile</span>
+                      </div>
+                      <div className={`flex flex-col items-center gap-2 p-4 rounded-xl cursor-pointer transition-all ${device === 'tablet' ? 'bg-rose-600 scale-105' : 'bg-slate-800 hover:bg-slate-700'}`} onClick={() => setDevice('tablet')}>
+                          <Tablet /> <span className="text-sm">Tablet</span>
+                      </div>
+                      <div className={`flex flex-col items-center gap-2 p-4 rounded-xl cursor-pointer transition-all ${device === 'desktop' ? 'bg-rose-600 scale-105' : 'bg-slate-800 hover:bg-slate-700'}`} onClick={() => setDevice('desktop')}>
+                          <Monitor /> <span className="text-sm">Desktop</span>
+                      </div>
+                  </div>
                 </div>
 
-                <div className="bg-white/5 p-8 rounded-2xl border border-white/10 flex flex-col items-center justify-center gap-6">
-                    <div className="flex gap-2 mb-4">
-                        <button onClick={() => setActiveTab('mobile')} className={`px-4 py-2 rounded flex items-center gap-2 ${activeTab==='mobile' ? 'bg-rose-500 text-white' : 'bg-slate-700 text-slate-400'}`}>
-                            <Smartphone className="w-4 h-4" /> Mobile
-                        </button>
-                        <button onClick={() => setActiveTab('tablet')} className={`px-4 py-2 rounded flex items-center gap-2 ${activeTab==='tablet' ? 'bg-rose-500 text-white' : 'bg-slate-700 text-slate-400'}`}>
-                            <Tablet className="w-4 h-4" /> Tablet
-                        </button>
-                        <button onClick={() => setActiveTab('desktop')} className={`px-4 py-2 rounded flex items-center gap-2 ${activeTab==='desktop' ? 'bg-rose-500 text-white' : 'bg-slate-700 text-slate-400'}`}>
-                            <Monitor className="w-4 h-4" /> Desktop
-                        </button>
-                    </div>
-                    
-                    <div 
-                        className={`transition-all duration-500 ease-in-out bg-white rounded-xl shadow-2xl flex items-center justify-center text-slate-800 font-bold overflow-hidden`}
+                <div className="bg-white/5 p-8 rounded-2xl border border-white/10 flex items-center justify-center">
+                     {/* Interactive Device Preview */}
+                     <div 
+                        className="bg-slate-900 border-4 border-slate-700 rounded-2xl overflow-hidden transition-all duration-500 shadow-2xl flex flex-col"
                         style={{
-                            width: activeTab === 'mobile' ? '200px' : activeTab === 'tablet' ? '350px' : '500px',
-                            height: '300px',
-                            backgroundColor: activeTab === 'mobile' ? 'white' : activeTab === 'tablet' ? 'lightblue' : 'lightgreen'
+                            width: device === 'mobile' ? '200px' : device === 'tablet' ? '400px' : '600px',
+                            height: '350px'
                         }}
-                    >
-                        <div className="text-center p-4">
-                            <div className="text-2xl mb-2">
-                                {activeTab === 'mobile' ? 'Mobile View' : activeTab === 'tablet' ? 'Tablet View' : 'Desktop View'}
-                            </div>
-                            <div className="font-mono text-sm text-slate-600">
-                                {activeTab === 'mobile' ? 'bg: white' : activeTab === 'tablet' ? 'bg: lightblue' : 'bg: lightgreen'}
-                            </div>
-                        </div>
-                    </div>
+                     >
+                         <div className="bg-slate-800 p-2 text-xs text-center text-slate-500 border-b border-slate-700">My Amazing Website</div>
+                         <div className="p-4 overflow-auto flex-1 bg-white">
+                             <div className={`h-24 rounded-lg mb-4 flex items-center justify-center text-white font-bold transition-colors ${device === 'mobile' ? 'bg-rose-500' : 'bg-blue-500'}`}>
+                                 Hero Banner
+                             </div>
+                             <div className={`grid gap-2 ${device === 'mobile' ? 'grid-cols-1' : 'grid-cols-3'}`}>
+                                 <div className="h-20 bg-slate-200 rounded"></div>
+                                 <div className="h-20 bg-slate-200 rounded"></div>
+                                 <div className="h-20 bg-slate-200 rounded"></div>
+                             </div>
+                             <p className="text-slate-500 text-xs mt-4">
+                                 {device === 'mobile' ? 'Mobile Layout: Single column stuff.' : 'Desktop Layout: Multi-column goodness!'}
+                             </p>
+                         </div>
+                     </div>
                 </div>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 3: Grid Layouts */}
+          {/* SLIDE 2: Breakpoints & Media Queries */}
           <Slide isActive={currentSlide === 2}>
             <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-orange-400">Responsive Grids 🕸️</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-                  <div className="space-y-4">
-                      <p className="text-slate-300">Change the number of columns based on screen size using <code className="text-orange-400">grid-template-columns</code>.</p>
-                      <CodeCard className="text-sm">
-                        <Tag>.card-grid</Tag> {'{'}{'\n'}
-                        {'  '}<Attr>display</Attr>: <Val>grid</Val>;{'\n'}
-                        {'  '}<Attr>grid-template-columns</Attr>: <Val>1fr</Val>; <Comment>/* Mobile: 1 col */</Comment>{'\n'}
-                        {'}'}{'\n'}
-                        {'\n'}
-                        <Tag>@media</Tag> (<Attr>min-width</Attr>: <Val>768px</Val>) {'{'}{'\n'}
-                        {'  '}<Tag>.card-grid</Tag> {'{'}{'\n'}
-                        {'    '}<Attr>grid-template-columns</Attr>: <Val>repeat(2, 1fr)</Val>; <Comment>/* Tablet: 2 cols */</Comment>{'\n'}
-                        {'  '}{'}'}{'\n'}
-                        {'}'}{'\n'}
-                        {'\n'}
-                        <Tag>@media</Tag> (<Attr>min-width</Attr>: <Val>1024px</Val>) {'{'}{'\n'}
-                        {'  '}<Tag>.card-grid</Tag> {'{'}{'\n'}
-                        {'    '}<Attr>grid-template-columns</Attr>: <Val>repeat(3, 1fr)</Val>; <Comment>/* Desktop: 3 cols */</Comment>{'\n'}
-                        {'  '}{'}'}{'\n'}
-                        {'}'}
-                      </CodeCard>
-                  </div>
-
-                  <div className="bg-white/5 p-6 rounded-2xl border border-white/10 h-full">
-                       <div className="flex justify-between items-center text-sm text-slate-400 mb-4 font-mono w-full">
-                           <span>Resize Browser ➡️</span>
-                           <span className="hidden md:inline lg:hidden text-orange-400 font-bold">Tablet Match</span>
-                           <span className="hidden lg:inline text-green-400 font-bold">Desktop Match</span>
-                           <span className="inline md:hidden text-rose-400 font-bold">Mobile Match</span>
-                       </div>
-                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                           {[1, 2, 3, 4, 5, 6].map(i => (
-                               <div key={i} className="bg-gradient-to-br from-orange-500 to-rose-500 h-24 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">
-                                   Card {i}
-                               </div>
-                           ))}
-                       </div>
-                  </div>
-              </div>
-            </div>
-          </Slide>
-
-          {/* SLIDE 4: Flexbox Navigation */}
-          <Slide isActive={currentSlide === 3}>
-            <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-yellow-400">Flex Navigation 🧭</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                   <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700 h-full flex flex-col justify-center">
-                        <div className="w-full max-w-sm mx-auto bg-white rounded-xl overflow-hidden shadow-2xl">
-                             {/* Mock Browser Header */}
-                             <div className="bg-slate-100 p-2 border-b flex gap-1">
-                                 <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                                 <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                                 <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                             </div>
-                             {/* Nav Example */}
-                             <div className="bg-slate-800 p-4 text-white flex justify-between items-center relative">
-                                 <div className="font-bold">Logo</div>
-                                 
-                                 {/* Desktop Menu */}
-                                 <ul className="hidden md:flex gap-4 text-sm text-slate-300">
-                                     <li>Home</li>
-                                     <li>About</li>
-                                     <li>Contact</li>
-                                 </ul>
-
-                                 {/* Mobile Menu Icon */}
-                                 <div className="md:hidden">☰</div>
-                             </div>
-                             <div className="p-8 text-center text-slate-500">
-                                 <p className="text-xs mb-2 bg-yellow-100 text-yellow-800 inline-block px-2 rounded">Try Resizing</p>
-                                 <p className="text-sm">
-                                     On <strong className="text-rose-500">Mobile</strong>, the menu hides behind the ☰.<br/>
-                                     On <strong className="text-green-500">Desktop</strong>, it expands to a row.
-                                 </p>
-                             </div>
-                        </div>
-                   </div>
-
-                   <div className="space-y-4">
-                      <CodeCard className="text-sm">
-                        <Tag>.navbar</Tag> {'{'}{'\n'}
-                        {'  '}<Attr>display</Attr>: <Val>flex</Val>;{'\n'}
-                        {'  '}<Attr>justify-content</Attr>: <Val>space-between</Val>;{'\n'}
-                        {'}'}{'\n'}
-                        {'\n'}
-                        <Tag>.menu</Tag> {'{'}{'\n'}
-                        {'  '}<Attr>display</Attr>: <Val>none</Val>; <Comment>/* Mobile: Hidden */</Comment>{'\n'}
-                        {'}'}{'\n'}
-                        {'\n'}
-                        <Tag>@media</Tag> (<Attr>min-width</Attr>: <Val>768px</Val>) {'{'}{'\n'}
-                        {'  '}<Tag>.menu</Tag> {'{'}{'\n'}
-                        {'    '}<Attr>display</Attr>: <Val>flex</Val>; <Comment>/* Tablet+: Show Row */</Comment>{'\n'}
-                        {'    '}<Attr>flex-direction</Attr>: <Val>row</Val>;{'\n'}
-                        {'  '}{'}'}{'\n'}
-                        {'}'}
-                      </CodeCard>
-                  </div>
-              </div>
-            </div>
-          </Slide>
-
-          {/* SLIDE 5: Essentials */}
-          <Slide isActive={currentSlide === 4}>
-            <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-teal-400">Essential Tech 🛠️</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                  <div className="bg-slate-800 p-8 rounded-2xl border-l-8 border-teal-500">
-                      <div className="flex items-center gap-3 mb-4">
-                          <Maximize className="w-8 h-8 text-teal-400" />
-                          <h3 className="text-2xl font-bold text-white">1. Viewport Meta Tag</h3>
-                      </div>
-                      <p className="text-slate-300 mb-6">Critically important! Without this, mobile browsers will zoom out to fit a desktop width, making text tiny.</p>
-                      <CodeCard className="text-xs">
-                          <Tag>&lt;meta</Tag> <Attr>name</Attr>=<Val>"viewport"</Val> <Attr>content</Attr>=<Val>"width=device-width, initial-scale=1.0"</Val> <Tag>/&gt;</Tag>
-                      </CodeCard>
-                  </div>
-
-                  <div className="bg-slate-800 p-8 rounded-2xl border-l-8 border-pink-500">
-                      <div className="flex items-center gap-3 mb-4">
-                          <LayoutGrid className="w-8 h-8 text-pink-400" />
-                          <h3 className="text-2xl font-bold text-white">2. Responsive Images</h3>
-                      </div>
-                      <p className="text-slate-300 mb-6">Ensure images never overflow their container.</p>
-                      <CodeCard className="text-xs">
-                          <Tag>img</Tag> {'{'}{'\n'}
-                          {'  '}<Attr>max-width</Attr>: <Val>100%</Val>;{'\n'}
-                          {'  '}<Attr>height</Attr>: <Val>auto</Val>;{'\n'}
-                          {'}'}
-                      </CodeCard>
-                      <div className="mt-4 bg-white/10 rounded-lg p-4 overflow-hidden">
-                          <div className="w-[150%] h-8 bg-red-400/20 mb-2 rounded relative">
-                              <span className="absolute left-2 text-xs text-red-300">Overflows without max-width :(</span>
-                          </div>
-                          <div className="w-full h-8 bg-green-400/20 rounded relative">
-                              <span className="absolute left-2 text-xs text-green-300">Fits nicely with max-width: 100% :)</span>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </Slide>
-
-          {/* SLIDE 6: Object Fit */}
-          <Slide isActive={currentSlide === 5}>
-            <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-purple-400">Object Fit 🖼️</h2>
+              <h2 className="text-5xl font-bold mb-12 text-center text-orange-400">Media Queries 📐</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                   <div className="space-y-6">
-                      <div className="bg-slate-800 p-6 rounded-2xl border-l-8 border-purple-500">
-                          <h3 className="text-2xl font-bold text-white mb-4">Handling Aspect Ratios</h3>
-                          <p className="text-slate-300 mb-4">When resizing images responsively, they can get distorted. <code className="text-purple-400">object-fit</code> fixes this by telling the image how to fit its container.</p>
-                      </div>
+                      <p className="text-lg text-slate-300">
+                          The heart of responsive design. Apply styles <strong className="text-orange-400">only if</strong> the screen size matches a condition.
+                      </p>
                       
-                      <CodeCard className="text-sm">
-                          <Tag>.img-cover</Tag> {'{'}{'\n'}
-                          {'  '}<Attr>width</Attr>: <Val>100%</Val>;{'\n'}
-                          {'  '}<Attr>height</Attr>: <Val>200px</Val>;{'\n'}
-                          {'  '}<Attr>object-fit</Attr>: <Val>cover</Val>; <Comment>/* Crops to fill */</Comment>{'\n'}
-                          {'}'}{'\n'}
-                          {'\n'}
-                          <Tag>.img-contain</Tag> {'{'}{'\n'}
-                          {'  '}<Attr>object-fit</Attr>: <Val>contain</Val>; <Comment>/* Show whole image */</Comment>{'\n'}
-                          {'}'}
+                      <div className="space-y-4">
+                          <div className="bg-slate-800 p-4 rounded-xl border-l-4 border-green-500">
+                              <span className="text-xs text-slate-400 uppercase font-bold tracking-wider">Mobile First Strategy</span>
+                              <p className="text-sm text-slate-300 mt-1">Start with base styles (mobile), then add <code className="text-orange-300">min-width</code> queries for larger screens.</p>
+                          </div>
+                      </div>
+
+                      <CodeCard>
+                        <Comment>/* Default (Mobile) */</Comment>{'\n'}
+                        <Tag>body</Tag> {'{'}{'\n'}
+                        {'  '}<Attr>background-color</Attr>: <Val>lightblue</Val>;{'\n'}
+                        {'}'}{'\n'}
+                        {'\n'}
+                        <Comment>/* Tablet & Up */</Comment>{'\n'}
+                        <Tag>@media</Tag> (<Attr>min-width</Attr>: <Val>768px</Val>) {'{'}{'\n'}
+                        {'  '}<Tag>body</Tag> {'{'}{'\n'}
+                        {'    '}<Attr>background-color</Attr>: <Val>lightgreen</Val>;{'\n'}
+                        {'  '}{'}'}{'\n'}
+                        {'}'}
                       </CodeCard>
                   </div>
 
-                  <div className="space-y-8 bg-white/5 p-8 rounded-2xl border border-white/10">
-                      <div>
-                          <p className="text-sm text-slate-400 mb-2">Original Image (Square)</p>
-                          <div className="w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white font-bold shadow-lg mx-auto">
-                              Img
-                          </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                              <p className="text-xs text-red-400 font-bold">Without object-fit (Stretch)</p>
-                              <div className="w-full h-32 bg-slate-900 rounded-lg overflow-hidden border border-slate-700">
-                                  <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold transform scale-x-[2]">
-                                      Img
-                                  </div>
-                              </div>
-                          </div>
-                          
-                          <div className="space-y-2">
-                              <p className="text-xs text-green-400 font-bold">object-fit: cover (Crop)</p>
-                              <div className="w-full h-32 bg-slate-900 rounded-lg overflow-hidden border border-slate-700 relative group">
-                                  <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">
-                                      Img
-                                  </div>
-                                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-xs text-white transition-opacity">
-                                      Cropped Top/Bottom
-                                  </div>
-                              </div>
-                          </div>
+                  <div className="bg-white/5 p-8 rounded-2xl border border-white/10 hidden md:flex items-center justify-center">
+                      <div className="text-center">
+                         <div className="mb-4 text-6xl">🚦</div>
+                         <h3 className="text-2xl font-bold text-white mb-2">Common Breakpoints</h3>
+                         <ul className="text-left space-y-2 bg-slate-900 p-6 rounded-xl border border-slate-700 font-mono text-sm text-slate-300">
+                             <li><span className="text-orange-400">min-width: 640px</span>  → Small Tablets</li>
+                             <li><span className="text-orange-400">min-width: 768px</span>  → Tablets (iPad)</li>
+                             <li><span className="text-orange-400">min-width: 1024px</span> → Laptops</li>
+                             <li><span className="text-orange-400">min-width: 1280px</span> → Desktops</li>
+                         </ul>
                       </div>
                   </div>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 7: Best Practices */}
-          <Slide isActive={currentSlide === 6}>
+           {/* SLIDE 3: Flex vs Grid (NEW) */}
+           <Slide isActive={currentSlide === 3}>
+             <div className="max-w-6xl w-full p-8 z-10">
+                <h2 className="text-5xl font-bold mb-10 text-center text-purple-400">Flexbox vs Grid 🥊</h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                   <div className="bg-slate-800 p-6 rounded-2xl border-t-8 border-purple-500">
+                      <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2"><Move /> Flexbox</h3>
+                      <p className="text-slate-300 mb-4 h-12">One-dimensional. Perfect for aligning items in a row OR a column.</p>
+                      <ul className="text-sm text-slate-400 space-y-2 mb-6">
+                         <li>✅ Aligning icons in a button</li>
+                         <li>✅ Navigation bars</li>
+                         <li>✅ Centering content vertically/horizontally</li>
+                      </ul>
+                      <div className="bg-slate-900 p-4 rounded h-32 flex justify-between items-center px-8 border border-slate-700">
+                         <div className="w-8 h-8 bg-purple-500 rounded"></div>
+                         <div className="w-8 h-8 bg-purple-500 rounded"></div>
+                         <div className="w-8 h-8 bg-purple-500 rounded"></div>
+                      </div>
+                   </div>
+
+                   <div className="bg-slate-800 p-6 rounded-2xl border-t-8 border-emerald-500">
+                      <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2"><Grid /> CSS Grid</h3>
+                      <p className="text-slate-300 mb-4 h-12">Two-dimensional. Perfect for entire page layouts (Rows AND Columns).</p>
+                      <ul className="text-sm text-slate-400 space-y-2 mb-6">
+                         <li>✅ Photo galleries</li>
+                         <li>✅ Page skeletons (Sidebar + Main + Footer)</li>
+                         <li>✅ Complex dashboard layouts</li>
+                      </ul>
+                      <div className="bg-slate-900 p-4 rounded h-32 grid grid-cols-3 gap-2 border border-slate-700">
+                         <div className="bg-emerald-500 rounded col-span-2"></div>
+                         <div className="bg-emerald-500 rounded"></div>
+                         <div className="bg-emerald-500 rounded"></div>
+                         <div className="bg-emerald-500 rounded col-span-2"></div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+           </Slide>
+
+          {/* SLIDE 4: Responsive Grid Layout */}
+          <Slide isActive={currentSlide === 4}>
             <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-12 text-center text-teal-400">Responsive Grids 🏁</h2>
+              
+              <div className="flex flex-col md:flex-row gap-12 items-center">
+                  <div className="md:w-1/2 space-y-6">
+                      <p className="text-slate-300 text-lg">
+                          CSS Grid is magic for responsive layouts. Using <code className="bg-white/10 p-1 rounded">repeat()</code> and <code className="bg-white/10 p-1 rounded">minmax()</code>, you can make grids that wrap automatically without media queries!
+                      </p>
+                      <CodeCard>
+                        <Tag>.grid-container</Tag> {'{'}{'\n'}
+                        {'  '}<Attr>display</Attr>: <Val>grid</Val>;{'\n'}
+                        {'  '}<Comment>/* Magic Line 👇 */</Comment>{'\n'}
+                        {'  '}<Attr>grid-template-columns</Attr>:{'\n'}
+                        {'    '}<Val>repeat(auto-fit, minmax(150px, 1fr))</Val>;{'\n'}
+                        {'  '}<Attr>gap</Attr>: <Val>1rem</Val>;{'\n'}
+                        {'}'}
+                      </CodeCard>
+                  </div>
+                  <div className="md:w-1/2 w-full">
+                       <div className="bg-slate-800 p-4 rounded-xl border border-slate-600 h-64 overflow-hidden resize-x relative group">
+                           <div className="absolute top-2 right-2 text-xs text-slate-500 bg-black/50 px-2 py-1 rounded pointer-events-none">Resize Me ↘</div>
+                           <div className="grid gap-2 h-full w-full" style={{
+                               gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))'
+                           }}>
+                               {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
+                                   <div key={n} className="bg-teal-500/50 border border-teal-500 rounded flex items-center justify-center font-bold text-white text-lg">
+                                       {n}
+                                   </div>
+                               ))}
+                           </div>
+                       </div>
+                  </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 5: Flex Navigation Example */}
+          <Slide isActive={currentSlide === 5}>
+            <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-12 text-center text-blue-400">Flex Navigation 🧭</h2>
+              
+              <div className="space-y-8">
+                  <CodeCard className="text-xs md:text-sm">
+                      <Tag>.nav</Tag> {'{'}{'\n'}
+                      {'  '}<Attr>display</Attr>: <Val>flex</Val>;{'\n'}
+                      {'  '}<Attr>justify-content</Attr>: <Val>space-between</Val>; <Comment>/* Logo left, Links right */</Comment>{'\n'}
+                      {'  '}<Attr>align-items</Attr>: <Val>center</Val>;{'\n'}
+                      {'}'}{'\n'}
+                      <Tag>@media</Tag> (<Attr>max-width</Attr>: <Val>600px</Val>) {'{'}{'\n'}
+                      {'  '}<Tag>.nav</Tag> {'{'} <Attr>flex-direction</Attr>: <Val>column</Val>; {'}'}{'\n'}
+                      {'}'}
+                  </CodeCard>
+
+                  <div className="bg-white rounded-xl overflow-hidden shadow-2xl mx-auto w-full max-w-2xl text-slate-800">
+                      <div className="p-4 bg-slate-900 text-white flex flex-wrap justify-between items-center gap-4">
+                          <div className="font-bold text-xl text-blue-400">Logo</div>
+                          <div className="flex gap-4 text-sm">
+                              <span className="hover:text-blue-300 cursor-pointer">Home</span>
+                              <span className="hover:text-blue-300 cursor-pointer">About</span>
+                              <span className="hover:text-blue-300 cursor-pointer">Contact</span>
+                          </div>
+                      </div>
+                      <div className="bg-slate-100 p-8 text-center text-slate-400">
+                          Resize your browser to see how this could stack!
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </Slide>
+
+           {/* SLIDE 6: Common Patterns (NEW) */}
+           <Slide isActive={currentSlide === 6}>
+             <div className="max-w-6xl w-full p-8 z-10">
+                <h2 className="text-5xl font-bold mb-10 text-center text-yellow-400">Common Patterns 🏗️</h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                   <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:scale-105 transition-transform">
+                      <div className="h-32 bg-slate-700 rounded-lg mb-4 flex border border-slate-600">
+                         <div className="w-1/3 border-r border-slate-600 bg-yellow-500/10"></div>
+                         <div className="flex-1"></div>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2"><LayoutTemplate size={20} /> Sidebar Layout</h3>
+                      <p className="text-sm text-slate-400">Sidebar for navigation, main content area for the page. Use Grid.</p>
+                   </div>
+
+                   <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:scale-105 transition-transform">
+                      <div className="h-32 bg-slate-700 rounded-lg mb-4 grid grid-cols-2 gap-2 p-2 border border-slate-600">
+                         <div className="bg-blue-500/20 rounded"></div>
+                         <div className="bg-blue-500/20 rounded"></div>
+                         <div className="bg-blue-500/20 rounded"></div>
+                         <div className="bg-blue-500/20 rounded"></div>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2"><CreditCard size={20} /> Card Grid</h3>
+                      <p className="text-sm text-slate-400">Repeating cards for products or posts. Use Grid (auto-fit).</p>
+                   </div>
+
+                   <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:scale-105 transition-transform">
+                      <div className="h-32 bg-slate-700 rounded-lg mb-4 flex flex-col items-center justify-center border border-slate-600">
+                         <div className="w-16 h-4 bg-slate-500 rounded mb-2"></div>
+                         <div className="w-24 h-8 bg-pink-500/50 rounded"></div>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2"><BoxSelect size={20} /> Centered Hero</h3>
+                      <p className="text-sm text-slate-400">Content perfectly centered in a large banner. Use Flexbox.</p>
+                   </div>
+                </div>
+             </div>
+           </Slide>
+
+          {/* SLIDE 7: Viewport Meta Tag */}
+          <Slide isActive={currentSlide === 7}>
+            <div className="max-w-4xl w-full p-8 z-10 text-center">
+              <h2 className="text-5xl font-bold mb-8 text-red-400">The Magic Tag 🪄</h2>
+              <p className="text-xl text-slate-300 mb-8">
+                  Without this line of code in your HTML <code className="text-red-300 bg-red-900/30 px-2 py-1 rounded">&lt;head&gt;</code>, responsive design won't work on mobile phones!
+              </p>
+              
+              <div className="bg-slate-900 p-6 rounded-xl border border-slate-600 shadow-2xl inline-block text-left">
+                  <CodeCard>
+                    <Tag>&lt;meta</Tag>{'\n'}
+                    {'  '}<Attr>name</Attr>=<Val>"viewport"</Val>{'\n'}
+                    {'  '}<Attr>content</Attr>=<Val>"width=device-width, initial-scale=1.0"</Val>{'\n'}
+                    <Tag>/&gt;</Tag>
+                  </CodeCard>
+              </div>
+
+              <div className="mt-8 grid grid-cols-2 gap-8 text-left max-w-2xl mx-auto">
+                  <div className="bg-slate-800 p-4 rounded border border-red-500/30">
+                      <strong className="text-red-400 block mb-1">width=device-width</strong>
+                      <span className="text-slate-400 text-sm">Sets the page width to follow the screen-width of the device.</span>
+                  </div>
+                  <div className="bg-slate-800 p-4 rounded border border-red-500/30">
+                      <strong className="text-red-400 block mb-1">initial-scale=1.0</strong>
+                      <span className="text-slate-400 text-sm">Sets the initial zoom level when the page is first loaded.</span>
+                  </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 8: Responsive Images */}
+          <Slide isActive={currentSlide === 8}>
+            <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-12 text-center text-pink-400">Responsive Images 🖼️</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-6">
+                      <h3 className="text-2xl font-bold text-white">Prevent Overflow</h3>
+                      <p className="text-slate-300">
+                          Images have fixed sizes by default. If an image is 1000px wide, it will cause horizontal scrolling on mobile.
+                      </p>
+                      <div className="bg-slate-800 p-4 rounded-xl border-l-4 border-pink-500">
+                          <p className="text-sm text-slate-300">Always add this CSS reset for images:</p>
+                      </div>
+                      <CodeCard>
+                        <Tag>img</Tag> {'{'}{'\n'}
+                        {'  '}<Attr>max-width</Attr>: <Val>100%</Val>;{'\n'}
+                        {'  '}<Attr>height</Attr>: <Val>auto</Val>;{'\n'}
+                        {'}'}
+                      </CodeCard>
+                  </div>
+
+                  <div className="bg-white/5 p-8 rounded-2xl border border-white/10 flex flex-col items-center">
+                       <div className="w-full h-48 bg-slate-700 rounded-lg overflow-hidden relative border-2 border-dashed border-slate-500">
+                           <div className="absolute inset-0 flex items-center justify-center text-slate-500">
+                               <Image className="w-12 h-12" />
+                           </div>
+                           <img 
+                            src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=1000" 
+                            alt="Coding" 
+                            className="w-full h-full object-cover"
+                           />
+                       </div>
+                       <p className="text-sm text-slate-500 mt-4 text-center">
+                           With <code className="text-pink-400">max-width: 100%</code>, the image never exceeds its container's width.
+                       </p>
+                  </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 9: Best Practices */}
+          <Slide isActive={currentSlide === 9}>
+            <div className="max-w-4xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-white">Best Practices 🌟</h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div className="bg-slate-800 p-6 rounded-2xl border-t-4 border-rose-500 hover:-translate-y-2 transition-transform">
-                      <SmartphoneCharging className="w-12 h-12 text-rose-400 mb-4" />
-                      <h3 className="text-xl font-bold text-white mb-2">Mobile First</h3>
-                      <p className="text-slate-400 text-sm">Write styles for mobile first, then use <code>min-width</code> media queries to add complexity for larger screens. It's faster and cleaner.</p>
-                  </div>
+              <div className="grid grid-cols-1 gap-6">
+                <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-emerald-500 flex gap-4 items-center">
+                    <CheckCircle className="w-8 h-8 text-emerald-500 shrink-0" />
+                    <div>
+                        <h3 className="text-xl font-bold text-white">Design Mobile First</h3>
+                        <p className="text-slate-400 text-sm">It's easier to scale up (add complexity) than to scale down (remove it).</p>
+                    </div>
+                </div>
 
-                  <div className="bg-slate-800 p-6 rounded-2xl border-t-4 border-orange-500 hover:-translate-y-2 transition-transform">
-                      <CheckCircle className="w-12 h-12 text-orange-400 mb-4" />
-                      <h3 className="text-xl font-bold text-white mb-2">Touch Targets</h3>
-                      <p className="text-slate-400 text-sm">Fingers are bigger than mouse pointers. Ensure buttons are at least <strong className="text-orange-300">44 x 44px</strong> for easy tapping.</p>
-                  </div>
+                <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-blue-500 flex gap-4 items-center">
+                    <CheckCircle className="w-8 h-8 text-blue-500 shrink-0" />
+                    <div>
+                        <h3 className="text-xl font-bold text-white">Use Relative Units</h3>
+                        <p className="text-slate-400 text-sm">Use <code className="text-blue-300">%</code>, <code className="text-blue-300">rem</code>, or <code className="text-blue-300">vw</code> instead of fixed <code className="text-red-400">px</code> widths.</p>
+                    </div>
+                </div>
 
-                  <div className="bg-slate-800 p-6 rounded-2xl border-t-4 border-yellow-500 hover:-translate-y-2 transition-transform">
-                      <RotateCcw className="w-12 h-12 text-yellow-400 mb-4" />
-                      <h3 className="text-xl font-bold text-white mb-2">Testing</h3>
-                      <p className="text-slate-400 text-sm">Don't just trust the resize handle. Use DevTools device mode and test on real phones whenever possible.</p>
-                  </div>
+                <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-yellow-500 flex gap-4 items-center">
+                    <CheckCircle className="w-8 h-8 text-yellow-500 shrink-0" />
+                    <div>
+                        <h3 className="text-xl font-bold text-white">Touch Friendly Targets</h3>
+                        <p className="text-slate-400 text-sm">Buttons should be at least 44px by 44px for easy tapping on phones.</p>
+                    </div>
+                </div>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 8: Practice */}
-          <Slide isActive={currentSlide === 7}>
+          {/* SLIDE 10: Practice */}
+          <Slide isActive={currentSlide === 10}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-bounce">
-                <Play className="w-16 h-16 text-rose-400" />
+                <Layout className="w-16 h-16 text-rose-400" />
               </div>
-              <h1 className="text-6xl font-bold mb-8">Practice: Portfolio 💼</h1>
+              <h1 className="text-6xl font-bold mb-8">Homework: Portfolio Layout 🎨</h1>
 
-              <div className="bg-slate-800/80 backdrop-blur-md p-8 rounded-2xl border border-slate-600 text-left max-w-3xl mx-auto shadow-2xl space-y-4">
-                  <h3 className="text-2xl font-bold text-rose-400">Build a Responsive Layout</h3>
-                  <div className="space-y-3 text-slate-300">
-                      <p className="flex items-center gap-2"><div className="w-2 h-2 bg-rose-500 rounded-full"></div> <strong>Navigation:</strong> Hamburger menu on mobile, row on desktop.</p>
-                      <p className="flex items-center gap-2"><div className="w-2 h-2 bg-rose-500 rounded-full"></div> <strong>Project Grid:</strong> 1 column (mobile) ➡️ 2 columns (tablet) ➡️ 3 columns (desktop).</p>
-                      <p className="flex items-center gap-2"><div className="w-2 h-2 bg-rose-500 rounded-full"></div> <strong>Typography:</strong> Readable font sizes on all screens.</p>
-                  </div>
-                  <div className="mt-4 p-4 bg-black/30 rounded-xl border border-white/10 text-sm font-mono text-slate-400">
-                      &lt;nav&gt;...&lt;/nav&gt;<br/>
-                      &lt;main class="project-grid"&gt;...&lt;/main&gt;<br/>
-                      &lt;footer&gt;...&lt;/footer&gt;
-                  </div>
+              <div className="bg-slate-800/80 backdrop-blur-md p-8 rounded-2xl border border-slate-600 text-left max-w-2xl mx-auto shadow-2xl space-y-4">
+                  <h3 className="text-xl font-bold text-rose-400 mb-2">Build a responsive profile page:</h3>
+                  <ul className="list-disc pl-6 space-y-2 text-slate-300">
+                      <li><strong>Mobile:</strong> Stacked layout (Header, About, Projects, Contact).</li>
+                      <li><strong>Tablet (768px+):</strong> Projects in a 2-column grid.</li>
+                      <li><strong>Desktop (1024px+):</strong> Projects in a 3-column grid. Sidebar for About section.</li>
+                      <li><strong>Nav:</strong> Hamburger menu on mobile (optional/advanced) or simple stack vs row.</li>
+                  </ul>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 9: Summary */}
-          <Slide isActive={currentSlide === 8}>
-            <div className="text-center p-8 max-w-4xl z-10 flex flex-col items-center justify-center h-full">
-               <h2 className="text-5xl font-bold mb-8 text-white">Summary 📝</h2>
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left max-w-2xl">
-                   <div className="bg-rose-500/20 p-6 rounded-xl border border-rose-500/50">
-                       <strong className="text-rose-300 block text-lg mb-2">Techniques</strong>
-                       <ul className="list-disc pl-4 text-slate-300 space-y-1">
-                           <li>Viewport Meta Tag</li>
-                           <li>Media Queries (@media)</li>
-                           <li>Flexible Grids & Flexbox</li>
-                           <li>Fluid Images</li>
-                       </ul>
-                   </div>
-                   <div className="bg-orange-500/20 p-6 rounded-xl border border-orange-500/50">
-                       <strong className="text-orange-300 block text-lg mb-2">Goals</strong>
-                       <ul className="list-disc pl-4 text-slate-300 space-y-1">
-                           <li>Usable on any device</li>
-                           <li>Readable text everywhere</li>
-                           <li>No horizontal scrolling</li>
-                           <li>Fast & Performance friendly</li>
-                       </ul>
-                   </div>
-               </div>
-               
-               <div className="mt-12">
+           {/* SLIDE 11: Summary */}
+           <Slide isActive={currentSlide === 11}>
+            <div className="text-center p-8 max-w-4xl z-10">
+              <h1 className="text-6xl font-bold mb-8">You're a Responsive Pro! 🎓</h1>
+              <p className="text-2xl text-slate-300 mb-12">
+                  You now have the power to make websites look amazing on any device, from a watch to a TV 📺.
+              </p>
+
+              <div className="mt-12">
                 <button
                   onClick={() => goToSlide(0)}
                   className="px-8 py-4 bg-rose-600 hover:bg-rose-500 rounded-full font-bold transition-all hover:scale-105 flex items-center gap-2 mx-auto shadow-lg shadow-rose-500/20"

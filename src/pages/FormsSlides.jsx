@@ -2,11 +2,11 @@ import { useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { Send, Mail, MapPin, Truck, TextCursorInput, CircleDot, CheckSquare, List as ListIcon, MousePointer, Shield, ClipboardList, RotateCcw, CheckCircle, UserPlus } from 'lucide-react';
+import { Send, Mail, MapPin, Truck, TextCursorInput, CircleDot, CheckSquare, List as ListIcon, MousePointer, Shield, ClipboardList, RotateCcw, CheckCircle, UserPlus, Grip, MousePointerClick, Calendar, Palette } from 'lucide-react';
 
 export default function FormsSlides() {
   return (
-    <SlideContainer totalSlides={8} accentColor="purple">
+    <SlideContainer totalSlides={10} accentColor="purple">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -16,7 +16,7 @@ export default function FormsSlides() {
             <div className="blob bg-pink-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-screen"></div>
           </div>
 
-          {/* SLIDE 1: Title */}
+          {/* SLIDE 0: Title */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-6 rounded-3xl bg-gradient-to-br from-purple-500 to-indigo-600 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
@@ -42,7 +42,7 @@ export default function FormsSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 2: The Form Container */}
+          {/* SLIDE 1: The Form Container */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-purple-400">The Envelope ✉️</h2>
@@ -97,46 +97,58 @@ export default function FormsSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 3: Text Inputs */}
+          {/* SLIDE 2: More Inputs (UPDATED) */}
           <Slide isActive={currentSlide === 2}>
             <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-blue-400">Typing Time ⌨️</h2>
+              <h2 className="text-5xl font-bold mb-12 text-center text-blue-400">Typing & Selecting Values ⌨️</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
                   <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-2xl font-bold text-blue-300">Text & Password</h3>
+                    <h3 className="text-2xl font-bold text-blue-300">Common Inputs</h3>
                     <span className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded">&lt;input&gt;</span>
                   </div>
                   <CodeCard className="text-sm mb-4">
-                    <Tag>&lt;input </Tag><Attr>type</Attr>=<Val>"text"</Val> <Attr>placeholder</Attr>=<Val>"Name"</Val><Tag>&gt;</Tag>{'\n'}
-                    <Tag>&lt;input </Tag><Attr>type</Attr>=<Val>"password"</Val><Tag>&gt;</Tag>
+                    <Tag>&lt;input </Tag><Attr>type</Attr>=<Val>"text"</Val><Tag>&gt;</Tag>{'\n'}
+                    <Tag>&lt;textarea&gt;</Tag>...<Tag>&lt;/textarea&gt;</Tag>
                   </CodeCard>
                   <div className="space-y-3">
-                    <input type="text" placeholder="Try typing here!" className="w-full bg-white/10 border-2 border-white/20 px-4 py-2 rounded-lg text-white focus:outline-none focus:border-indigo-400 transition-colors" />
-                    <input type="password" placeholder="Secret password..." className="w-full bg-white/10 border-2 border-white/20 px-4 py-2 rounded-lg text-white focus:outline-none focus:border-indigo-400 transition-colors" />
+                    <input type="text" placeholder="Name" className="w-full bg-white/10 border-2 border-white/20 px-4 py-2 rounded-lg text-white" />
+                    <textarea rows="2" className="w-full bg-white/10 border-2 border-white/20 px-4 py-2 rounded-lg text-white" placeholder="Message..."></textarea>
                   </div>
                 </div>
 
                 <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
                   <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-2xl font-bold text-yellow-300">Long Text</h3>
-                    <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded">&lt;textarea&gt;</span>
+                    <h3 className="text-2xl font-bold text-yellow-300">Fancy Inputs</h3>
+                    <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded">HTML5</span>
                   </div>
-                  <CodeCard className="text-sm mb-4">
-                    <Tag>&lt;textarea </Tag><Attr>rows</Attr>=<Val>"4"</Val><Tag>&gt;</Tag>{'\n'}
-                    Default text...{'\n'}
-                    <Tag>&lt;/textarea&gt;</Tag>
-                  </CodeCard>
-                  <div>
-                    <textarea rows="4" className="w-full bg-white/10 border-2 border-white/20 px-4 py-2 rounded-lg text-white focus:outline-none focus:border-indigo-400 transition-colors" placeholder="Write a novel here..."></textarea>
-                  </div>
+                   <div className="grid grid-cols-2 gap-4">
+                      <div>
+                         <label className="text-xs text-slate-400 flex items-center gap-1 mb-1"><Calendar className="w-3 h-3"/> Date</label>
+                         <input type="date" className="w-full bg-slate-900 border border-slate-600 rounded p-2 text-white" />
+                      </div>
+                      <div>
+                         <label className="text-xs text-slate-400 flex items-center gap-1 mb-1"><Palette className="w-3 h-3"/> Color</label>
+                         <input type="color" className="w-full h-10 bg-slate-900 border border-slate-600 rounded p-1" />
+                      </div>
+                      <div className="col-span-2">
+                        <label className="text-xs text-slate-400 flex items-center gap-1 mb-1">File Upload</label>
+                        <input type="file" className="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"/>
+                      </div>
+                   </div>
+                   <div className="mt-4">
+                      <CodeCard className="text-xs">
+                         <Tag>&lt;input </Tag><Attr>type</Attr>=<Val>"date"</Val><Tag>&gt;</Tag>{'\n'}
+                         <Tag>&lt;input </Tag><Attr>type</Attr>=<Val>"color"</Val><Tag>&gt;</Tag>
+                      </CodeCard>
+                   </div>
                 </div>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 4: Making Choices */}
+          {/* SLIDE 3: Making Choices */}
           <Slide isActive={currentSlide === 3}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-8 text-center text-pink-400">Making Choices 🗳️</h2>
@@ -208,8 +220,41 @@ export default function FormsSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 5: Accessibility */}
+          {/* SLIDE 4: Button Types (NEW) */}
           <Slide isActive={currentSlide === 4}>
+            <div className="max-w-5xl w-full p-8 z-10">
+               <h2 className="text-5xl font-bold mb-10 text-center text-indigo-400">Clicky Things: Buttons 🖱️</h2>
+               
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div className="bg-slate-800 p-6 rounded-2xl border border-indigo-500/30 flex flex-col items-center text-center">
+                     <button className="bg-indigo-600 px-6 py-2 rounded-lg text-white font-bold mb-4 shadow-lg hover:bg-indigo-500 transition-colors pointer-events-none">Submit</button>
+                     <code className="text-indigo-400 font-bold mb-2">type="submit"</code>
+                     <p className="text-slate-400 text-sm">The default. Sends the form data to the server (action URL).</p>
+                  </div>
+
+                  <div className="bg-slate-800 p-6 rounded-2xl border border-indigo-500/30 flex flex-col items-center text-center">
+                     <button className="bg-slate-600 px-6 py-2 rounded-lg text-white font-bold mb-4 shadow-lg hover:bg-slate-500 transition-colors pointer-events-none">Reset</button>
+                     <code className="text-slate-400 font-bold mb-2">type="reset"</code>
+                     <p className="text-slate-400 text-sm">Clears all inputs to their default values. The "Undo" button.</p>
+                  </div>
+
+                  <div className="bg-slate-800 p-6 rounded-2xl border border-indigo-500/30 flex flex-col items-center text-center">
+                     <button className="bg-green-600 px-6 py-2 rounded-lg text-white font-bold mb-4 shadow-lg hover:bg-green-500 transition-colors pointer-events-none">Click Me</button>
+                     <code className="text-green-400 font-bold mb-2">type="button"</code>
+                     <p className="text-slate-400 text-sm">Does NOTHING... until you add JavaScript. Good for custom actions.</p>
+                  </div>
+               </div>
+
+               <div className="mt-8 text-center">
+                  <CodeCard className="inline-block text-left">
+                     <Tag>&lt;button </Tag><Attr>type</Attr>=<Val>"submit"</Val><Tag>&gt;</Tag>Send<Tag>&lt;/button&gt;</Tag>
+                  </CodeCard>
+               </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 5: Accessibility */}
+          <Slide isActive={currentSlide === 5}>
             <div className="max-w-5xl w-full p-8 flex flex-col items-center z-10">
               <h2 className="text-5xl font-bold mb-8 text-orange-400">Connecting Labels 🔗</h2>
               <p className="text-xl text-slate-300 mb-8 text-center max-w-2xl">
@@ -244,8 +289,41 @@ export default function FormsSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 6: Validation */}
-          <Slide isActive={currentSlide === 5}>
+           {/* SLIDE 6: Grouping (NEW) */}
+          <Slide isActive={currentSlide === 6}>
+             <div className="max-w-4xl w-full p-8 z-10">
+                <h2 className="text-5xl font-bold mb-8 text-center text-cyan-400">Grouping Fields 📦</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                   <div className="bg-slate-800 p-8 rounded-xl border border-slate-700">
+                      <fieldset className="border border-cyan-400/50 p-4 rounded bg-cyan-900/10">
+                         <legend className="text-cyan-400 px-2 font-bold bg-slate-800 border border-cyan-400/50 rounded">Personal Info</legend>
+                         <div className="space-y-4">
+                           <input type="text" placeholder="First Name" className="w-full bg-slate-900 border border-slate-600 rounded p-2" />
+                           <input type="text" placeholder="Last Name" className="w-full bg-slate-900 border border-slate-600 rounded p-2" />
+                         </div>
+                      </fieldset>
+                   </div>
+                   
+                   <div className="space-y-4">
+                      <p className="text-slate-300">
+                        Use <code className="text-cyan-400 font-bold">&lt;fieldset&gt;</code> to group related inputs visually and semantically.
+                      </p>
+                      <p className="text-slate-300">
+                        Use <code className="text-cyan-400 font-bold">&lt;legend&gt;</code> to give the group a title.
+                      </p>
+                      <CodeCard>
+                         <Tag>&lt;fieldset&gt;</Tag>{'\n'}
+                         {'  '}<Tag>&lt;legend&gt;</Tag>Personal Info<Tag>&lt;/legend&gt;</Tag>{'\n'}
+                         {'  '}...Inputs...{'\n'}
+                         <Tag>&lt;/fieldset&gt;</Tag>
+                      </CodeCard>
+                   </div>
+                </div>
+             </div>
+          </Slide>
+
+          {/* SLIDE 7: Validation */}
+          <Slide isActive={currentSlide === 7}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-red-400">The Bouncer: Validation 🛡️</h2>
 
@@ -280,8 +358,8 @@ export default function FormsSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 7: Form Example */}
-          <Slide isActive={currentSlide === 6}>
+          {/* SLIDE 8: Form Example */}
+          <Slide isActive={currentSlide === 8}>
             <div className="max-w-4xl w-full p-8 z-10">
               <h2 className="text-4xl font-bold mb-6 text-center">Let's Build It! 🏗️</h2>
 
@@ -335,8 +413,8 @@ export default function FormsSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 8: Homework */}
-          <Slide isActive={currentSlide === 7}>
+          {/* SLIDE 9: Homework */}
+          <Slide isActive={currentSlide === 9}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-bounce">
                 <ClipboardList className="w-16 h-16 text-indigo-400" />

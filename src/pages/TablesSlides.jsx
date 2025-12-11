@@ -1,11 +1,11 @@
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { Table2, Square, Maximize, Grid, Info, Music, RotateCcw, CheckCircle } from 'lucide-react';
+import { Table2, Square, Maximize, Grid, Info, Music, RotateCcw, CheckCircle, PaintBucket, AlertOctagon } from 'lucide-react';
 
 export default function TablesSlides() {
   return (
-    <SlideContainer totalSlides={7} accentColor="emerald">
+    <SlideContainer totalSlides={9} accentColor="emerald">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -15,7 +15,7 @@ export default function TablesSlides() {
             <div className="blob bg-orange-500 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 mix-blend-screen"></div>
           </div>
 
-          {/* SLIDE 1: Title */}
+          {/* SLIDE 0: Title */}
           <Slide isActive={currentSlide === 0}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-6 rounded-3xl bg-gradient-to-br from-emerald-400 to-cyan-500 mb-6 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
@@ -41,7 +41,7 @@ export default function TablesSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 2: Basic Ingredients */}
+          {/* SLIDE 1: Basic Ingredients */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-emerald-400">The Basic Ingredients 🥣</h2>
@@ -87,7 +87,7 @@ export default function TablesSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 3: Table Sections */}
+          {/* SLIDE 2: Table Sections */}
           <Slide isActive={currentSlide === 2}>
             <div className="max-w-5xl w-full p-8 text-center z-10">
               <h2 className="text-5xl font-bold mb-8">Table Anatomy 🦴</h2>
@@ -138,7 +138,7 @@ export default function TablesSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 4: Live Example */}
+          {/* SLIDE 3: Live Example */}
           <Slide isActive={currentSlide === 3}>
             <div className="max-w-4xl w-full p-8 z-10">
               <h2 className="text-4xl font-bold mb-6 text-center">Product Inventory Example</h2>
@@ -186,7 +186,7 @@ export default function TablesSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 5: Attributes */}
+          {/* SLIDE 4: Attributes */}
           <Slide isActive={currentSlide === 4}>
             <div className="max-w-5xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-12 text-center text-purple-400">Table Attributes 🎛️</h2>
@@ -228,9 +228,59 @@ export default function TablesSlides() {
               </div>
             </div>
           </Slide>
+          
+          {/* SLIDE 5: Modern Styling (NEW) */}
+          <Slide isActive={currentSlide === 5}>
+             <div className="max-w-6xl w-full p-8 z-10 text-center">
+               <div className="inline-block p-4 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full mb-6">
+                  <PaintBucket className="w-12 h-12 text-white" />
+               </div>
+               <h2 className="text-5xl font-bold mb-8 text-rose-400">Modern Styling (CSS) 🎨</h2>
+               <p className="text-xl text-slate-300 mb-12">
+                   Don't use old attributes like `border="1"`. Use CSS to make it beautiful!
+               </p>
+
+               <div className="flex flex-col md:flex-row gap-8 justify-center">
+                  <CodeCard className="text-lg text-left">
+                    <Tag>&lt;style&gt;</Tag>{'\n'}
+                    {'  '}table {'{'}{'\n'}
+                    {'    '}width: 100%;{'\n'}
+                    {'    '}border-collapse: collapse;{'\n'}
+                    {'  '}{'}'}{'\n'}
+                    {'  '}th, td {'{'}{'\n'}
+                    {'    '}padding: 12px;{'\n'}
+                    {'    '}border: 1px solid #ddd;{'\n'}
+                    {'  '}{'}'}{'\n'}
+                    <Tag>&lt;/style&gt;</Tag>
+                  </CodeCard>
+                  
+                  <div className="bg-white rounded-lg overflow-hidden text-slate-800 p-4 shadow-xl w-full max-w-sm">
+                     <table className="w-full text-left border-collapse">
+                        <thead>
+                           <tr className="bg-rose-500 text-white">
+                              <th className="p-3 border-b">Name</th>
+                              <th className="p-3 border-b">Role</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr className="bg-slate-50">
+                              <td className="p-3 border-b border-slate-200">Alice</td>
+                              <td className="p-3 border-b border-slate-200">Admin</td>
+                           </tr>
+                           <tr className="bg-white">
+                              <td className="p-3 border-b border-slate-200">Bob</td>
+                              <td className="p-3 border-b border-slate-200">User</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <p className="mt-4 text-xs text-slate-500 text-center">A clean, CSS-styled table.</p>
+                  </div>
+               </div>
+             </div>
+          </Slide>
 
           {/* SLIDE 6: Merging Cells */}
-          <Slide isActive={currentSlide === 5}>
+          <Slide isActive={currentSlide === 6}>
             <div className="max-w-6xl w-full p-8 z-10">
               <h2 className="text-5xl font-bold mb-8 text-center text-orange-400">Merging Magic 🪄</h2>
 
@@ -271,9 +321,33 @@ export default function TablesSlides() {
               </div>
             </div>
           </Slide>
+          
+           {/* SLIDE 7: Common Mistakes (NEW) */}
+          <Slide isActive={currentSlide === 7}>
+            <div className="max-w-5xl w-full p-8 z-10">
+               <h2 className="text-5xl font-bold mb-10 text-center text-red-400 flex items-center justify-center gap-4">
+                 <AlertOctagon className="w-12 h-12" /> Common Mistakes
+               </h2>
+               
+               <div className="space-y-6">
+                  <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-red-500">
+                     <h3 className="text-xl font-bold text-white mb-2">1. Forgetting to close rows &lt;/tr&gt;</h3>
+                     <p className="text-slate-400">If you don't close a row, your table will look like a staircase to nowhere!</p>
+                  </div>
+                  <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-red-500">
+                     <h3 className="text-xl font-bold text-white mb-2">2. Mismatched Cells</h3>
+                     <p className="text-slate-400">If row 1 has 3 cells, row 2 needs 3 cells (unless you use colspan). Otherwise, it breaks.</p>
+                  </div>
+                  <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-red-500">
+                     <h3 className="text-xl font-bold text-white mb-2">3. Not using &lt;th&gt;</h3>
+                     <p className="text-slate-400">Using standard &lt;td&gt; for headers hurts accessibility and styling. Use &lt;th&gt; for the title row!</p>
+                  </div>
+               </div>
+            </div>
+          </Slide>
 
-          {/* SLIDE 7: Homework */}
-          <Slide isActive={currentSlide === 6}>
+          {/* SLIDE 8: Homework */}
+          <Slide isActive={currentSlide === 8}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-bounce">
                 <Music className="w-16 h-16 text-pink-400" />
