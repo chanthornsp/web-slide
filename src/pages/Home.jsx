@@ -1,267 +1,219 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Code2, Layout, Table, FileInput } from 'lucide-react';
+import { 
+  Code2, Layout, Table, FileInput, 
+  Palette, Monitor, Sliders, ShoppingBag, Smartphone, 
+  Package, Wind, Terminal, Atom,
+  ChevronRight, Map, Star, Award, Zap, Github
+} from 'lucide-react';
 
 export default function Home() {
-  const [bubbles, setBubbles] = useState([]);
+  const [activePhase, setActivePhase] = useState(0);
 
-  useEffect(() => {
-    const newBubbles = [];
-    for (let i = 0; i < 6; i++) {
-      newBubbles.push({
-        id: i,
-        left: `${10 + i * 15}%`,
-        width: `${50 + Math.random() * 50}px`,
-        delay: `${i}s`,
-      });
-    }
-    setBubbles(newBubbles);
-  }, []);
-
-  const slides = [
+  // Grouped content for the roadmap
+  const roadmap = [
     {
-      title: 'HTML Basics',
-      path: '/basics',
-      icon: Code2,
-      gradient: 'from-pink-400 to-red-500',
-      badge: '🎯 Beginner',
-      badgeColor: 'bg-pink-100 text-pink-600',
-      description: 'Start your journey with the fundamentals of HTML',
-      shadowColor: 'hover:shadow-purple-500/50',
-    },
-    {
-      title: 'HTML Structure',
-      path: '/structure',
+      id: 'html',
+      title: "Phase 1: The Foundation",
+      subtitle: "Structure & Semantics",
+      description: "Every journey begins with a solid foundation. Master HTML to structure your content meaningfully.",
+      color: "from-pink-500 to-rose-600",
       icon: Layout,
-      gradient: 'from-blue-400 to-indigo-500',
-      badge: '📐 Essential',
-      badgeColor: 'bg-blue-100 text-blue-600',
-      description: 'Learn how to organize and structure your content',
-      shadowColor: 'hover:shadow-blue-500/50',
+      items: [
+        { title: 'HTML Basics', path: '/basics', icon: Code2, desc: 'Tags, Attributes & Elements', difficulty: 'Beginner' },
+        { title: 'HTML Structure', path: '/structure', icon: Layout, desc: 'Semantic HTML5', difficulty: 'Essential' },
+        { title: 'HTML Tables', path: '/tables', icon: Table, desc: 'Organizing Data', difficulty: 'Practical' },
+        { title: 'HTML Forms', path: '/forms', icon: FileInput, desc: 'User Input & Validation', difficulty: 'Advanced' },
+      ]
     },
     {
-      title: 'HTML Tables',
-      path: '/tables',
-      icon: Table,
-      gradient: 'from-green-400 to-emerald-500',
-      badge: '📊 Practical',
-      badgeColor: 'bg-green-100 text-green-600',
-      description: 'Master the art of creating beautiful data tables',
-      shadowColor: 'hover:shadow-green-500/50',
+      id: 'css',
+      title: "Phase 2: The Art of Styling",
+      subtitle: "Design & Responsiveness",
+      description: "Bring your websites to life. Learn how to style, layout, and make your designs adaptable to any device.",
+      color: "from-blue-500 to-cyan-500",
+      icon: Palette,
+      items: [
+        { title: 'CSS Intro', path: '/css', icon: Palette, desc: 'Selectors, Colors & Fonts', difficulty: 'Creative' },
+        { title: 'CSS Display', path: '/css-display', icon: Monitor, desc: 'Flexbox & Grid Layouts', difficulty: 'Core' },
+        { title: 'CSS Variables', path: '/css-variables', icon: Sliders, desc: 'Theming & Maintainability', difficulty: 'Modern' },
+        { title: 'Responsive Web', path: '/responsive', icon: Smartphone, desc: 'Mobile-First Design', difficulty: 'Critical' },
+        { title: 'CSS Project', path: '/css-practice', icon: ShoppingBag, desc: 'Build an E-commerce UI', difficulty: 'Practice' },
+      ]
     },
     {
-      title: 'HTML Forms',
-      path: '/forms',
-      icon: FileInput,
-      gradient: 'from-amber-400 to-orange-500',
-      badge: '✨ Advanced',
-      badgeColor: 'bg-amber-100 text-amber-600',
-      description: 'Build interactive forms for user input',
-      shadowColor: 'hover:shadow-amber-500/50',
+      id: 'js',
+      title: "Phase 3: The Brains",
+      subtitle: "Logic & Interactivity",
+      description: "Step into programming. Make your site dynamic, handle events, and manipulate the DOM.",
+      color: "from-yellow-400 to-orange-500",
+      icon: Terminal,
+      items: [
+        { title: 'JavaScript Basics', path: '/javascript', icon: Terminal, desc: 'Variables, Logic & DOM', difficulty: 'Programming' },
+      ]
     },
+    {
+      id: 'frameworks',
+      title: "Phase 4: Modern Ecosystem",
+      subtitle: "Scale & Architecture",
+      description: "Level up with professional tools. Use frameworks to build faster, scalable, and manageable applications.",
+      color: "from-purple-500 to-indigo-600",
+      icon: Zap,
+      items: [
+        { title: 'CSS Frameworks', path: '/css-frameworks', icon: Package, desc: 'Overview of Tools', difficulty: 'Speed' },
+        { title: 'Tailwind CSS', path: '/tailwind', icon: Wind, desc: 'Utility-First Styling', difficulty: 'Modern' },
+        { title: 'ReactJS', path: '/react', icon: Atom, desc: 'Component Architecture', difficulty: 'Framework' },
+      ]
+    }
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-purple-600 via-indigo-600 to-purple-700 overflow-x-hidden">
-      {/* Animated Background Bubbles */}
-      {bubbles.map((bubble) => (
-        <div
-          key={bubble.id}
-          className="bubble absolute rounded-full bg-white/10 pointer-events-none animate-rise"
-          style={{
-            left: bubble.left,
-            width: bubble.width,
-            height: bubble.width,
-            animationDelay: bubble.delay,
-            bottom: '-100px',
-          }}
-        />
-      ))}
-
-      <div className="container mx-auto px-6 py-12 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h1 className="text-7xl font-bold text-white mb-4 font-[family-name:var(--font-pacifico)] animate-float">
-            🎨 HTML Presentation Slides
-          </h1>
-          <p className="text-2xl text-white/90 font-light">
-            Choose your learning adventure! 🚀
-          </p>
+    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500/30 pb-20 overflow-x-hidden">
+        {/* Background Grid & Effects */}
+        <div className="fixed inset-0 pointer-events-none">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+            <div className="absolute left-0 top-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px]"></div>
+            <div className="absolute right-0 bottom-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px]"></div>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-          {slides.map((slide, index) => {
-            const Icon = slide.icon;
-            return (
-              <Link
-                key={slide.path}
-                to={slide.path}
-                className="block animate-bounce-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className={`bg-white rounded-3xl shadow-2xl p-8 h-full transition-all duration-300 hover:-translate-y-4 hover:rotate-2 ${slide.shadowColor}`}>
-                  <div className="flex justify-center mb-6">
-                    <div className={`bg-gradient-to-br ${slide.gradient} rounded-full p-6 animate-pulse-slow`}>
-                      <Icon className="w-12 h-12 text-white" />
+        {/* Hero Section */}
+        <div className="relative pt-20 pb-16 text-center z-10 px-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-700 text-cyan-400 text-sm font-medium mb-6 animate-fade-in-up">
+                <Map className="w-4 h-4" />
+                <span>Learning Path 2025</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 animate-slide-down">
+                Frontend Developer<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Mastery Roadmap</span>
+            </h1>
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in">
+                Follow this step-by-step guide to master web development. From HTML basics to modern React applications.
+            </p>
+            <div className="flex justify-center gap-4 animate-fade-in">
+                <button onClick={() => document.getElementById('phase-0').scrollIntoView({ behavior: 'smooth' })} className="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-lg text-white font-bold transition-all shadow-lg shadow-cyan-500/20 hover:scale-105 flex items-center gap-2">
+                    Start Journey <ChevronRight className="w-4 h-4" />
+                </button>
+            </div>
+        </div>
+
+        {/* Roadmap Timeline */}
+        <div className="relative max-w-5xl mx-auto px-4 z-10">
+            {/* Vertical Line */}
+            <div className="absolute left-4 md:left-1/2 top-4 bottom-0 w-1 bg-slate-800 transform -translate-x-1/2 hidden md:block"></div>
+            
+            {roadmap.map((phase, index) => {
+                const isLeft = index % 2 === 0;
+                return (
+                    <div key={phase.id} id={`phase-${index}`} className={`relative mb-24 md:flex items-start ${isLeft ? 'flex-row-reverse' : ''} group`}>
+                        
+                        {/* Timeline Node (Center) */}
+                        <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 top-0 flex-col items-center">
+                            <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${phase.color} flex items-center justify-center shadow-lg shadow-black/50 z-20 border-4 border-slate-950`}>
+                                <phase.icon className="w-6 h-6 text-white" />
+                            </div>
+                            <div className="h-full w-1 bg-gradient-to-b from-transparent via-slate-700 to-transparent my-2"></div>
+                        </div>
+
+                        {/* Content Card (Left or Right) */}
+                        <div className={`md:w-1/2 ${isLeft ? 'md:pr-16' : 'md:pl-16'} relative`}>
+                            {/* Phase Header */}
+                            <div className={`mb-8 ${isLeft ? 'md:text-right' : 'md:text-left'} text-left md:items-${isLeft ? 'end' : 'start'} flex flex-col`}>
+                                <div className={`inline-block px-3 py-1 rounded text-xs font-bold tracking-wider uppercase mb-2 bg-gradient-to-r ${phase.color} text-white`}>
+                                    {phase.title}
+                                </div>
+                                <h2 className="text-3xl font-bold text-white mb-3">{phase.subtitle}</h2>
+                                <p className="text-slate-400 leading-relaxed text-sm md:text-base max-w-sm">
+                                    {phase.description}
+                                </p>
+                            </div>
+
+                            {/* Slides Grid for this Phase */}
+                            <div className="grid grid-cols-1 gap-4">
+                                {phase.items.map((item, itemIdx) => (
+                                    <Link 
+                                        to={item.path} 
+                                        key={itemIdx}
+                                        className="block group/card relative overflow-hidden"
+                                    >
+                                        <div className="absolute inset-0 bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 rounded-xl transition-all duration-300 group-hover/card:border-slate-500 group-hover/card:shadow-xl group-hover/card:shadow-cyan-500/10"></div>
+                                        
+                                        {/* Hover Gradient Overlay */}
+                                        <div className={`absolute inset-0 opacity-0 group-hover/card:opacity-10 bg-gradient-to-r ${phase.color} transition-opacity duration-300`}></div>
+
+                                        <div className="relative p-5 flex items-center gap-4">
+                                            <div className={`w-12 h-12 rounded-lg bg-slate-950 flex items-center justify-center border border-slate-800 group-hover/card:scale-110 transition-transform duration-300`}>
+                                                <item.icon className={`w-6 h-6 text-slate-400 group-hover/card:text-white transition-colors`} />
+                                            </div>
+                                            
+                                            <div className="flex-1">
+                                                <div className="flex items-center justify-between mb-1">
+                                                    <h3 className="text-lg font-bold text-white group-hover/card:text-cyan-300 transition-colors">{item.title}</h3>
+                                                    <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-slate-950 text-slate-500 border border-slate-800`}>
+                                                        {item.difficulty}
+                                                    </span>
+                                                </div>
+                                                <p className="text-sm text-slate-500 group-hover/card:text-slate-400 transition-colors">{item.desc}</p>
+                                            </div>
+
+                                            <ChevronRight className="w-5 h-5 text-slate-600 group-hover/card:text-white group-hover/card:translate-x-1 transition-all" />
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Empty side for balance on desktop */}
+                        <div className="hidden md:block md:w-1/2"></div>
                     </div>
-                  </div>
-                  <h2 className="text-3xl font-bold text-center mb-4 bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
-                    {slide.title}
-                  </h2>
-                  <p className="text-gray-600 text-center mb-6">
-                    {slide.description}
-                  </p>
-                  <div className="flex justify-center">
-                    <span className={`${slide.badgeColor} px-4 py-2 rounded-full text-sm font-semibold`}>
-                      {slide.badge}
-                    </span>
-                  </div>
+                );
+            })}
+        </div>
+
+        {/* Completion Star at the bottom */}
+        <div className="text-center pb-12 mt-20">
+            <div className="inline-block p-4 rounded-full bg-slate-900 border border-slate-800 mb-4 animate-bounce">
+                <Star className="w-8 h-8 text-yellow-500 fill-yellow-500" />
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-2">Keep Learning!</h2>
+            <p className="text-slate-400">The web is constantly evolving. Stay curious.</p>
+        </div>
+
+        {/* Footer / Credits */}
+        <footer className="border-t border-slate-800 pt-12 pb-8 mt-12 bg-slate-950/50 backdrop-blur-sm">
+            <div className="max-w-4xl mx-auto px-4 text-center">
+                <div className="flex flex-col items-center gap-4">
+                     <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-cyan-400 to-purple-500 p-[2px]">
+                        <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
+                             {/* Placeholder for avatar if available, or just initials */}
+                             <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">HC</span>
+                        </div>
+                     </div>
+                     
+                     <div className="space-y-1">
+                        <h3 className="text-xl font-bold text-white">HOEUN Chanthorn</h3>
+                        <p className="text-cyan-400 font-medium text-sm">Full Stack Developer</p>
+                     </div>
+
+                     <p className="text-slate-500 text-sm max-w-md mx-auto">
+                        Passionate about building beautiful, functional, and scalable web applications. Sharing knowledge to help others grow.
+                     </p>
+
+                     <a 
+                        href="https://github.com/chanthornsp" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-6 py-2 bg-slate-800 hover:bg-slate-700 rounded-full text-slate-300 hover:text-white transition-all group mt-2 border border-slate-700 hover:border-slate-500"
+                     >
+                        <Github className="w-5 h-5" />
+                        <span>github.com/chanthornsp</span>
+                     </a>
                 </div>
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-16">
-          <p className="text-white/80 text-lg">
-            💡 Click on any card to start learning!
-          </p>
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
-            <span className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full text-sm font-semibold">
-              ⌨️ Use Arrow Keys to Navigate
-            </span>
-            <span className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full text-sm font-semibold">
-              🎨 Interactive & Fun
-            </span>
-            <span className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full text-sm font-semibold">
-              📱 Fully Responsive
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes rise {
-          0% {
-            bottom: -100px;
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            bottom: 110%;
-            opacity: 0;
-          }
-        }
-
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-
-        @keyframes bounce-in {
-          0% {
-            transform: scale(0.3);
-            opacity: 0;
-          }
-          50% {
-            transform: scale(1.05);
-          }
-          70% {
-            transform: scale(0.9);
-          }
-          100% {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes pulse-slow {
-          0%, 100% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.05);
-          }
-        }
-
-        @keyframes twinkle {
-          0%, 100% {
-            opacity: 0.2;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.5);
-          }
-        }
-
-        @keyframes move {
-          from {
-            transform: translate(0, 0) scale(1);
-          }
-          to {
-            transform: translate(20px, -20px) scale(1.1);
-          }
-        }
-
-        .bubble {
-          animation: rise 15s infinite ease-in;
-        }
-
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-
-        .animate-bounce-in {
-          animation: bounce-in 1s ease-out;
-          opacity: 0;
-          animation-fill-mode: forwards;
-        }
-
-        .animate-fade-in {
-          animation: fade-in 1s ease-out;
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        .animate-twinkle {
-          animation: twinkle 4s infinite;
-        }
-
-        .animate-move {
-          animation: move 10s infinite alternate;
-        }
-
-        .blob {
-          position: absolute;
-          filter: blur(40px);
-          z-index: -1;
-        }
-      `}</style>
+                
+                <div className="mt-12 text-slate-600 text-xs">
+                    &copy; {new Date().getFullYear()} Web Slide. Handcrafted with React & Tailwind.
+                </div>
+            </div>
+        </footer>
     </div>
   );
 }
