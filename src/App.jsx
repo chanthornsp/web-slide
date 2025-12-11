@@ -1,4 +1,6 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { roadmap } from './data/roadmap'
 import Home from './pages/Home'
 import BasicsSlides from './pages/BasicsSlides'
 import StructureSlides from './pages/StructureSlides'
@@ -15,6 +17,19 @@ import JavascriptSlides from './pages/JavascriptSlides'
 import ReactSlides from './pages/ReactSlides'
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const allItems = roadmap.flatMap(phase => phase.items);
+    const currentItem = allItems.find(item => item.path === location.pathname);
+    
+    if (currentItem) {
+      document.title = `${currentItem.title} | Frontend Roadmap`;
+    } else {
+      document.title = 'Frontend Roadmap';
+    }
+  }, [location]);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
