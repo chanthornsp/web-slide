@@ -2,13 +2,13 @@ import { useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { Monitor, Square, Type, LayoutGrid, Layers, Ghost, MousePointer, BookOpen, RotateCcw, CheckCircle, MapPin, ArrowUpFromLine } from 'lucide-react';
+import { Monitor, Square, Type, LayoutGrid, Layers, Ghost, MousePointer, BookOpen, RotateCcw, CheckCircle, MapPin, ArrowUpFromLine, Navigation, CreditCard, Grid3X3, ExternalLink } from 'lucide-react';
 
 export default function CssDisplaySlides() {
   const [activeTab, setActiveTab] = useState('block');
 
   return (
-    <SlideContainer totalSlides={11} accentColor="indigo">
+    <SlideContainer totalSlides={16} accentColor="indigo">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -36,16 +36,16 @@ export default function CssDisplaySlides() {
           {/* SLIDE 1: Block Elements */}
           <Slide isActive={currentSlide === 1}>
             <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-indigo-400">Display: Block 🧱</h2>
+              <h2 className="text-5xl font-bold mb-12 text-center text-indigo-400">1. Display: Block 🧱</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-6">
                   <div className="bg-slate-800 p-6 rounded-xl border border-indigo-500/30">
                     <p className="text-lg text-slate-300 leading-relaxed">
-                      Block elements take up the <strong className="text-indigo-400">full width</strong> available. They start on a new line and push subsequent elements to the next line.
+                      Block elements take up the <strong className="text-indigo-400">full width</strong> available, with a new line before and after the element.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                        {['<div>', '<h1>', '<p>', '<section>'].map(tag => (
+                        {['<div>', '<h1>-<h6>', '<p>', '<section>'].map(tag => (
                             <span key={tag} className="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-md font-mono text-sm">{tag}</span>
                         ))}
                     </div>
@@ -55,13 +55,16 @@ export default function CssDisplaySlides() {
                     {'  '}<Attr>display</Attr>: <Val>block</Val>;{'\n'}
                     {'}'}
                   </CodeCard>
+                  <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 text-blue-200 text-sm">
+                    ℹ️ Block elements can have width and height set, and they respect top and bottom margins.
+                  </div>
                 </div>
 
                 <div className="bg-white/5 p-8 rounded-2xl border border-white/10 space-y-4">
-                    <div className="bg-indigo-500 text-white p-4 text-center rounded">Block Element 1</div>
-                    <div className="bg-purple-500 text-white p-4 text-center rounded">Block Element 2</div>
-                    <div className="bg-pink-500 text-white p-4 text-center rounded">Block Element 3</div>
-                    <p className="text-center text-sm text-slate-400 mt-2">Notice how they stack vertically.</p>
+                    <div className="bg-indigo-500 text-white p-4 text-center rounded">Block Element 1 (full width)</div>
+                    <div className="bg-purple-500 text-white p-4 text-center rounded">Block Element 2 (full width)</div>
+                    <div className="bg-pink-500 text-white p-4 text-center rounded">Block Element 3 (full width)</div>
+                    <p className="text-center text-sm text-slate-400 mt-2">Notice how they stack vertically and take full width.</p>
                 </div>
               </div>
             </div>
@@ -70,21 +73,18 @@ export default function CssDisplaySlides() {
           {/* SLIDE 2: Inline Elements */}
           <Slide isActive={currentSlide === 2}>
             <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-pink-400">Display: Inline 📝</h2>
+              <h2 className="text-5xl font-bold mb-12 text-center text-pink-400">2. Display: Inline 📝</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-6">
                   <div className="bg-slate-800 p-6 rounded-xl border border-pink-500/30">
                     <p className="text-lg text-slate-300 leading-relaxed">
-                      Inline elements only take up as much width as <strong className="text-pink-400">necessary</strong>. They flow within text and do NOT start on a new line.
+                      Inline elements do not start on a new line and only take up as much width as <strong className="text-pink-400">necessary</strong>. They flow within text.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
                         {['<span>', '<a>', '<strong>', '<em>'].map(tag => (
                             <span key={tag} className="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-md font-mono text-sm">{tag}</span>
                         ))}
-                    </div>
-                    <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded text-yellow-200 text-sm">
-                        ⚠️ Cannot set width/height or top/bottom margins!
                     </div>
                   </div>
                   <CodeCard>
@@ -92,6 +92,9 @@ export default function CssDisplaySlides() {
                     {'  '}<Attr>display</Attr>: <Val>inline</Val>;{'\n'}
                     {'}'}
                   </CodeCard>
+                  <div className="p-4 bg-yellow-500/10 border border-yellow-500/30 rounded text-yellow-200 text-sm">
+                    ⚠️ Inline elements cannot have width or height set, and they do not respect top and bottom margins.
+                  </div>
                 </div>
 
                 <div className="bg-white/5 p-8 rounded-2xl border border-white/10 text-xl leading-loose text-white">
@@ -108,150 +111,62 @@ export default function CssDisplaySlides() {
           {/* SLIDE 3: Inline-Block */}
           <Slide isActive={currentSlide === 3}>
             <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-yellow-400">Display: Inline-Block 🍱</h2>
+              <h2 className="text-5xl font-bold mb-12 text-center text-yellow-400">3. Display: Inline-Block 🍱</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-6">
                   <div className="bg-slate-800 p-6 rounded-xl border border-yellow-500/30">
                     <p className="text-lg text-slate-300 leading-relaxed">
-                      The best of both worlds! Flows like <strong className="text-pink-400">Inline</strong>, but you can set width, height, and margins like <strong className="text-indigo-400">Block</strong>.
+                      Inline-block elements are similar to inline elements but allow you to set <strong className="text-yellow-400">width and height</strong>. They do not start on a new line.
                     </p>
                     <p className="text-sm text-slate-400 mt-2">Great for navigation menus and grids of items.</p>
                   </div>
                   <CodeCard>
-                    <Tag>.item</Tag> {'{'}{'\n'}
+                    <Tag>span</Tag> {'{'}{'\n'}
                     {'  '}<Attr>display</Attr>: <Val>inline-block</Val>;{'\n'}
                     {'  '}<Attr>width</Attr>: <Val>100px</Val>;{'\n'}
-                    {'  '}<Attr>height</Attr>: <Val>100px</Val>;{'\n'}
+                    {'  '}<Attr>height</Attr>: <Val>50px</Val>;{'\n'}
                     {'}'}
                   </CodeCard>
+                  <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 text-blue-200 text-sm">
+                    ℹ️ Inline-block elements respect both horizontal and vertical margins, making them versatile for layout purposes.
+                  </div>
                 </div>
 
                 <div className="bg-white/5 p-8 rounded-2xl border border-white/10">
-                    <div className="space-x-4">
-                        <div className="inline-block w-24 h-24 bg-red-500 rounded-lg shadow-lg flex items-center justify-center">1</div>
-                        <div className="inline-block w-24 h-24 bg-orange-500 rounded-lg shadow-lg flex items-center justify-center">2</div>
-                        <div className="inline-block w-24 h-24 bg-yellow-500 rounded-lg shadow-lg flex items-center justify-center">3</div>
-                        <div className="inline-block w-24 h-24 bg-green-500 rounded-lg shadow-lg flex items-center justify-center">4</div>
+                    <div className="text-center">
+                        <span className="inline-block w-24 h-24 bg-red-500 rounded-lg shadow-lg leading-[6rem] text-center mx-2">1</span>
+                        <span className="inline-block w-24 h-24 bg-orange-500 rounded-lg shadow-lg leading-[6rem] text-center mx-2">2</span>
+                        <span className="inline-block w-24 h-24 bg-yellow-500 rounded-lg shadow-lg leading-[6rem] text-center mx-2">3</span>
+                        <span className="inline-block w-24 h-24 bg-green-500 rounded-lg shadow-lg leading-[6rem] text-center mx-2">4</span>
                     </div>
+                    <p className="text-center text-sm text-slate-400 mt-4">Same line, but with width & height!</p>
                 </div>
               </div>
             </div>
           </Slide>
 
-           {/* SLIDE 4: Positioning (NEW) */}
-           <Slide isActive={currentSlide === 4}>
-             <div className="max-w-6xl w-full p-8 z-10">
-                <h2 className="text-5xl font-bold mb-8 text-center text-cyan-400">Positioning 📍</h2>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm md:text-base">
-                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600">
-                      <div className="flex items-center gap-2 mb-2 text-blue-400 font-bold">
-                         <div className="w-3 h-3 bg-blue-500 rounded-full"></div> relative
-                      </div>
-                      <p className="text-slate-300 mb-2">Positioned relative to its <span className="italic">normal</span> position.</p>
-                      <CodeCard className="text-xs">
-                         <Attr>position</Attr>: <Val>relative</Val>;{'\n'}
-                         <Attr>top</Attr>: <Val>20px</Val>;
-                      </CodeCard>
-                   </div>
-
-                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600">
-                      <div className="flex items-center gap-2 mb-2 text-red-400 font-bold">
-                         <div className="w-3 h-3 bg-red-500 rounded-full"></div> absolute
-                      </div>
-                      <p className="text-slate-300 mb-2">Removed from flow. Relative to nearest <span className="text-blue-400">positioned ancestor</span>.</p>
-                      <CodeCard className="text-xs">
-                         <Attr>position</Attr>: <Val>absolute</Val>;{'\n'}
-                         <Attr>top</Attr>: <Val>0</Val>; <Attr>right</Attr>: <Val>0</Val>;
-                      </CodeCard>
-                   </div>
-
-                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600">
-                      <div className="flex items-center gap-2 mb-2 text-green-400 font-bold">
-                         <div className="w-3 h-3 bg-green-500 rounded-full"></div> fixed
-                      </div>
-                      <p className="text-slate-300 mb-2">Stuck to the <span className="text-green-400">viewport</span> (screen). Doesn't move when scrolling.</p>
-                      <CodeCard className="text-xs">
-                         <Attr>position</Attr>: <Val>fixed</Val>;{'\n'}
-                         <Attr>bottom</Attr>: <Val>20px</Val>;
-                      </CodeCard>
-                   </div>
-
-                   <div className="bg-slate-800 p-6 rounded-xl border border-slate-600">
-                      <div className="flex items-center gap-2 mb-2 text-yellow-400 font-bold">
-                         <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> sticky
-                      </div>
-                      <p className="text-slate-300 mb-2">Behaves like relative until scroll hits threshold, then becomes fixed.</p>
-                      <CodeCard className="text-xs">
-                         <Attr>position</Attr>: <Val>sticky</Val>;{'\n'}
-                         <Attr>top</Attr>: <Val>0</Val>;
-                      </CodeCard>
-                   </div>
-                </div>
-             </div>
-           </Slide>
-
-           {/* SLIDE 5: Z-Index (NEW) */}
-            <Slide isActive={currentSlide === 5}>
-             <div className="max-w-5xl w-full p-8 z-10">
-                <h2 className="text-5xl font-bold mb-10 text-center text-purple-400">Layers (z-index) 🥞</h2>
-                
-                <div className="flex flex-col md:flex-row gap-12 items-center">
-                   <div className="space-y-6 w-full md:w-1/2">
-                      <p className="text-xl text-slate-300">
-                         Controls strict stacking order. Higher numbers sit on top of lower numbers.
-                      </p>
-                      <div className="bg-yellow-500/10 border-l-4 border-yellow-500 p-4 text-yellow-200 text-sm">
-                         ⚠️ Only works on positioned elements (relative, absolute, fixed, sticky)!
-                      </div>
-                      <CodeCard>
-                         <Tag>.bottom</Tag> {'{'} <Attr>z-index</Attr>: <Val>1</Val>; {'}'}{'\n'}
-                         <Tag>.top</Tag> {'{'} <Attr>z-index</Attr>: <Val>999</Val>; {'}'}
-                      </CodeCard>
-                   </div>
-
-                   <div className="relative w-64 h-64 mx-auto">
-                      <div className="absolute top-0 left-0 w-32 h-32 bg-red-500 rounded-xl shadow-xl flex items-center justify-center font-bold text-white z-0 transform hover:scale-110 transition-transform">
-                         z-index: 1
-                      </div>
-                      <div className="absolute top-8 left-8 w-32 h-32 bg-blue-500 rounded-xl shadow-xl flex items-center justify-center font-bold text-white z-10 transform hover:scale-110 transition-transform">
-                         z-index: 2
-                      </div>
-                      <div className="absolute top-16 left-16 w-32 h-32 bg-green-500 rounded-xl shadow-xl flex items-center justify-center font-bold text-white z-20 transform hover:scale-110 transition-transform">
-                         z-index: 3
-                      </div>
-                   </div>
-                </div>
-             </div>
-            </Slide>
-
-          {/* SLIDE 6: Flexbox */}
-          <Slide isActive={currentSlide === 6}>
+           {/* SLIDE 4: Flexbox */}
+          <Slide isActive={currentSlide === 4}>
             <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-8 text-center text-teal-400">Display: Flex 💪</h2>
+              <h2 className="text-5xl font-bold mb-8 text-center text-teal-400">4. Display: Flex 💪</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <div className="space-y-4">
-                      <p className="text-slate-300">Layout model for one-dimensional layouts. Magically aligns items in a row or column.</p>
+                      <p className="text-slate-300">Flexbox is a layout model that allows for responsive design and alignment of elements in a container.</p>
                       <CodeCard className="text-xs md:text-sm">
                         <Tag>.container</Tag> {'{'}{'\n'}
                         {'  '}<Attr>display</Attr>: <Val>flex</Val>;{'\n'}
-                        {'  '}<Attr>justify-content</Attr>: <Val>center</Val>; <Comment>/* x-axis */</Comment>{'\n'}
-                        {'  '}<Attr>align-items</Attr>: <Val>center</Val>; <Comment>/* y-axis */</Comment>{'\n'}
+                        {'  '}<Attr>flex-direction</Attr>: <Val>row</Val>;{'\n'}
+                        {'  '}<Attr>justify-content</Attr>: <Val>center</Val>;{'\n'}
+                        {'  '}<Attr>align-items</Attr>: <Val>center</Val>;{'\n'}
+                        {'  '}<Attr>flex-wrap</Attr>: <Val>wrap</Val>;{'\n'}
                         {'  '}<Attr>gap</Attr>: <Val>10px</Val>;{'\n'}
                         {'}'}
                       </CodeCard>
                       
-                      <div className="grid grid-cols-2 gap-4 text-sm text-slate-400">
-                          <div className="bg-slate-800 p-2 rounded border border-slate-700">
-                              <strong className="text-teal-400 block">Row (default)</strong>
-                              Items side-by-side
-                          </div>
-                          <div className="bg-slate-800 p-2 rounded border border-slate-700">
-                              <strong className="text-teal-400 block">Column</strong>
-                              Items stacked top-to-bottom
-                          </div>
+                      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 text-blue-200 text-sm">
+                        ℹ️ Flex containers can have their children arranged in rows or columns, and they can grow or shrink to fit the available space.
                       </div>
                   </div>
 
@@ -267,43 +182,118 @@ export default function CssDisplaySlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 7: Grid */}
-          <Slide isActive={currentSlide === 7}>
+          {/* SLIDE 5: Flex Properties Detail */}
+          <Slide isActive={currentSlide === 5}>
             <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-8 text-center text-emerald-400">Display: Grid 🏁</h2>
+              <h2 className="text-4xl font-bold mb-8 text-center text-teal-400">Flex Properties Explained 📐</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                <div className="bg-slate-800 p-4 rounded-xl border border-slate-600">
+                  <h3 className="text-teal-400 font-bold mb-2">flex-direction</h3>
+                  <p className="text-slate-400 mb-2">Defines the direction of flex items</p>
+                  <div className="space-y-1 text-xs">
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>row</Val> - horizontal (default)</div>
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>column</Val> - vertical</div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-800 p-4 rounded-xl border border-slate-600">
+                  <h3 className="text-teal-400 font-bold mb-2">justify-content</h3>
+                  <p className="text-slate-400 mb-2">Aligns items along the main axis</p>
+                  <div className="space-y-1 text-xs">
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>center</Val> - centers items</div>
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>space-between</Val> - space between</div>
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>space-around</Val> - space around</div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-800 p-4 rounded-xl border border-slate-600">
+                  <h3 className="text-teal-400 font-bold mb-2">align-items</h3>
+                  <p className="text-slate-400 mb-2">Aligns items along the cross axis</p>
+                  <div className="space-y-1 text-xs">
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>center</Val> - center vertically</div>
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>flex-start</Val> - align to start</div>
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>flex-end</Val> - align to end</div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-800 p-4 rounded-xl border border-slate-600">
+                  <h3 className="text-teal-400 font-bold mb-2">flex-wrap</h3>
+                  <p className="text-slate-400 mb-2">Allows items to wrap onto multiple lines</p>
+                  <div className="space-y-1 text-xs">
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>nowrap</Val> - single line (default)</div>
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>wrap</Val> - wraps to new lines</div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-800 p-4 rounded-xl border border-slate-600">
+                  <h3 className="text-teal-400 font-bold mb-2">gap</h3>
+                  <p className="text-slate-400 mb-2">Sets space between flex items</p>
+                  <div className="space-y-1 text-xs">
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>10px</Val> - equal gap</div>
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>10px 20px</Val> - row/column gap</div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-800 p-4 rounded-xl border border-slate-600">
+                  <h3 className="text-teal-400 font-bold mb-2">flex (item)</h3>
+                  <p className="text-slate-400 mb-2">Controls how items grow/shrink</p>
+                  <div className="space-y-1 text-xs">
+                    <div className="bg-slate-700 px-2 py-1 rounded"><Val>1 1 300px</Val></div>
+                    <div className="text-slate-500">grow | shrink | basis</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Slide>
+
+
+
+          {/* SLIDE 6: Grid */}
+          <Slide isActive={currentSlide === 6}>
+            <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-8 text-center text-emerald-400">5. Display: Grid 🏁</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <div className="space-y-4">
-                      <p className="text-slate-300">Layout model for two-dimensional layouts (Rows & Columns).</p>
+                      <p className="text-slate-300">Grid layout allows for two-dimensional layout control, enabling complex designs with rows and columns.</p>
                       <CodeCard className="text-xs md:text-sm">
                         <Tag>.container</Tag> {'{'}{'\n'}
                         {'  '}<Attr>display</Attr>: <Val>grid</Val>;{'\n'}
-                        {'  '}<Attr>grid-template-columns</Attr>: <Val>1fr 1fr 1fr</Val>;{'\n'}
+                        {'  '}<Attr>grid-template-columns</Attr>:{'\n'}
+                        {'    '}<Val>repeat(auto-fill, minmax(200px, 1fr))</Val>;{'\n'}
+                        {'  '}<Attr>grid-template-rows</Attr>: <Val>auto</Val>;{'\n'}
                         {'  '}<Attr>gap</Attr>: <Val>20px</Val>;{'\n'}
                         {'}'}
                       </CodeCard>
+                      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 text-blue-200 text-sm">
+                        ℹ️ Grid layout provides precise control over the placement of elements, allowing for responsive designs with ease.
+                      </div>
                       <p className="text-sm text-slate-400 bg-emerald-900/20 p-3 rounded">
                         <strong className="text-emerald-400">fr</strong> = fraction of available space.
+                        <br />
+                        <strong className="text-emerald-400">auto-fill</strong> = creates as many columns as will fit.
                       </p>
                   </div>
 
                   <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
                       <div className="grid grid-cols-3 gap-4 bg-slate-900/50 p-4 rounded-xl border-2 border-dashed border-slate-600">
                           {[1, 2, 3, 4, 5, 6].map(n => (
-                              <div key={n} className="bg-emerald-600/80 h-20 rounded flex items-center justify-center text-xl font-bold hover:bg-emerald-500 transition-colors">
+                              <div key={n} className="bg-emerald-600/80 h-20 rounded text-xl font-bold hover:bg-emerald-500 transition-colors text-center leading-[5rem]">
                                   {n}
                               </div>
                           ))}
                       </div>
+                      <p className="text-center text-sm text-slate-500 mt-2">grid-template-columns: 1fr 1fr 1fr;</p>
                   </div>
               </div>
             </div>
           </Slide>
 
-          {/* SLIDE 8: Display None */}
-          <Slide isActive={currentSlide === 8}>
+          {/* SLIDE 7: Display None */}
+          <Slide isActive={currentSlide === 7}>
             <div className="max-w-4xl w-full p-8 z-10 text-center">
-              <h2 className="text-5xl font-bold mb-8 text-slate-400">Display: None 👻</h2>
+              <h2 className="text-5xl font-bold mb-8 text-slate-400">6. Display: None 👻</h2>
               
               <div className="bg-slate-800 p-8 rounded-2xl border border-slate-600 mb-8 inline-block">
                 <Ghost className="w-24 h-24 text-slate-600 animate-pulse mx-auto mb-4" />
@@ -314,14 +304,194 @@ export default function CssDisplaySlides() {
                 </CodeCard>
               </div>
               
-              <p className="text-xl text-slate-300 max-w-xl mx-auto">
-                Removes the element from the document flow entirely. It's invisible and takes up <strong className="text-red-400">zero space</strong>.
+              <p className="text-xl text-slate-300 max-w-xl mx-auto mb-6">
+                The <code className="text-red-400">none</code> value removes the element from the document flow, making it invisible and not taking up any space.
               </p>
+              
+              <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 text-blue-200 text-sm max-w-xl mx-auto">
+                ℹ️ Elements with <code>display: none</code> are not rendered on the page and do not affect the layout of other elements.
+              </div>
             </div>
           </Slide>
 
-          {/* SLIDE 9: Interactive Playground */}
+          {/* SLIDE 8: Block vs Inline Example */}
+          <Slide isActive={currentSlide === 8}>
+            <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-4xl font-bold mb-8 text-center text-violet-400">Example: Block vs. Inline 🆚</h2>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-slate-300">HTML</h3>
+                  <CodeCard className="text-xs">
+                    {'<'}<Tag>div</Tag> <Attr>class</Attr>=<Val>"block-example"</Val>{'>'}{'\n'}
+                    {'  This is a block element.'}{'\n'}
+                    {'</'}<Tag>div</Tag>{'>'}{'\n'}
+                    {'<'}<Tag>span</Tag> <Attr>class</Attr>=<Val>"inline-example"</Val>{'>'}{'\n'}
+                    {'  This is an inline element.'}{'\n'}
+                    {'</'}<Tag>span</Tag>{'>'}
+                  </CodeCard>
+                  
+                  <h3 className="text-xl font-bold text-slate-300 mt-4">CSS</h3>
+                  <CodeCard className="text-xs">
+                    <Tag>.block-example</Tag> {'{'}{'\n'}
+                    {'  '}<Attr>display</Attr>: <Val>block</Val>;{'\n'}
+                    {'  '}<Attr>background-color</Attr>: <Val>lightblue</Val>;{'\n'}
+                    {'  '}<Attr>padding</Attr>: <Val>10px</Val>;{'\n'}
+                    {'}'}{'\n'}{'\n'}
+                    <Tag>.inline-example</Tag> {'{'}{'\n'}
+                    {'  '}<Attr>display</Attr>: <Val>inline</Val>;{'\n'}
+                    {'  '}<Attr>background-color</Attr>: <Val>lightgreen</Val>;{'\n'}
+                    {'  '}<Attr>padding</Attr>: <Val>5px</Val>;{'\n'}
+                    {'}'}
+                  </CodeCard>
+                </div>
+
+                <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
+                  <h3 className="text-xl font-bold text-slate-300 mb-4">Result:</h3>
+                  <div className="bg-white rounded-lg p-4 text-gray-800">
+                    <div className="bg-blue-200 p-2.5 mb-2 rounded">This is a block element.</div>
+                    <span className="bg-green-200 p-1 rounded">This is an inline element.</span>
+                  </div>
+                  <p className="text-sm text-slate-400 mt-4">Notice: Block takes full width, inline only takes needed space.</p>
+                </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 9: Navigation Bar Example */}
           <Slide isActive={currentSlide === 9}>
+            <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-4xl font-bold mb-8 text-center text-orange-400">Example: Navigation Bar 🧭</h2>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-slate-300">HTML</h3>
+                  <CodeCard className="text-xs">
+                    {'<'}<Tag>nav</Tag> <Attr>class</Attr>=<Val>"navbar"</Val>{'>'}{'\n'}
+                    {'  <'}<Tag>ul</Tag>{'>'}{'\n'}
+                    {'    <'}<Tag>li</Tag>{'><'}<Tag>a</Tag> <Attr>href</Attr>=<Val>"#"</Val>{'>'}Home{'</'}<Tag>a</Tag>{'></'}<Tag>li</Tag>{'>'}{'\n'}
+                    {'    <'}<Tag>li</Tag>{'><'}<Tag>a</Tag> <Attr>href</Attr>=<Val>"#"</Val>{'>'}About{'</'}<Tag>a</Tag>{'></'}<Tag>li</Tag>{'>'}{'\n'}
+                    {'    <'}<Tag>li</Tag>{'><'}<Tag>a</Tag> <Attr>href</Attr>=<Val>"#"</Val>{'>'}Services{'</'}<Tag>a</Tag>{'></'}<Tag>li</Tag>{'>'}{'\n'}
+                    {'    <'}<Tag>li</Tag>{'><'}<Tag>a</Tag> <Attr>href</Attr>=<Val>"#"</Val>{'>'}Contact{'</'}<Tag>a</Tag>{'></'}<Tag>li</Tag>{'>'}{'\n'}
+                    {'  </'}<Tag>ul</Tag>{'>'}{'\n'}
+                    {'</'}<Tag>nav</Tag>{'>'}
+                  </CodeCard>
+                  
+                  <h3 className="text-xl font-bold text-slate-300 mt-4">CSS</h3>
+                  <CodeCard className="text-xs">
+                    <Tag>.navbar ul</Tag> {'{'}{'\n'}
+                    {'  '}<Attr>list-style-type</Attr>: <Val>none</Val>;{'\n'}
+                    {'  '}<Attr>padding</Attr>: <Val>0</Val>; <Attr>margin</Attr>: <Val>0</Val>;{'\n'}
+                    {'}'}{'\n'}
+                    <Tag>.navbar li</Tag> {'{'}{'\n'}
+                    {'  '}<Attr>display</Attr>: <Val>inline-block</Val>;{'\n'}
+                    {'  '}<Attr>margin-right</Attr>: <Val>20px</Val>;{'\n'}
+                    {'}'}{'\n'}
+                    <Tag>.navbar a</Tag> {'{'}{'\n'}
+                    {'  '}<Attr>text-decoration</Attr>: <Val>none</Val>;{'\n'}
+                    {'  '}<Attr>color</Attr>: <Val>#333</Val>;{'\n'}
+                    {'}'}
+                  </CodeCard>
+                </div>
+
+                <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
+                  <h3 className="text-xl font-bold text-slate-300 mb-4">Result:</h3>
+                  <div className="bg-white rounded-lg p-4">
+                    <nav>
+                      <ul className="list-none p-0 m-0">
+                        <li className="inline-block mr-5"><a href="#" className="text-gray-800 no-underline hover:text-orange-500 transition-colors">Home</a></li>
+                        <li className="inline-block mr-5"><a href="#" className="text-gray-800 no-underline hover:text-orange-500 transition-colors">About</a></li>
+                        <li className="inline-block mr-5"><a href="#" className="text-gray-800 no-underline hover:text-orange-500 transition-colors">Services</a></li>
+                        <li className="inline-block"><a href="#" className="text-gray-800 no-underline hover:text-orange-500 transition-colors">Contact</a></li>
+                      </ul>
+                    </nav>
+                  </div>
+                  <p className="text-sm text-slate-400 mt-4">Using <code className="text-orange-400">inline-block</code> to display list items horizontally!</p>
+                </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 10: Card Layout with Flexbox */}
+          <Slide isActive={currentSlide === 10}>
+            <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-4xl font-bold mb-8 text-center text-teal-400">Example: Card Layout with Flexbox 🃏</h2>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-slate-300">CSS</h3>
+                  <CodeCard className="text-xs">
+                    <Tag>.card-container</Tag> {'{'}{'\n'}
+                    {'  '}<Attr>display</Attr>: <Val>flex</Val>;{'\n'}
+                    {'  '}<Attr>flex-wrap</Attr>: <Val>wrap</Val>;{'\n'}
+                    {'  '}<Attr>gap</Attr>: <Val>20px</Val>;{'\n'}
+                    {'}'}{'\n'}{'\n'}
+                    <Tag>.card</Tag> {'{'}{'\n'}
+                    {'  '}<Attr>flex</Attr>: <Val>1 1 300px</Val>;{'\n'}
+                    {'  '}<Comment>/* Grow, shrink, base width */</Comment>{'\n'}
+                    {'  '}<Attr>background-color</Attr>: <Val>#f9f9f9</Val>;{'\n'}
+                    {'  '}<Attr>padding</Attr>: <Val>20px</Val>;{'\n'}
+                    {'  '}<Attr>border</Attr>: <Val>1px solid #ddd</Val>;{'\n'}
+                    {'}'}
+                  </CodeCard>
+                </div>
+
+                <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
+                  <h3 className="text-xl font-bold text-slate-300 mb-4">Result:</h3>
+                  <div className="flex flex-wrap gap-4">
+                    {[1, 2, 3, 4, 5, 6].map(n => (
+                      <div key={n} className="flex-1 min-w-[120px] bg-slate-100 text-gray-800 p-4 rounded border border-gray-300 text-center">
+                        Card {n}
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-sm text-slate-400 mt-4">Cards wrap and grow/shrink responsively!</p>
+                </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 11: Grid Layout Example */}
+          <Slide isActive={currentSlide === 11}>
+            <div className="max-w-6xl w-full p-8 z-10">
+              <h2 className="text-4xl font-bold mb-8 text-center text-emerald-400">Example: Grid Layout 📊</h2>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-slate-300">CSS</h3>
+                  <CodeCard className="text-xs">
+                    <Tag>.grid-container</Tag> {'{'}{'\n'}
+                    {'  '}<Attr>display</Attr>: <Val>grid</Val>;{'\n'}
+                    {'  '}<Attr>grid-template-columns</Attr>:{'\n'}
+                    {'    '}<Val>repeat(auto-fill, minmax(200px, 1fr))</Val>;{'\n'}
+                    {'  '}<Comment>/* Responsive columns */</Comment>{'\n'}
+                    {'  '}<Attr>gap</Attr>: <Val>20px</Val>;{'\n'}
+                    {'}'}{'\n'}{'\n'}
+                    <Tag>.grid-item</Tag> {'{'}{'\n'}
+                    {'  '}<Attr>background-color</Attr>: <Val>#f9f9f9</Val>;{'\n'}
+                    {'  '}<Attr>padding</Attr>: <Val>20px</Val>;{'\n'}
+                    {'  '}<Attr>border</Attr>: <Val>1px solid #ddd</Val>;{'\n'}
+                    {'}'}
+                  </CodeCard>
+                </div>
+
+                <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
+                  <h3 className="text-xl font-bold text-slate-300 mb-4">Result:</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {[1, 2, 3, 4, 5, 6].map(n => (
+                      <div key={n} className="bg-slate-100 text-gray-800 p-4 rounded border border-gray-300 text-center">
+                        Item {n}
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-sm text-slate-400 mt-4">Grid auto-fills columns based on available space!</p>
+                </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 12: Interactive Playground */}
+          <Slide isActive={currentSlide === 12}>
             <div className="max-w-6xl w-full p-4 z-10 flex flex-col h-full">
               <h2 className="text-4xl font-bold mb-6 text-center text-white">Interactive Playground 🎮</h2>
               
@@ -340,7 +510,7 @@ export default function CssDisplaySlides() {
               <div className="flex-1 bg-slate-900 rounded-2xl border-2 border-slate-700 p-8 overflow-y-auto">
                 {activeTab === 'block' && (
                     <div className="space-y-4">
-                        <div className="bg-indigo-500 p-4 rounded text-white text-center">I am a Block DIV</div>
+                        <div className="bg-indigo-500 p-4 rounded text-white text-center">I am a Block DIV (full width)</div>
                         <div className="bg-purple-500 p-4 rounded text-white text-center">I am another Block DIV</div>
                         <div className="bg-pink-500 p-4 rounded text-white text-center">We stack automatically!</div>
                     </div>
@@ -349,13 +519,13 @@ export default function CssDisplaySlides() {
                     <div className="text-xl leading-relaxed text-white">
                         Here is some text with <span className="bg-indigo-500 p-2 rounded text-white">inline spans</span> inside it.
                         Unlike block elements, <span className="bg-purple-500 p-2 rounded text-white">they flow</span> with the text
-                        and reset to the start <span className="bg-pink-500 p-2 rounded text-white">if the line</span> breaks.
+                        and wrap naturally <span className="bg-pink-500 p-2 rounded text-white">when needed</span>.
                     </div>
                 )}
                 {activeTab === 'flex' && (
                     <div className="flex flex-wrap gap-4 justify-center items-center h-full">
                         {[1, 2, 3, 4, 5].map(n => (
-                            <div key={n} className="w-24 h-24 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-2xl font-bold shadow-lg">
+                            <div key={n} className="w-24 h-24 bg-gradient-to-br from-teal-500 to-teal-700 rounded-xl flex items-center justify-center text-2xl font-bold shadow-lg">
                                 {n}
                             </div>
                         ))}
@@ -375,8 +545,46 @@ export default function CssDisplaySlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 10: Homework */}
-          <Slide isActive={currentSlide === 10}>
+          {/* SLIDE 13: Summary */}
+          <Slide isActive={currentSlide === 13}>
+            <div className="max-w-5xl w-full p-8 z-10">
+              <h2 className="text-5xl font-bold mb-10 text-center text-white">Summary 📋</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="bg-indigo-500/20 border border-indigo-500/50 rounded-xl p-4">
+                  <h3 className="text-indigo-400 font-bold mb-2">Block</h3>
+                  <p className="text-sm text-slate-300">Full width, new line, can set dimensions</p>
+                </div>
+                <div className="bg-pink-500/20 border border-pink-500/50 rounded-xl p-4">
+                  <h3 className="text-pink-400 font-bold mb-2">Inline</h3>
+                  <p className="text-sm text-slate-300">Content width only, flows in text</p>
+                </div>
+                <div className="bg-yellow-500/20 border border-yellow-500/50 rounded-xl p-4">
+                  <h3 className="text-yellow-400 font-bold mb-2">Inline-Block</h3>
+                  <p className="text-sm text-slate-300">Best of both: inline + dimensions</p>
+                </div>
+                <div className="bg-teal-500/20 border border-teal-500/50 rounded-xl p-4">
+                  <h3 className="text-teal-400 font-bold mb-2">Flex</h3>
+                  <p className="text-sm text-slate-300">1D layout, powerful alignment</p>
+                </div>
+                <div className="bg-emerald-500/20 border border-emerald-500/50 rounded-xl p-4">
+                  <h3 className="text-emerald-400 font-bold mb-2">Grid</h3>
+                  <p className="text-sm text-slate-300">2D layout, rows & columns</p>
+                </div>
+                <div className="bg-slate-500/20 border border-slate-500/50 rounded-xl p-4">
+                  <h3 className="text-slate-400 font-bold mb-2">None</h3>
+                  <p className="text-sm text-slate-300">Completely hidden, no space</p>
+                </div>
+              </div>
+              
+              <p className="text-center text-slate-400 mt-8 text-lg">
+                The <code className="text-indigo-400">display</code> property is fundamental to controlling layout and appearance of HTML elements!
+              </p>
+            </div>
+          </Slide>
+
+          {/* SLIDE 14: Homework */}
+          <Slide isActive={currentSlide === 14}>
             <div className="text-center p-8 max-w-4xl z-10">
               <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-bounce">
                 <BookOpen className="w-16 h-16 text-indigo-400" />
@@ -386,16 +594,64 @@ export default function CssDisplaySlides() {
               <div className="bg-slate-800/80 backdrop-blur-md p-8 rounded-2xl border border-slate-600 text-left max-w-2xl mx-auto shadow-2xl space-y-6">
                 <div className="flex items-start gap-4">
                     <CheckCircle className="w-6 h-6 text-indigo-400 shrink-0 mt-1" />
-                    <p className="text-slate-300">Create a webpage with a <strong className="text-white">Sticky Header</strong> using <code>position: sticky</code>.</p>
+                    <p className="text-slate-300">Create a simple webpage with a <strong className="text-white">header</strong>, a <strong className="text-white">navigation bar</strong>, and a <strong className="text-white">content section</strong>.</p>
                 </div>
                 <div className="flex items-start gap-4">
                     <CheckCircle className="w-6 h-6 text-indigo-400 shrink-0 mt-1" />
-                    <p className="text-slate-300">Create a <strong className="text-white">card layout</strong> in the content section using <code>display: flex</code> (or grid!).</p>
+                    <p className="text-slate-300">Use the <code className="text-yellow-400">display</code> property to style the navigation bar with <strong className="text-white">inline-block</strong> elements.</p>
                 </div>
                 <div className="flex items-start gap-4">
                     <CheckCircle className="w-6 h-6 text-indigo-400 shrink-0 mt-1" />
-                    <p className="text-slate-300">Build a <strong className="text-white">"Go to Top"</strong> button that stays in the corner using <code>position: fixed</code>.</p>
+                    <p className="text-slate-300">Create a <strong className="text-white">flexbox layout</strong> for the content section, displaying multiple cards.</p>
                 </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 15: Resources */}
+          <Slide isActive={currentSlide === 15}>
+            <div className="text-center p-8 max-w-4xl z-10">
+              <div className="inline-block p-4 bg-white/10 rounded-full mb-6">
+                <ExternalLink className="w-16 h-16 text-blue-400" />
+              </div>
+              <h1 className="text-5xl font-bold mb-8">Additional Resources 🔗</h1>
+
+              <div className="bg-slate-800/80 backdrop-blur-md p-8 rounded-2xl border border-slate-600 text-left max-w-2xl mx-auto shadow-2xl space-y-4">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display" target="_blank" rel="noopener noreferrer" 
+                   className="flex items-center gap-4 p-4 bg-slate-700/50 rounded-xl hover:bg-slate-700 transition-colors group">
+                    <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold">M</div>
+                    <div>
+                      <p className="text-white font-semibold group-hover:text-orange-400 transition-colors">MDN Web Docs - CSS Display</p>
+                      <p className="text-slate-400 text-sm">Comprehensive reference documentation</p>
+                    </div>
+                </a>
+                
+                <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener noreferrer" 
+                   className="flex items-center gap-4 p-4 bg-slate-700/50 rounded-xl hover:bg-slate-700 transition-colors group">
+                    <div className="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center text-white font-bold">CT</div>
+                    <div>
+                      <p className="text-white font-semibold group-hover:text-teal-400 transition-colors">CSS Tricks - Guide to Flexbox</p>
+                      <p className="text-slate-400 text-sm">Visual guide with examples</p>
+                    </div>
+                </a>
+                
+                <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank" rel="noopener noreferrer" 
+                   className="flex items-center gap-4 p-4 bg-slate-700/50 rounded-xl hover:bg-slate-700 transition-colors group">
+                    <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center text-white font-bold">CT</div>
+                    <div>
+                      <p className="text-white font-semibold group-hover:text-emerald-400 transition-colors">CSS Tricks - Guide to Grid</p>
+                      <p className="text-slate-400 text-sm">Complete grid layout reference</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.w3schools.com/cssref/pr_class_display.asp" target="_blank" rel="noopener noreferrer" 
+                   className="flex items-center gap-4 p-4 bg-slate-700/50 rounded-xl hover:bg-slate-700 transition-colors group">
+                    <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold">W3</div>
+                    <div>
+                      <p className="text-white font-semibold group-hover:text-green-400 transition-colors">W3Schools - CSS Display</p>
+                      <p className="text-slate-400 text-sm">Interactive examples and tutorials</p>
+                    </div>
+                </a>
               </div>
 
               <div className="mt-12">
