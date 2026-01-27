@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import SlideContainer from '../components/SlideContainer';
 import Slide from '../components/Slide';
 import CodeCard, { Tag, Attr, Val, Comment } from '../components/CodeCard';
-import { ShoppingBag, Palette, Type, Layout, MousePointer, Download, Layers, Smartphone, CheckCircle, RotateCcw } from 'lucide-react';
+import { ShoppingBag, Palette, Type, Layout, MousePointer, Download, Layers, Smartphone, CheckCircle, RotateCcw, Eye } from 'lucide-react';
+import ecommercePreview from '../assets/e-commerce.png';
 
 export default function CssPracticeSlides() {
   return (
-    <SlideContainer totalSlides={7} accentColor="blue">
+    <SlideContainer totalSlides={8} accentColor="blue">
       {(currentSlide, goToSlide) => (
         <>
           {/* Background Blobs */}
@@ -75,8 +75,8 @@ export default function CssPracticeSlides() {
                         <div className="flex items-center gap-4 bg-slate-800 p-3 rounded-lg border border-slate-700">
                             <div className="w-12 h-12 rounded-full shadow-lg bg-gray-900 border border-white/20"></div>
                             <div>
-                                <div className="font-bold text-white">Dark Gray</div>
-                                <div className="text-xs text-slate-400 font-mono">#1f2937</div>
+                                <div className="font-bold text-white">Dark Slate</div>
+                                <div className="text-xs text-slate-400 font-mono">#1e293b</div>
                             </div>
                         </div>
                         <div className="flex items-center gap-4 bg-slate-800 p-3 rounded-lg border border-slate-700">
@@ -94,17 +94,10 @@ export default function CssPracticeSlides() {
                     <h3 className="text-xl font-bold text-white border-b border-white/10 pb-2">Accent</h3>
                     <div className="space-y-3">
                         <div className="flex items-center gap-4 bg-slate-800 p-3 rounded-lg border border-slate-700">
-                            <div className="w-12 h-12 rounded-full shadow-lg" style={{background: '#10b981'}}></div>
+                            <div className="w-12 h-12 rounded-full shadow-lg" style={{background: '#f59e0b'}}></div>
                             <div>
-                                <div className="font-bold text-white">Success</div>
-                                <div className="text-xs text-emerald-400 font-mono">#10b981</div>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-4 bg-slate-800 p-3 rounded-lg border border-slate-700">
-                            <div className="w-12 h-12 rounded-full shadow-lg" style={{background: '#ef4444'}}></div>
-                            <div>
-                                <div className="font-bold text-white">Error</div>
-                                <div className="text-xs text-red-400 font-mono">#ef4444</div>
+                                <div className="font-bold text-white">Accent Orange</div>
+                                <div className="text-xs text-amber-400 font-mono">#f59e0b</div>
                             </div>
                         </div>
                     </div>
@@ -136,8 +129,8 @@ export default function CssPracticeSlides() {
                  <div className="space-y-8">
                      <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-indigo-500">
                          <h3 className="text-2xl font-bold text-white mb-2">Font Family</h3>
-                         <p className="text-2xl font-light text-slate-300 font-sans">"Nokora", Arial, sans-serif</p>
-                         <p className="text-sm text-slate-400 mt-2">Secondary: "Noto Sans Khmer"</p>
+                         <p className="text-2xl font-light text-slate-300 font-sans">"Segoe UI", Tahoma, sans-serif</p>
+                         <p className="text-sm text-slate-400 mt-2">Clean, native system fonts</p>
                      </div>
 
                      <div className="space-y-4">
@@ -195,7 +188,7 @@ export default function CssPracticeSlides() {
                         <Tag>.btn-primary</Tag> {'{'}{'\n'}
                         {'  '}<Attr>background</Attr>: <Val>#2563eb</Val>;{'\n'}
                         {'  '}<Attr>color</Attr>: <Val>white</Val>;{'\n'}
-                        {'  '}<Attr>padding</Attr>: <Val>12px 24px</Val>;{'\n'}
+                        {'  '}<Attr>padding</Attr>: <Val>12px 30px</Val>;{'\n'}
                         {'  '}<Attr>border-radius</Attr>: <Val>8px</Val>;{'\n'}
                         {'}'}
                       </CodeCard>
@@ -216,8 +209,8 @@ export default function CssPracticeSlides() {
                       <CodeCard className="text-xs">
                         <Tag>.card</Tag> {'{'}{'\n'}
                         {'  '}<Attr>background</Attr>: <Val>white</Val>;{'\n'}
-                        {'  '}<Attr>border-radius</Attr>: <Val>16px</Val>;{'\n'}
-                        {'  '}<Attr>box-shadow</Attr>: <Val>0 4px 20px rgba(0,0,0,0.08)</Val>;{'\n'}
+                        {'  '}<Attr>border-radius</Attr>: <Val>8px</Val>;{'\n'}
+                        {'  '}<Attr>box-shadow</Attr>: <Val>0 4px 6px -1px rgba(0,0,0,0.1)</Val>;{'\n'}
                         {'  '}<Attr>transition</Attr>: <Val>transform 0.3s</Val>;{'\n'}
                         {'}'}
                       </CodeCard>
@@ -304,7 +297,7 @@ export default function CssPracticeSlides() {
                           <Layers className="w-8 h-8 text-blue-400" />
                           <div>
                               <h3 className="font-bold text-white">1. Structure the Project</h3>
-                              <p className="text-sm text-slate-400">Create <code className="text-blue-300">index.html</code> and <code className="text-blue-300">assets/css/main.css</code></p>
+                              <p className="text-sm text-slate-400">Create <code className="text-blue-300">index.html</code> and <code className="text-blue-300">css/styles.css</code></p>
                           </div>
                       </div>
                   </div>
@@ -314,7 +307,7 @@ export default function CssPracticeSlides() {
                           <ShoppingBag className="w-8 h-8 text-purple-400" />
                           <div>
                               <h3 className="font-bold text-white">2. Build the Layout</h3>
-                              <p className="text-sm text-slate-400">Implement Header, Hero, Features Grid, and Product Grid.</p>
+                              <p className="text-sm text-slate-400">Implement Header (Flex), Hero (Flex), Categories (Grid), Products (Grid).</p>
                           </div>
                       </div>
                   </div>
@@ -336,8 +329,44 @@ export default function CssPracticeSlides() {
             </div>
           </Slide>
 
-          {/* SLIDE 7: Footer/Reset */}
+            {/* SLIDE 7: Expected Output */}
           <Slide isActive={currentSlide === 6}>
+            <div className="max-w-6xl w-full p-8 z-10 flex flex-col items-center justify-center h-full">
+               <h2 className="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                <Eye className="w-10 h-10 text-blue-400" /> Expected Output
+              </h2>
+              
+              <div className="relative group max-w-4xl w-full rounded-xl overflow-hidden shadow-2xl border-[8px] border-slate-800 bg-slate-800 transform hover:scale-[1.02] transition-transform duration-500">
+                  {/* Browser Mockup Header */}
+                  <div className="h-8 bg-slate-800 flex items-center px-4 gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      <div className="ml-4 flex-1 bg-slate-700/50 h-5 rounded-md text-[10px] flex items-center px-2 text-slate-400 font-mono">
+                          localhost:3000
+                      </div>
+                  </div>
+                  {/* Image Container with Scroll */}
+                  <div className="max-h-[60vh] overflow-y-auto bg-white custom-scrollbar">
+                     <img 
+                        src={ecommercePreview} 
+                        alt="Final Project Preview" 
+                        className="w-full h-auto object-cover"
+                      />
+                  </div>
+                  
+                  {/* Overlay prompt */}
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                      <span className="text-white font-bold text-xl px-6 py-3 bg-blue-600 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                          Goal: Pixel Perfection 🎯
+                      </span>
+                  </div>
+              </div>
+            </div>
+          </Slide>
+
+          {/* SLIDE 8: Footer/Reset */}
+          <Slide isActive={currentSlide === 7}>
              <div className="flex flex-col items-center justify-center h-full z-10 p-8">
                  <h2 className="text-5xl font-bold mb-8 text-white">Good Luck! 👨‍💻</h2>
                  <p className="text-xl text-slate-300 mb-12 max-w-2xl text-center">
