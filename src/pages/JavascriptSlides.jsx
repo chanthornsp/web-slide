@@ -106,33 +106,52 @@ export default function JavascriptSlides() {
 
           {/* SLIDE 2: Including JS */}
           <Slide isActive={currentSlide === 2}>
-            <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-orange-400">Where does it go? 📍</h2>
+            <div className="max-w-6xl w-full p-8 z-10 overflow-y-auto max-h-[85vh]">
+              <h2 className="text-5xl font-bold mb-8 text-center text-orange-400">Where does it go? 📍</h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Inline */}
-                  <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700 opacity-70 hover:opacity-100 transition-opacity">
+                  <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700 opacity-70">
                       <div className="flex items-center gap-3 mb-4">
                            <FileCode className="w-6 h-6 text-red-400" />
                            <h3 className="text-xl font-bold text-white">1. Inline</h3>
                       </div>
-                      <p className="text-sm text-slate-400 mb-4">Directly in HTML attributes. <span className="text-red-400 font-bold">Not recommended!</span></p>
+                      <p className="text-sm text-slate-400 mb-4">Directly in HTML attributes. <span className="text-red-400 font-bold">Not Recommended.</span></p>
                       <CodeCard className="text-xs">
                           <Tag>&lt;button</Tag> <Attr>onclick</Attr>=<Val>"alert('Hi')"</Val><Tag>&gt;</Tag>
                       </CodeCard>
                   </div>
 
-                  {/* Internal */}
+                  {/* Internal Head */}
                   <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
                       <div className="flex items-center gap-3 mb-4">
                            <FileCode className="w-6 h-6 text-yellow-400" />
-                           <h3 className="text-xl font-bold text-white">2. Internal</h3>
+                           <h3 className="text-xl font-bold text-white">2. Internal (In Head)</h3>
                       </div>
-                      <p className="text-sm text-slate-400 mb-4">Inside <code className="text-yellow-300">&lt;script&gt;</code> tags. Good for small scripts.</p>
+                      <p className="text-sm text-slate-400 mb-4">Inside <code className="text-yellow-300">&lt;script&gt;</code> in head.</p>
                       <CodeCard className="text-xs">
-                          <Tag>&lt;script&gt;</Tag>{'\n'}
-                          {'  '}<Tag>alert</Tag>(<Val>'Hello'</Val>);{'\n'}
-                          <Tag>&lt;/script&gt;</Tag>
+                          <Tag>&lt;head&gt;</Tag>{'\n'}
+                          {'  '}<Tag>&lt;script&gt;</Tag>{'\n'}
+                          {'    '}<Tag>function</Tag> <Attr>show</Attr>() {'{'} ... {'}'}{'\n'}
+                          {'  '}<Tag>&lt;/script&gt;</Tag>{'\n'}
+                          <Tag>&lt;/head&gt;</Tag>
+                      </CodeCard>
+                  </div>
+
+                  {/* Internal Body */}
+                  <div className="bg-slate-800 p-6 rounded-2xl border border-orange-500/50">
+                      <div className="flex items-center gap-3 mb-4">
+                           <FileCode className="w-6 h-6 text-orange-400" />
+                           <h3 className="text-xl font-bold text-white">3. Internal (End of Body)</h3>
+                      </div>
+                      <p className="text-sm text-slate-400 mb-4">Before <code className="text-orange-300">&lt;/body&gt;</code>. <span className="text-orange-400 font-bold">Recommended.</span></p>
+                      <CodeCard className="text-xs">
+                          <Tag>&lt;body&gt;</Tag>{'\n'}
+                          {'  '}... HTML elements ...{'\n'}
+                          {'  '}<Tag>&lt;script&gt;</Tag>{'\n'}
+                          {'    '}// Runs after HTML loads{'\n'}
+                          {'  '}<Tag>&lt;/script&gt;</Tag>{'\n'}
+                          <Tag>&lt;/body&gt;</Tag>
                       </CodeCard>
                   </div>
 
@@ -140,7 +159,7 @@ export default function JavascriptSlides() {
                   <div className="bg-slate-800 p-6 rounded-2xl border-2 border-green-500 shadow-lg shadow-green-500/10">
                       <div className="flex items-center gap-3 mb-4">
                            <FileCode className="w-6 h-6 text-green-400" />
-                           <h3 className="text-xl font-bold text-white">3. External</h3>
+                           <h3 className="text-xl font-bold text-white">4. External File</h3>
                       </div>
                       <p className="text-sm text-slate-400 mb-4">In a separate <code>.js</code> file. <span className="text-green-400 font-bold">Best Practice!</span></p>
                       <CodeCard className="text-xs">
@@ -154,7 +173,7 @@ export default function JavascriptSlides() {
           {/* SLIDE 3: Variables */}
           <Slide isActive={currentSlide === 3}>
              <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-teal-400">Variables 📦</h2>
+              <h2 className="text-5xl font-bold mb-12 text-center text-teal-400">Variables: Storing Data 📦</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                    <div className="space-y-6">
@@ -163,30 +182,30 @@ export default function JavascriptSlides() {
                        <div className="grid gap-4">
                            <div className="bg-slate-800 p-4 rounded-xl border-l-4 border-green-500">
                                <div className="font-mono text-green-400 font-bold mb-1">const</div>
-                               <p className="text-sm text-slate-400">Value cannot change. Use by default.</p>
+                               <p className="text-sm text-slate-400">For values that won't change. <code className="text-white">siteName</code></p>
                            </div>
                            <div className="bg-slate-800 p-4 rounded-xl border-l-4 border-yellow-500">
                                <div className="font-mono text-yellow-400 font-bold mb-1">let</div>
-                               <p className="text-sm text-slate-400">Value can change. Use for counters, totals, etc.</p>
+                               <p className="text-sm text-slate-400">For values that can change. <code className="text-white">userName</code></p>
                            </div>
                            <div className="bg-slate-800 p-4 rounded-xl border-l-4 border-red-500 opacity-60">
                                <div className="font-mono text-red-400 font-bold mb-1">var</div>
-                               <p className="text-sm text-slate-400">Old way. Avoid usage.</p>
+                               <p className="text-sm text-slate-400">Old way. Avoid using in new code.</p>
                            </div>
                        </div>
                    </div>
 
                    <CodeCard className="text-sm h-full">
-                       <Comment>// Unchanging values</Comment>{'\n'}
-                       <Tag>const</Tag> <Attr>appName</Attr> = <Val>"My App"</Val>;{'\n'}
-                       <Tag>const</Tag> <Attr>taxRate</Attr> = <Val>0.08</Val>;{'\n'}
+                       <Comment>// const - Unchanging values</Comment>{'\n'}
+                       <Tag>const</Tag> <Attr>siteName</Attr> = <Val>"My Website"</Val>;{'\n'}
+                       <Tag>const</Tag> <Attr>maxUsers</Attr> = <Val>100</Val>;{'\n'}
                        {'\n'}
-                       <Comment>// Changeable values</Comment>{'\n'}
-                       <Tag>let</Tag> <Attr>score</Attr> = <Val>0</Val>;{'\n'}
-                       <Tag>let</Tag> <Attr>userName</Attr> = <Val>"Guest"</Val>;{'\n'}
+                       <Comment>// let - Changeable values</Comment>{'\n'}
+                       <Tag>let</Tag> <Attr>userName</Attr> = <Val>"John"</Val>;{'\n'}
+                       <Tag>let</Tag> <Attr>currentPage</Attr> = <Val>1</Val>;{'\n'}
                        {'\n'}
-                       <Attr>score</Attr> = <Val>10</Val>; <Comment>// ✅ OK</Comment>{'\n'}
-                       <Comment>// appName = "New App"; // ❌ Error!</Comment>
+                       <Attr>userName</Attr> = <Val>"Jane"</Val>; <Comment>// ✅ Works</Comment>{'\n'}
+                       <Comment>// siteName = "New Name"; // ❌ Error!</Comment>
                    </CodeCard>
               </div>
              </div>
@@ -258,11 +277,11 @@ export default function JavascriptSlides() {
           {/* SLIDE 5: Arrays */}
           <Slide isActive={currentSlide === 5}>
               <div className="max-w-6xl w-full p-8 z-10">
-                <h2 className="text-5xl font-bold mb-12 text-center text-pink-400">Arrays [] 📋</h2>
+                <h2 className="text-5xl font-bold mb-12 text-center text-pink-400">Working with Arrays 📋</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div className="space-y-6">
-                        <p className="text-slate-300">Organize lists of data. Access items by their index (starting at 0).</p>
+                        <p className="text-slate-300">Arrays store multiple values in a single variable, like a list.</p>
                         
                         <div className="bg-slate-800 p-4 rounded-xl space-y-2">
                              <div className="flex justify-between font-mono text-sm border-b border-slate-700 pb-2">
@@ -271,28 +290,29 @@ export default function JavascriptSlides() {
                              </div>
                              <div className="flex justify-between font-mono text-sm">
                                  <span className="text-pink-400">0</span>
-                                 <span className="text-white">"Apple"</span>
+                                 <span className="text-white">"apple"</span>
                              </div>
                              <div className="flex justify-between font-mono text-sm">
                                  <span className="text-pink-400">1</span>
-                                 <span className="text-white">"Banana"</span>
+                                 <span className="text-white">"banana"</span>
                              </div>
                              <div className="flex justify-between font-mono text-sm">
                                  <span className="text-pink-400">2</span>
-                                 <span className="text-white">"Cherry"</span>
+                                 <span className="text-white">"orange"</span>
                              </div>
                         </div>
                     </div>
 
                     <CodeCard className="text-sm">
-                        <Tag>const</Tag> <Attr>fruits</Attr> = [<Val>"Apple"</Val>, <Val>"Banana"</Val>, <Val>"Cherry"</Val>];{'\n'}
+                        <Tag>const</Tag> <Attr>fruits</Attr> = [<Val>"apple"</Val>, <Val>"banana"</Val>, <Val>"orange"</Val>];{'\n'}
                         {'\n'}
-                        <Comment>// Access</Comment>{'\n'}
-                        <Tag>console</Tag>.<Attr>log</Attr>(<Attr>fruits</Attr>[<Val>0</Val>]); <Comment>// "Apple"</Comment>{'\n'}
+                        <Comment>// Access (starts from 0)</Comment>{'\n'}
+                        <Tag>console</Tag>.<Attr>log</Attr>(<Attr>fruits</Attr>[<Val>0</Val>]); <Comment>// "apple"</Comment>{'\n'}
                         {'\n'}
-                        <Comment>// Modify</Comment>{'\n'}
-                        <Attr>fruits</Attr>.<Attr>push</Attr>(<Val>"Date"</Val>); <Comment>// Adds to end</Comment>{'\n'}
-                        <Attr>fruits</Attr>.<Attr>pop</Attr>(); <Comment>// Removes last</Comment>
+                        <Comment>// Methods</Comment>{'\n'}
+                        <Attr>fruits</Attr>.<Attr>push</Attr>(<Val>"grape"</Val>); <Comment>// Adds to end</Comment>{'\n'}
+                        <Attr>fruits</Attr>.<Attr>pop</Attr>(); <Comment>// Removes last</Comment>{'\n'}
+                        <Attr>fruits</Attr>.<Attr>indexOf</Attr>(<Val>"banana"</Val>); <Comment>// 1</Comment>
                     </CodeCard>
                 </div>
               </div>
@@ -446,54 +466,58 @@ export default function JavascriptSlides() {
 
           {/* SLIDE 10: The DOM */}
           <Slide isActive={currentSlide === 10}>
-             <div className="max-w-6xl w-full p-8 z-10">
-              <h2 className="text-5xl font-bold mb-12 text-center text-rose-400">The DOM 🌳</h2>
+             <div className="max-w-6xl w-full p-8 z-10 overflow-y-auto max-h-[85vh]">
+              <h2 className="text-5xl font-bold mb-8 text-center text-rose-400">Accessing & Modifying the DOM 🌳</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                   <div className="space-y-6">
-                      <p className="text-xl text-slate-300">
-                          The <strong className="text-rose-400">Document Object Model</strong> allows JS to change HTML & CSS.
+                      <p className="text-lg text-slate-300">
+                          The <strong className="text-rose-400">Document Object Model</strong> is your page as objects JS can change.
                       </p>
                       
-                      <div className="bg-slate-800 p-6 rounded-2xl space-y-4">
-                          <div className="flex items-center justify-between bg-black/30 p-3 rounded text-sm text-slate-300">
-                              <span>Get Element</span>
-                              <code className="text-rose-300">document.querySelector()</code>
+                      <div className="bg-slate-800 p-4 rounded-2xl space-y-3">
+                          <div className="flex items-center justify-between bg-black/30 p-2 rounded text-xs text-slate-300">
+                              <span>Get by ID</span>
+                              <code className="text-rose-300">document.getElementById("id")</code>
                           </div>
-                          <div className="flex items-center justify-between bg-black/30 p-3 rounded text-sm text-slate-300">
-                              <span>Change Text</span>
-                              <code className="text-rose-300">el.innerText = "..."</code>
+                          <div className="flex items-center justify-between bg-black/30 p-2 rounded text-xs text-slate-300">
+                              <span>Query Selector</span>
+                              <code className="text-rose-300">document.querySelector(".class")</code>
                           </div>
-                          <div className="flex items-center justify-between bg-black/30 p-3 rounded text-sm text-slate-300">
+                          <div className="flex items-center justify-between bg-black/30 p-2 rounded text-xs text-slate-300">
+                              <span>Change Content</span>
+                              <code className="text-rose-300">el.textContent = "Hi"</code>
+                          </div>
+                          <div className="flex items-center justify-between bg-black/30 p-2 rounded text-xs text-slate-300">
                               <span>Change Style</span>
-                              <code className="text-rose-300">el.style.color = "red"</code>
+                              <code className="text-rose-300">el.style.color = "blue"</code>
                           </div>
-                          <div className="flex items-center justify-between bg-black/30 p-3 rounded text-sm text-slate-300">
-                              <span>Add Class</span>
-                              <code className="text-rose-300">el.classList.add()</code>
+                          <div className="flex items-center justify-between bg-black/30 p-2 rounded text-xs text-slate-300">
+                              <span>Class List</span>
+                              <code className="text-rose-300">el.classList.add("btn")</code>
                           </div>
                       </div>
                   </div>
 
-                  <div className="flex flex-col gap-6 items-center justify-center bg-white/5 p-8 rounded-2xl border border-white/10">
-                       <h1 id="demo-text" className="text-4xl font-bold text-white transition-all">Hello! 👋</h1>
+                  <div className="flex flex-col gap-4 items-center justify-center bg-white/5 p-6 rounded-2xl border border-white/10">
+                       <h1 id="demo-text" className="text-4xl font-bold text-white transition-all">Welcome JS 👋</h1>
                        <div className="flex gap-2">
                            <button 
                                className="px-4 py-2 bg-rose-500 rounded text-white font-bold text-sm"
                                onClick={() => {
                                    const el = document.getElementById('demo-text');
-                                   el.innerText = "Updated! 🚀";
+                                   el.innerText = "Title Changed! 🚀";
                                    el.style.color = "#fb7185";
-                                   el.style.transform = "scale(1.2)";
+                                   el.style.transform = "scale(1.1)";
                                }}
                            >
-                               Update Text
+                               Change Title
                            </button>
                            <button 
                                className="px-4 py-2 bg-slate-600 rounded text-white font-bold text-sm"
                                onClick={() => {
                                    const el = document.getElementById('demo-text');
-                                   el.innerText = "Hello! 👋";
+                                   el.innerText = "Welcome JS 👋";
                                    el.style.color = "white";
                                    el.style.transform = "scale(1)";
                                }}
@@ -502,9 +526,10 @@ export default function JavascriptSlides() {
                            </button>
                        </div>
                        <CodeCard className="text-xs w-full">
-                           <Tag>const</Tag> <Attr>el</Attr> = <Tag>document</Tag>.<Attr>getElementById</Attr>(<Val>"demo-text"</Val>);{'\n'}
-                           <Attr>el</Attr>.<Attr>innerText</Attr> = <Val>"Updated! 🚀"</Val>;{'\n'}
-                           <Attr>el</Attr>.<Attr>style</Attr>.<Attr>color</Attr> = <Val>"pink"</Val>;
+                           <Comment>// script.js</Comment>{'\n'}
+                           <Tag>const</Tag> <Attr>title</Attr> = <Tag>document</Tag>.<Attr>getElementById</Attr>(<Val>"title"</Val>);{'\n'}
+                           <Attr>title</Attr>.<Attr>textContent</Attr> = <Val>"Title Changed!"</Val>;{'\n'}
+                           <Attr>title</Attr>.<Attr>style</Attr>.<Attr>color</Attr> = <Val>"blue"</Val>;
                        </CodeCard>
                   </div>
               </div>
@@ -557,109 +582,116 @@ export default function JavascriptSlides() {
               </div>
            </Slide>
 
-          {/* SLIDE 12: Async JS (NEW) */}
-           <Slide isActive={currentSlide === 12}>
-              <div className="max-w-6xl w-full p-8 z-10">
-                <h2 className="text-5xl font-bold mb-8 text-center text-purple-400">Async JS ⏳</h2>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                   <div className="space-y-4">
-                       <h3 className="text-2xl font-bold text-white mb-2">Promises & Fetch</h3>
-                       <p className="text-slate-300">
-                           JavaScript is single-threaded. We use <strong>Async/Await</strong> to handle tasks that take time (like fetching data) without freezing the page.
-                       </p>
-                       <CodeCard className="text-xs">
-                          <Tag>async function</Tag> <Attr>getData</Attr>() {'{'}{'\n'}
-                          {'  '}<Tag>const</Tag> <Attr>res</Attr> = <Tag>await</Tag> <Attr>fetch</Attr>(<Val>'api/data'</Val>);{'\n'}
-                          {'  '}<Tag>const</Tag> <Attr>data</Attr> = <Tag>await</Tag> <Attr>res</Attr>.<Attr>json</Attr>();{'\n'}
-                          {'  '}<Tag>console</Tag>.<Attr>log</Attr>(<Attr>data</Attr>);{'\n'}
-                          {'}'}
-                       </CodeCard>
-                   </div>
 
-                   <div className="bg-white/5 p-6 rounded-2xl border border-white/10 flex flex-col items-center justify-center">
-                       <div className="flex gap-4 mb-8">
-                           <div className="w-16 h-16 rounded-full border-4 border-purple-500 border-t-transparent animate-spin"></div>
-                       </div>
-                       <p className="text-purple-300 font-mono text-sm">Loading Data...</p>
-                       <div className="mt-4 p-4 bg-green-500/20 text-green-300 rounded-lg text-xs w-full">
-                           {'{'} "status": "success", "user": "Chanthorn" {'}'}
-                       </div>
-                   </div>
-                </div>
-              </div>
-           </Slide>
 
-          {/* SLIDE 13: Project (NEW) */}
-          <Slide isActive={currentSlide === 13}>
-              <div className="max-w-4xl w-full p-8 z-10">
-                <h2 className="text-5xl font-bold mb-8 text-center text-white">Mini Project: To-Do 📝</h2>
+          {/* SLIDE 12: Project - Mobile Nav Toggle */}
+          <Slide isActive={currentSlide === 12}>
+              <div className="max-w-6xl w-full p-8 z-10 overflow-y-auto max-h-[85vh]">
+                <h2 className="text-5xl font-bold mb-8 text-center text-white">Practical Example: Mobile Nav �</h2>
                 
-                <div className="bg-white text-slate-800 rounded-2xl shadow-2xl overflow-hidden max-w-md mx-auto">
-                    <div className="bg-yellow-500 p-6 flex justify-between items-center">
-                        <h3 className="font-bold text-xl text-white">My Tasks</h3>
-                        <span className="text-yellow-100 text-sm">{todos.length} items</span>
-                    </div>
-                    
-                    <div className="p-6">
-                        <div className="flex gap-2 mb-6">
-                            <input 
-                                type="text"
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && addTodo()}
-                                placeholder="Add a new task..."
-                                className="flex-1 px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-yellow-500"
-                            />
-                            <button 
-                                onClick={addTodo}
-                                className="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-lg transition-colors"
-                            >
-                                <Plus />
-                            </button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div className="space-y-4">
+                        <div className="bg-blue-600 rounded-xl overflow-hidden shadow-2xl">
+                            {/* Navbar Mockup */}
+                            <div className="p-4 flex justify-between items-center text-white border-b border-blue-500">
+                                <div className="font-bold">My Website</div>
+                                <button 
+                                    className="p-1 hover:bg-blue-700 rounded transition-colors"
+                                    onClick={() => {
+                                        const menu = document.getElementById('slide-mobile-menu');
+                                        const icon = document.getElementById('nav-icon-path');
+                                        menu.classList.toggle('hidden');
+                                        if (menu.classList.contains('hidden')) {
+                                            icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                                        } else {
+                                            icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                                        }
+                                    }}
+                                >
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path id="nav-icon-path" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            {/* Mobile Menu Content */}
+                            <div id="slide-mobile-menu" className="hidden p-4 bg-blue-700 space-y-2 animate-in slide-in-from-top duration-300">
+                                {['Home', 'About', 'Services', 'Contact'].map(link => (
+                                    <a key={link} href="#" className="block py-2 px-4 hover:bg-blue-800 rounded text-white text-sm">{link}</a>
+                                ))}
+                            </div>
+                            <div className="bg-slate-50 p-12 text-center text-slate-400 text-sm">Main Content Area</div>
                         </div>
+                        <p className="text-xs text-slate-400 text-center">Toggling the 'hidden' class to show/hide the menu.</p>
+                    </div>
 
-                        <ul className="space-y-2">
-                            {todos.map((todo, index) => (
-                                <li key={index} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg group">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-5 h-5 border-2 border-slate-300 rounded cursor-pointer hover:border-yellow-500"></div>
-                                        <span>{todo}</span>
-                                    </div>
-                                    <button 
-                                        onClick={() => removeTodo(index)}
-                                        className="text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
-                                    >
-                                        <Trash size={18} />
-                                    </button>
-                                </li>
-                            ))}
-                            {todos.length === 0 && (
-                                <li className="text-center text-slate-400 py-4 italic">No tasks yet. Add one!</li>
-                            )}
-                        </ul>
+                    <div className="space-y-4">
+                        <CodeCard className="text-xs">
+                           <Comment>// Get elements</Comment>{'\n'}
+                           <Tag>const</Tag> <Attr>btn</Attr> = <Tag>document</Tag>.<Attr>getElementById</Attr>(<Val>"btn"</Val>);{'\n'}
+                           <Tag>const</Tag> <Attr>menu</Attr> = <Tag>document</Tag>.<Attr>getElementById</Attr>(<Val>"menu"</Val>);{'\n'}
+                           {'\n'}
+                           <Comment>// Toggle on click</Comment>{'\n'}
+                           <Attr>btn</Attr>.<Attr>addEventListener</Attr>(<Val>"click"</Val>, () <Tag>=&gt;</Tag> {'{'}{'\n'}
+                           {'  '}<Attr>menu</Attr>.<Attr>classList</Attr>.<Attr>toggle</Attr>(<Val>"hidden"</Val>);{'\n'}
+                           {'}'});
+                        </CodeCard>
                     </div>
                 </div>
               </div>
           </Slide>
 
-          {/* SLIDE 14: Summary */}
+          {/* SLIDE 13: Practice Exercises (NEW) */}
+          <Slide isActive={currentSlide === 13}>
+              <div className="max-w-6xl w-full p-8 z-10">
+                <h2 className="text-5xl font-bold mb-10 text-center text-yellow-400">Practice Exercises 🏋️‍♂️</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {[
+                        { title: "To-Do List", desc: "Add, remove, and mark tasks", icon: <CheckSquare /> },
+                        { title: "Image Gallery", desc: "Click thumbnails for larger views", icon: <Layers /> },
+                        { title: "Form Validator", desc: "Check email & password strength", icon: <Settings /> },
+                        { title: "Theme Switcher", desc: "Toggle light and dark modes", icon: <Zap /> },
+                        { title: "Accordion Menu", desc: "Expand/collapse sections", icon: <Repeat /> }
+                    ].map((item, i) => (
+                        <div key={i} className="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:border-yellow-500/50 transition-colors">
+                            <div className="text-yellow-400 mb-3">{item.icon}</div>
+                            <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                            <p className="text-sm text-slate-400">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+              </div>
+          </Slide>
+
+          {/* SLIDE 14: Summary & Next Steps */}
           <Slide isActive={currentSlide === 14}>
-            <div className="text-center p-8 max-w-4xl z-10">
+            <div className="text-center p-8 max-w-4xl z-10 overflow-y-auto max-h-[85vh]">
               <div className="inline-block p-4 bg-white/10 rounded-full mb-6 animate-bounce">
                 <Coffee className="w-16 h-16 text-yellow-400" />
               </div>
-              <h1 className="text-5xl font-bold mb-8 text-white">You're a Programmer! 💻</h1>
-              <div className="text-xl text-slate-300 mb-12 space-y-4">
-                  <p>You've mastered the pillars of modern JS:</p>
-                  <div className="flex flex-wrap justify-center gap-4">
-                      <span className="bg-green-500/20 text-green-300 px-4 py-2 rounded-full border border-green-500/30">ES6+</span>
-                      <span className="bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full border border-blue-500/30">Async/Await</span>
-                      <span className="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full border border-purple-500/30">DOM Events</span>
-                      <span className="bg-rose-500/20 text-rose-300 px-4 py-2 rounded-full border border-rose-500/30">Logic</span>
+              <h2 className="text-4xl font-bold mb-6 text-white">You're a Programmer! 💻</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mb-8">
+                  <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+                      <h3 className="text-yellow-400 font-bold mb-4 flex items-center gap-2"><Layers size={20}/> Next Steps</h3>
+                      <ul className="space-y-2 text-slate-300 text-sm">
+                          <li>🚀 Form Validation</li>
+                          <li>🌐 AJAX / Fetch API</li>
+                          <li>💾 Local Storage</li>
+                          <li>⚛️ JS Frameworks (React/Vue)</li>
+                          <li>⚡ ES6+ Modern Features</li>
+                      </ul>
                   </div>
-                  <p className="mt-8">Next Stop: <strong>React Frameworks</strong>! ⚛️</p>
+                  <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+                      <h3 className="text-green-400 font-bold mb-4 flex items-center gap-2"><Zap size={20}/> Key Pillars</h3>
+                      <div className="flex flex-wrap gap-2">
+                          {['Variables', 'Arrays', 'DOM', 'Events', 'Functions', 'Logic'].map(p => (
+                              <span key={p} className="bg-slate-700 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-600">{p}</span>
+                          ))}
+                      </div>
+                      <p className="mt-4 text-xs text-slate-400 italic">"The best way to learn is by building real projects!"</p>
+                  </div>
               </div>
+
               <button
                 onClick={() => goToSlide(0)}
                 className="px-8 py-4 bg-yellow-500 hover:bg-yellow-400 text-black rounded-full font-bold transition-all hover:scale-105 flex items-center gap-2 mx-auto shadow-lg shadow-yellow-500/20"
